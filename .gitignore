@@ -1,1 +1,10 @@
 **/compile_commands.json
+**/.cache/
+**/CMakeCache.txt
+**/CTestTestfile.cmake
+**/DartConfiguration.tcl
+**/Makefile
+**/Testing/
+**/extern/
+**/CMakeFiles/
+**/cmake_install.cmake
