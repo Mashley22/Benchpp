@@ -3,8 +3,9 @@
 
 #include <chrono>
 
-namespace bpp {
+namespace benchpp {
 
+// DONT TRY TO USE THIS WITH THE STATS STUFF
 class BasicTimer {
 public:
 
@@ -16,14 +17,29 @@ using Clock_t = std::chrono::steady_clock;
 
 using TimePoint_t = std::chrono::time_point<Clock_t>;
 
-  void start(void) noexcept;
-
-
-
 private:
   TimePoint_t m_startTime{};
   TimePoint_t m_endTime{};
 
+public:
+
+  void 
+  start(void) noexcept;
+
+  void
+  stop(void) noexcept;
+
+  template<typename Duration>
+  Duration
+  duration(void) const noexcept {
+    return std::chrono::duration_cast<Duration>(m_startTime - m_endTime);
+  }
+
+  template<typename Duration>
+  Duration
+  currentElapsed(void) const noexcept {
+    return std::chrono::duration_cast<Duration>(m_startTime - Clock_t::now());
+  }
 };
 
 }
