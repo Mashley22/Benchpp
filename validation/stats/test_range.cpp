@@ -1,9 +1,12 @@
 #include <Bench++/stats.hpp>
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include <cstdint>
 
 namespace benchpp {
+
+// A bit overkill... rest will just use std::(u)int64_t and double
 
 TEST_CASE( "range works for basic unsigned integer types", "[stats]") {
 
@@ -106,6 +109,38 @@ TEST_CASE( "range works for basic signed integer types", "[stats]") {
 
     REQUIRE(stats.range() == max - min);
   }
+
+}
+
+namespace {
+
+template<typename T>
+void test_range_floating_point(T max, T min) noexcept {
+  Stats<T> stats;
+  stats.max = max;
+  stats.min = min;
+
+  REQUIRE_THAT(stats.range(), Catch::Matchers::WithinRel(max - min));
+}
+
+}
+
+TEST_CASE( "ranges works for floats", "[stats]") {
+
+  test_range_floating_point<float>(0.001f, 0.00f);
+  test_range_floating_point<float>(10000.0f, 9.0089f);
+  test_range_floating_point<float>(1987.67f, 0.9876f);
+  test_range_floating_point<float>(4580.8f, 19823.1f);
+
+}
+
+TEST_CASE( "ranges works for doubles", "[stats]") {
+
+  test_range_floating_point<double>(0.001f, 0.00f);
+  test_range_floating_point<double>(10000.0f, 9.0089f);
+  test_range_floating_point<double>(1987.67f, 0.9876f);
+  test_range_floating_point<double>(4580.8f, 19823.1f);
+
 }
 
 }
