@@ -1,4 +1,7 @@
-add_executable(test_stats test_range.cpp)
+add_executable(test_stats
+  test_range.cpp
+  test_median.cpp
+)
 
 target_link_libraries(test_stats 
   PRIVATE
