@@ -50,7 +50,7 @@ struct AssertFail {
     } \
   } while(0)
 
-#else
+#elif BENCHPP_DEBUG
 
 #include <iostream>
 
@@ -75,6 +75,12 @@ struct AssertFail {
             std::abort(); \
         } \
     } while(0)
+#else
+
+#define ASSERT(cond) while(0)
+
+#define ASSERT_MSG(cond, message) while(0)
+
 #endif
 
 #endif /* BENCHPP_ASSERT_HPP */
