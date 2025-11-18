@@ -1,0 +1,1 @@
+If using clangd and a compile_commands.json, delete all the catch2 build commands since this will cause some weird behaviour
