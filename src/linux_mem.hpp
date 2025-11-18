@@ -1,4 +1,5 @@
-#include <Bench++/mem.h>
+#include <Bench++/mem.hpp>
+#include <Bench++/linux/mem.hpp>
 
 #include <fstream>
 #include <string_view>
@@ -21,7 +22,7 @@ M_openStatusFile(void) {
   statusFile.open(LINUX_STATUS_FILE);
 
   if (!statusFile.is_open()) {
-    throw GetError();
+    throw lnx::OpenStatusFileErr();
   }
 
   return statusFile;
@@ -39,13 +40,13 @@ M_parseStatusFile(const std::string_view key) {
       std::size_t num_start = line.find_first_of("0123456789", key.length()); // start after the length of the key
 
       if (num_start == std::string::npos) {
-        throw GetError();
+        throw lnx::LineParseError();
       }
       
       std::size_t num_end = line.find(' ', num_start); // space for the stuff
 
       if (num_end == std::string::npos) {
-        throw GetError();
+        throw lnx::LineParseError();
       }
     
       std::string num_str = line.substr(num_start, num_end);
@@ -54,14 +55,14 @@ M_parseStatusFile(const std::string_view key) {
         retval = std::stoull(num_str);
       }
       catch(std::exception& e) {
-        throw GetError();
+        throw lnx::StrTo_ull_Error();
       }
         
       return retval;
     }
   }
   
-  throw GetError();
+  throw lnx::KeyNotFoundError();
 }
 
 }
