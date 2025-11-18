@@ -2,12 +2,12 @@
 #define BENCHPP_TIMER_HPP
 
 #include <chrono>
+#include <vector>
+#include <array>
+
+#include <Bench++/assert.hpp>
 
 namespace benchpp {
-
-// DONT TRY TO USE THIS WITH THE STATS STUFF
-class BasicTimer {
-public:
 
 #ifdef BENCHPP_USE_HIGH_RESOLUTION
 using Clock_t = std::chrono::high_resolution_clock;
@@ -16,11 +16,12 @@ using Clock_t = std::chrono::steady_clock;
 #endif
 
 using TimePoint_t = std::chrono::time_point<Clock_t>;
+using Time_t = std::chrono::nanoseconds;
+using Count_t = Time_t::rep;
 
-private:
-  TimePoint_t m_startTime{};
-  TimePoint_t m_endTime{};
 
+// DONT TRY TO USE THIS WITH THE STATS STUFF
+class BasicTimer {
 public:
 
   void 
@@ -28,18 +29,86 @@ public:
 
   void
   stop(void) noexcept;
+  
+  Time_t
+  duration(void) const noexcept;
+  
+  void
+  reset(void) noexcept;
 
-  template<typename Duration>
-  Duration
-  duration(void) const noexcept {
-    return std::chrono::duration_cast<Duration>(m_startTime - m_endTime);
+private:
+  TimePoint_t m_startTime{};
+  Time_t m_recordedTime{0};
+  bool m_running{false};
+};
+
+class Timer {
+public:
+  void
+  start(void) noexcept;
+  
+  void
+  stop(void) noexcept;
+  
+  void 
+  reset(void) noexcept;
+
+  void
+  record(void) noexcept;
+
+  void
+  recordAndReset(void) noexcept;
+
+  std::span<const Count_t> times(void) const noexcept;
+
+private:
+  std::vector<Count_t> m_times;
+  BasicTimer m_stopwatch;
+};
+
+
+/**@brief a class for being able to collect many times in one run and do several runs
+ */
+template<std::size_t pointCount>
+class MultiPointTimer {
+  static_assert(pointCount != 1, "really?");
+private:
+  std::size_t m_curPointCount = 0;
+  std::array<std::vector<Count_t>, pointCount> m_times;
+  BasicTimer m_stopwatch;
+
+public:
+
+  /**@brief for starting a new run
+   */
+  void
+  start(void) noexcept {
+    ASSERT(m_curPointCount == 0);
+    m_stopwatch.start();
+  }
+  
+  /**@brief for pausing mid run
+   */
+  void 
+  pause(void) noexcept {
+    m_stopwatch.stop();
   }
 
-  template<typename Duration>
-  Duration
-  currentElapsed(void) const noexcept {
-    return std::chrono::duration_cast<Duration>(m_startTime - Clock_t::now());
+  void 
+  lap(void) noexcept {
+    ASSERT(m_curPointCount < pointCount);
+    m_times[m_curPointCount++].push_back(m_stopwatch.duration());
+    m_stopwatch.reset();
+    m_stopwatch.start();
   }
+  
+  void
+  endRun(void) noexcept {
+    m_curPointCount = 0;
+    m_stopwatch.reset();
+  }
+
+
 };
 
 }
