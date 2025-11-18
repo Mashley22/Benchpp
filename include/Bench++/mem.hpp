@@ -21,7 +21,7 @@ struct Snapshot {
 
 /**@brief can be thrown by any of the getters if for some reasong they fail to get the memory
  */
-class GetError {};
+class Error {};
 
 [[nodiscard]]
 std::size_t
