@@ -11,17 +11,17 @@
 
 namespace benchpp {
 
-template<class T>
+template<class T, class D = double>
 struct Stats {
-  T mean;
-  T variance;
+  std::size_t count;
+  D mean;
+  D variance;
+  D median;
   T min;
   T max;
-  T median;
-  std::size_t count;
 
   [[nodiscard]] 
-  static Stats<T>
+  static Stats<T, D>
   generate(const std::span<const T> results) {
 
     static_assert(std::is_arithmetic_v<T>, "T must be arithmetic type");
@@ -29,8 +29,8 @@ struct Stats {
 
     Stats<T> stats;
 
-    T mean_of_squares = {};
-    T mean = {};
+    D mean_of_squares = {};
+    D mean = {};
     T min = results[0];
     T max = results[0];
     for (std::size_t i = 0; i < results.size(); i++) {
@@ -45,15 +45,15 @@ struct Stats {
         max = results[i];
       }
     }
-    mean_of_squares = mean_of_squares / static_cast<T>(results.size());
-    mean = mean / static_cast<T>(results.size());
+    mean_of_squares = static_cast<D>(mean_of_squares) / static_cast<D>(results.size());
+    mean = static_cast<D>(mean) / static_cast<D>(results.size());
 
     stats.mean = mean;
     stats.variance = mean_of_squares - mean * mean;
     stats.max = max;
     stats.min = min;
 
-    stats.median = calc_median(results);
+    stats.median = calc_median<D>(results);
     stats.count = results.size();
 
     return stats;
