@@ -29,12 +29,12 @@ struct Stats {
 
     Stats<T> stats;
 
-    D mean_of_squares = {};
-    D mean = {};
+    T sum_of_squares = {};
+    T mean = {};
     T min = results[0];
     T max = results[0];
     for (std::size_t i = 0; i < results.size(); i++) {
-      mean_of_squares += results[i] * results[i];
+      sum_of_squares += results[i] * results[i];
       mean += results[i];
 
       if (results[i] < min) {
@@ -45,11 +45,10 @@ struct Stats {
         max = results[i];
       }
     }
-    mean_of_squares = static_cast<D>(mean_of_squares) / static_cast<D>(results.size());
-    mean = static_cast<D>(mean) / static_cast<D>(results.size());
+    D mean_of_squares = static_cast<D>(sum_of_squares) / static_cast<D>(results.size());
+    stats.mean = static_cast<D>(mean) / static_cast<D>(results.size());
 
-    stats.mean = mean;
-    stats.variance = mean_of_squares - mean * mean;
+    stats.variance = mean_of_squares - stats.mean * stats.mean;
     stats.max = max;
     stats.min = min;
 
@@ -74,7 +73,7 @@ struct Stats {
       return static_cast<R>(copy[results.size() / 2] + copy[results.size() / 2 - 1]) / 2;
     }
     else {
-      return (copy[(results.size() - 1)/ 2]);
+      return static_cast<R>(copy[(results.size() - 1) / 2]);
     }
   }
   

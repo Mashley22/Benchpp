@@ -10,4 +10,14 @@ target_link_libraries(test_stats
     Catch2::Catch2WithMain
   )
 
+target_compile_options(test_stats
+  PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Werror
+    -Wshadow
+    -Wconversion
+    -Wsign-conversion
+)
 catch_discover_tests(test_stats)
