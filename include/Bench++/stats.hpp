@@ -59,19 +59,22 @@ struct Stats {
     return stats;
   }
   
+  template<class R = double>
   [[nodiscard]]
-  static T 
+  static R  // not sure about this
   calc_median(const std::span<const T> results) {
 
-    std::vector<T> copy(results);
+    static_assert(std::is_arithmetic_v<R>);
+
+    std::vector<T> copy(results.begin(), results.end());
 
     std::sort(copy.begin(), copy.end());
 
     if (results.size() % 2 == 0) {
-      return copy[results.size() / 2];
+      return static_cast<R>(copy[results.size() / 2] + copy[results.size() / 2 - 1]) / 2;
     }
     else {
-      return (copy[results.size() / 2] + copy[results.size() / 2 + 1]) / 2;
+      return (copy[(results.size() - 1)/ 2]);
     }
   }
   
