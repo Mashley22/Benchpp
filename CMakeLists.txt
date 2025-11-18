@@ -25,9 +25,15 @@ target_include_directories(benchpp
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
 
+#build options
 option(BENCHPP_DEBUG "Add some extra debugging and asserts etc." OFF)
 
 option(BENCHPP_TEST "Build the unitests, use the build.sh in validation for this" OFF)
+
+#config options
+option(BENCHPP_USE_HIGH_RESOLUTION
+  "Use std::chrono::high_resolution as opposed to std::chronon::steady"
+  OFF)
 
 if(DEFINED BENCHPP_TEST)
   enable_testing()
