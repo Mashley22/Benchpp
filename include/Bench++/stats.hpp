@@ -7,6 +7,8 @@
 #include <cmath>
 #include <iostream>
 
+#include <Bench++/assert.hpp>
+
 namespace benchpp {
 
 template<class T>
@@ -23,7 +25,7 @@ struct Stats {
   generate(const std::span<const T> results) {
 
     static_assert(std::is_arithmetic_v<T>, "T must be arithmetic type");
-    assert(!results.empty());
+    ASSERT(!results.empty());
 
     Stats<T> stats;
 

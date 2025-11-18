@@ -1,5 +1,8 @@
 #include <Bench++/timer.hpp>
 
+#include <Bench++/assert.hpp>
+#include <Bench++/assert.hpp>
+
 namespace benchpp {
 
 void
