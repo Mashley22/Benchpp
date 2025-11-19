@@ -4,4 +4,4 @@ add_executable(test_stats
   test_generate.cpp
 )
 
-add_test(test_stats)
+add_unit_test(test_stats)

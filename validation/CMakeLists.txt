@@ -1,4 +1,4 @@
-function(add_test TARGET_NAME)
+function(add_unit_test TARGET_NAME)
 
   target_link_libraries(${TARGET_NAME}
     PRIVATE
