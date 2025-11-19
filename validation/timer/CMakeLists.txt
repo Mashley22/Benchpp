@@ -1,5 +1,6 @@
 set(TEST_TIMER_SOURCES  
   test_BasicTimer.cpp
+  test_Timer.cpp
 )
 
 add_executable(test_steady_timer
