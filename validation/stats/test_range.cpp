@@ -8,7 +8,7 @@ namespace benchpp {
 
 // A bit overkill... rest will just use std::(u)int64_t and double
 
-TEST_CASE( "range works for basic unsigned integer types", "[stats]" ) {
+TEST_CASE( "range for basic unsigned integer types", "[stats]" ) {
 
   SECTION( "uint8_t" ) {
     std::uint8_t max, min;
@@ -60,7 +60,7 @@ TEST_CASE( "range works for basic unsigned integer types", "[stats]" ) {
 
 }
 
-TEST_CASE( "range works for basic signed integer types", "[stats]" ) {
+TEST_CASE( "range for basic signed integer types", "[stats]" ) {
 
   SECTION( "int8_t" ) {
     std::int8_t max, min;
@@ -125,7 +125,7 @@ void test_range_floating_point(T max, T min) noexcept {
 
 }
 
-TEST_CASE( "ranges works for floats", "[stats]") {
+TEST_CASE( "ranges for floats", "[stats]") {
 
   test_range_floating_point<float>(0.001f, 0.00f);
   test_range_floating_point<float>(10000.0f, 9.0089f);
@@ -134,7 +134,7 @@ TEST_CASE( "ranges works for floats", "[stats]") {
 
 }
 
-TEST_CASE( "ranges works for doubles", "[stats]" ) {
+TEST_CASE( "ranges for doubles", "[stats]" ) {
 
   test_range_floating_point<double>(0.001f, 0.00f);
   test_range_floating_point<double>(10000.0f, 9.0089f);
