@@ -68,7 +68,7 @@ std::optional<std::size_t>
 try_get_currentPhysical(void) noexcept;
 
 [[nodiscard]]
-Snapshot
+std::optional<Snapshot>
 try_get_snapshot(void) noexcept;
 
 }
