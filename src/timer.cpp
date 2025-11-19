@@ -26,12 +26,12 @@ BasicTimer::stop(void) noexcept {
 
 Time_t 
 BasicTimer::duration(void) const noexcept {
-  if (m_running == true) {
-    return m_recordedTime;
-  }
-  else {
+  if (m_running) {
     return m_recordedTime +
           std::chrono::duration_cast<Time_t>(Clock_t::now() - m_startTime);
+  }
+  else {
+    return m_recordedTime;
   }
 }
 

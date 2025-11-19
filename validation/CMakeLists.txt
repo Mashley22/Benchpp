@@ -27,3 +27,4 @@ function(add_unit_test TARGET_NAME)
 endfunction()
 
 add_subdirectory(stats)
+add_subdirectory(timer)
