@@ -20,8 +20,6 @@ BasicTimer::stop(void) noexcept {
 
   m_recordedTime +=
     std::chrono::duration_cast<Time_t>(Clock_t::now() - m_startTime);
-  
-  m_startTime = Clock_t::now();
 }
 
 Time_t 
