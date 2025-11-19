@@ -13,6 +13,7 @@ struct AssertFail {
 };
 
 }
+
 #define ASSERT(condition) \
     do { \
         if (!(condition)) { \
@@ -34,7 +35,7 @@ struct AssertFail {
   do { \
     try { \
       func; \
-      EXPECTED_ASSERT_BUT_NONE(func);
+      EXPECTED_ASSERT_BUT_NONE(func); \
     catch(Benchpp::AssertFail a) { \
     } \
   } while(0)
@@ -43,10 +44,10 @@ struct AssertFail {
   do { \
     try { \
       func; \
-      EXPECTED_ASSERT_BUT_NONE(func);
+      EXPECTED_ASSERT_BUT_NONE(func); \
     catch(Benchpp::AssertFail a) { \
-      REQUIRE(a.cond == cond);
-      REQUIRE(a.msg == msg);
+      REQUIRE(a.cond == cond); \
+      REQUIRE(a.msg == msg); \
     } \
   } while(0)
 

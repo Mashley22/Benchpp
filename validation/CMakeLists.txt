@@ -17,6 +17,11 @@ function(add_unit_test TARGET_NAME)
       -Wsign-conversion
   )
 
+  target_compile_definitions(${TARGET_NAME}
+    PRIVATE
+      BENCHPP_TEST
+  )
+
   catch_discover_tests(${TARGET_NAME})
 
 endfunction()

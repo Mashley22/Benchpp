@@ -9,7 +9,7 @@
 
 namespace benchpp {
 
-#ifdef BENCHPP_USE_HIGH_RESOLUTION
+#ifdef BENCHPP_USE_HIGH_RESOLUTION_CLOCK
 using Clock_t = std::chrono::high_resolution_clock;
 #else
 using Clock_t = std::chrono::steady_clock;

@@ -26,14 +26,21 @@ target_include_directories(benchpp
 )
 
 #build options
-option(BENCHPP_DEBUG "Add some extra debugging and asserts etc." OFF)
+option(BENCHPP_DEBUG 
+  "Add some extra debugging and asserts etc." 
+  OFF
+)
 
-option(BENCHPP_TEST "Build the unitests, use the build.sh in validation for this" OFF)
+option(BENCHPP_TEST
+  "Build the unitests, use the build.sh in validation for this" 
+  OFF
+)
 
 #config options
-option(BENCHPP_USE_HIGH_RESOLUTION
+option(BENCHPP_USE_HIGH_RESOLUTION_CLOCK
   "Use std::chrono::high_resolution as opposed to std::chronon::steady"
-  OFF)
+  OFF
+)
 
 if(DEFINED BENCHPP_TEST)
   enable_testing()
