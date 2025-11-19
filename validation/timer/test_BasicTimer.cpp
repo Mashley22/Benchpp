@@ -67,6 +67,25 @@ TEST_CASE( "BasicTimer", "[Timer]") {
 
   }
 
+  SECTION( "reset" ) {
+
+    BasicTimer timer;
+
+    timer.start();
+    M_smallStall();
+    
+    timer.reset();
+    
+    REQUIRE(timer.duration() == Time_t{0});
+
+    timer.start();
+    M_smallStall();
+    timer.stop();
+    timer.reset();
+
+    REQUIRE(timer.duration() == Time_t{0});
+  }
+
 }
 
 }
