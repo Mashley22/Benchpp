@@ -1,13 +1,10 @@
 #include <Bench++/timer.hpp>
 
-#include <Bench++/assert.hpp>
-#include <Bench++/assert.hpp>
-
 namespace benchpp {
 
 void
 BasicTimer::start(void) noexcept {
-  ASSERT(m_running == false);
+  assert(m_running == false);
   m_running = true;
 
   m_startTime = Clock_t::now();
@@ -15,7 +12,7 @@ BasicTimer::start(void) noexcept {
 
 void 
 BasicTimer::stop(void) noexcept {
-  ASSERT(m_running == true);
+  assert(m_running == true);
   m_running = false;
 
   m_recordedTime +=
@@ -35,7 +32,7 @@ BasicTimer::duration(void) const noexcept {
 
 void
 BasicTimer::reset(void) noexcept {
-  ASSERT(m_running == false);
+  assert(m_running == false);
   m_running = false;
   m_recordedTime = Time_t(0);
 }

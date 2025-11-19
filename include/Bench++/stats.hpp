@@ -6,8 +6,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
-
-#include <Bench++/assert.hpp>
+#include <cassert>
 
 namespace benchpp {
 
@@ -25,7 +24,7 @@ struct Stats {
   generate(const std::span<const T> results) {
 
     static_assert(std::is_arithmetic_v<T>, "T must be arithmetic type");
-    ASSERT(!results.empty());
+    assert(!results.empty());
 
     Stats<T> stats;
 

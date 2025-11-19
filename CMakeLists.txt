@@ -36,6 +36,13 @@ option(BENCHPP_TEST
   OFF
 )
 
+if(DEFINED BENCHPP_DEBUG)
+  target_compile_definitions(benchpp
+    PRIVATE
+    NDEBUG
+  )
+endif()
+
 #config options
 option(BENCHPP_USE_HIGH_RESOLUTION_CLOCK
   "Use std::chrono::high_resolution as opposed to std::chronon::steady"

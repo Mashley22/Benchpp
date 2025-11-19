@@ -5,7 +5,7 @@
 #include <vector>
 #include <array>
 
-#include <Bench++/assert.hpp>
+#include <cassert>
 
 namespace benchpp {
 
@@ -71,6 +71,7 @@ private:
 
 
 /**@brief a class for being able to collect many times in one run and do several runs
+ * the times are store in **Count_t form, accessed via [i][j], i refers to the lap number, j the run
  */
 template<std::size_t pointCount>
 class MultiPointTimer {
@@ -85,21 +86,21 @@ public:
    */
   void
   start(void) noexcept {
-    ASSERT(m_curPointCount == 0);
+    assert(m_curPointCount == 0);
     m_stopwatch.start();
   }
   
   /**@brief for pausing mid run
    */
   void 
-  pause(void) noexcept {
+  stop(void) noexcept {
     m_stopwatch.stop();
   }
 
   void 
   lap(void) noexcept {
-    ASSERT(m_curPointCount < pointCount);
-    m_times[m_curPointCount++].push_back(m_stopwatch.duration());
+    assert(m_curPointCount < pointCount);
+    m_times[m_curPointCount++].push_back(m_stopwatch.duration().count());
     m_stopwatch.reset();
     m_stopwatch.start();
   }
@@ -109,7 +110,12 @@ public:
     m_curPointCount = 0;
     m_stopwatch.reset();
   }
-
+  
+  [[nodiscard]]
+  std::span<const std::span<const Count_t>>
+  times(void) const noexcept {
+    return std::span<const std::span<const Count_t>>();
+  }
 
 };
 
