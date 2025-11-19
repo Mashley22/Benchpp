@@ -20,16 +20,16 @@ void M_smallStall(void) noexcept {
 
 TEST_CASE( "BasicTimer", "[Timer]") {
   
+  BasicTimer timer;
+
   SECTION( "Default 0 time" ) {
     
-    BasicTimer timer;
     REQUIRE(timer.duration() == Time_t{0});
 
   }
 
   SECTION( "start" ) {
     
-    BasicTimer timer;
     timer.start();
 
     REQUIRE(timer.duration() >= Time_t{0});
@@ -37,7 +37,6 @@ TEST_CASE( "BasicTimer", "[Timer]") {
 
   SECTION( "stop, duration doesn't change after stopping" ) {
 
-    BasicTimer timer;
     timer.start();
 
     timer.stop();
@@ -52,8 +51,6 @@ TEST_CASE( "BasicTimer", "[Timer]") {
   }
 
   SECTION( "repeated stop starts only increase the time" ) {
-    BasicTimer timer;
-    
 
     for (std::size_t i = 0; i < START_STOP_CYCLE_COUNT; i++) {
       Time_t timeAccumulate{timer.duration()};
@@ -68,8 +65,6 @@ TEST_CASE( "BasicTimer", "[Timer]") {
   }
 
   SECTION( "reset" ) {
-
-    BasicTimer timer;
 
     timer.start();
     M_smallStall();
