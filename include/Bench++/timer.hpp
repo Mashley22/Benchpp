@@ -42,16 +42,8 @@ private:
   bool m_running{false};
 };
 
-class Timer {
+class Timer : BasicTimer {
 public:
-  void
-  start(void) noexcept;
-  
-  void
-  stop(void) noexcept;
-  
-  void 
-  reset(void) noexcept;
 
   void
   record(void) noexcept;

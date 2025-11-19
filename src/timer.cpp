@@ -41,29 +41,14 @@ BasicTimer::reset(void) noexcept {
 }
 
 void
-Timer::start(void) noexcept {
-  m_stopwatch.start();
-}
-
-void
-Timer::stop(void) noexcept {
-  m_stopwatch.stop();
-}
-
-void
-Timer::reset(void) noexcept {
-  m_stopwatch.reset();
-}
-
-void
 Timer::record(void) noexcept {
-  m_times.push_back(m_stopwatch.duration().count());
+  m_times.push_back(BasicTimer::duration().count());
 }
 
 void
 Timer::recordAndReset(void) noexcept {
   record();
-  reset();
+  BasicTimer::reset();
 }
 
 std::span<const Count_t>
