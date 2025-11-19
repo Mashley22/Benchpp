@@ -42,7 +42,9 @@ private:
   bool m_running{false};
 };
 
-class Timer : BasicTimer {
+/**@brief For collecting several times, either in one run or over many runs, but not both
+ */
+class Timer : public BasicTimer {
 public:
 
   void
@@ -50,8 +52,17 @@ public:
 
   void
   recordAndReset(void) noexcept;
-
-  std::span<const Count_t> times(void) const noexcept;
+  
+  [[nodiscard]]
+  std::span<const Count_t>
+  times(void) const noexcept;
+    
+  /**@brief empties the internal timer
+   * @retval the currently stored times
+   */
+  [[nodiscard]]
+  std::vector<Count_t>
+  emptyTimes(void);
 
 private:
   std::vector<Count_t> m_times;
@@ -63,7 +74,6 @@ private:
  */
 template<std::size_t pointCount>
 class MultiPointTimer {
-  static_assert(pointCount != 1, "really?");
 private:
   std::size_t m_curPointCount = 0;
   std::array<std::vector<Count_t>, pointCount> m_times;

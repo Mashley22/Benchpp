@@ -56,4 +56,11 @@ Timer::times(void) const noexcept {
   return m_times;
 }
 
+std::vector<Count_t>
+Timer::emptyTimes(void) {
+  std::vector<Count_t> retval;
+  std::swap(m_times, retval);
+  return retval;
+}
+
 }
