@@ -73,11 +73,11 @@ private:
 /**@brief a class for being able to collect many times in one run and do several runs
  * the times are store in **Count_t form, accessed via [i][j], i refers to the lap number, j the run
  */
-template<std::size_t pointCount>
+template<std::size_t T_pointCount>
 class MultiPointTimer {
 private:
   std::size_t m_curPointCount = 0;
-  std::array<std::vector<Count_t>, pointCount> m_times;
+  std::array<std::vector<Count_t>, T_pointCount> m_times{};
   BasicTimer m_stopwatch;
 
 public:
@@ -99,7 +99,7 @@ public:
 
   void 
   lap(void) noexcept {
-    assert(m_curPointCount < pointCount);
+    assert(m_curPointCount < T_pointCount);
     m_times[m_curPointCount++].push_back(m_stopwatch.duration().count());
     m_stopwatch.reset();
     m_stopwatch.start();
@@ -110,11 +110,16 @@ public:
     m_curPointCount = 0;
     m_stopwatch.reset();
   }
+
+  constexpr std::size_t
+  pointCount(void) const noexcept {
+    return T_pointCount;
+  }
   
   [[nodiscard]]
-  std::span<const std::span<const Count_t>>
+  const std::array<std::vector<Count_t>, T_pointCount> // This gets really buggy with spans for some reason __
   times(void) const noexcept {
-    return std::span<const std::span<const Count_t>>();
+    return m_times;
   }
 
 };
