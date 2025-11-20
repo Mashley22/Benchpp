@@ -8,6 +8,8 @@ namespace benchpp {
 
 namespace mem {
 
+//KB!!!
+
 /**@brief contains the memory usage statistics at a particular point in time
  */
 struct Snapshot {

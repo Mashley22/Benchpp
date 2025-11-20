@@ -5,7 +5,7 @@
 #include <string_view>
 #include <string>
 
-#define LINUX_STATUS_FILE "/proc/status/status"
+#define LINUX_STATUS_FILE "/proc/self/status"
 
 //TODO: self-adjust the readings?
 
@@ -32,7 +32,6 @@ M_openStatusFile(void) {
 std::size_t
 M_parseStatusFile(const std::string_view key) {
   std::ifstream statusFile = M_openStatusFile();
-
   std::string line;
 
   while(std::getline(statusFile, line)) {
@@ -67,31 +66,37 @@ M_parseStatusFile(const std::string_view key) {
 
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::size_t 
 get_peakVirtual(void) {
   return M_parseStatusFile("VmPeak");
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::size_t
-get_currentVirtual(void) {
+get_currentVirtual(void) {  
   return M_parseStatusFile("VmSize");
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::size_t
 get_peakPhysical(void) {
   return M_parseStatusFile("VmHWM");
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::size_t
 get_currentPhysical(void) {
   return M_parseStatusFile("VmRSS");
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
+std::size_t
+get_currentSwapped(void) {
+  return M_parseStatusFile("VmSwap");
+}
+
+[[nodiscard]]
 std::optional<std::size_t>
 try_get_peakVirtual(void) noexcept {
   try {
@@ -103,7 +108,7 @@ try_get_peakVirtual(void) noexcept {
   }
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::optional<std::size_t>
 try_get_currentVirtual(void) noexcept {
   try {
@@ -115,7 +120,7 @@ try_get_currentVirtual(void) noexcept {
   }
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::optional<std::size_t>
 try_get_peakPhysical(void) noexcept {
   try {
@@ -127,7 +132,7 @@ try_get_peakPhysical(void) noexcept {
   }
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::optional<std::size_t>
 try_get_currentPhysical(void) noexcept {
   try {
@@ -139,7 +144,19 @@ try_get_currentPhysical(void) noexcept {
   }
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
+std::optional<std::size_t>
+try_get_currentSwapped(void) noexcept {
+  try {
+    std::size_t res = M_parseStatusFile("VmSwap");
+    return res;
+  }
+  catch(Error& e) {
+    return std::nullopt;
+  }
+}
+
+[[nodiscard]]
 Snapshot
 get_snapshot(void) {
   Snapshot snap = {
@@ -151,7 +168,7 @@ get_snapshot(void) {
   return snap;
 }
 
-[[nodiscard]] inline
+[[nodiscard]]
 std::optional<Snapshot>
 try_get_snapshot(void) noexcept {
   try {

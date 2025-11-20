@@ -28,3 +28,4 @@ endfunction()
 
 add_subdirectory(stats)
 add_subdirectory(timer)
+add_subdirectory(mem)

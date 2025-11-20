@@ -12,7 +12,8 @@ endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BENCHPP_SOURCES
-      src/timer.cpp
+  src/timer.cpp
+  src/mem.cpp
 )
 
 add_library(benchpp
