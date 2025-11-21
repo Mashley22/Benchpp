@@ -1,5 +1,5 @@
 #include <Bench++/mem.hpp>
-#include <Bench++/linux/mem.hpp>
+#include <Bench++/linux/exception/mem.hpp>
 
 #include "statusFile.hpp"
 

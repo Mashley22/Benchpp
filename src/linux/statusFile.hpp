@@ -1,4 +1,4 @@
-#include <Bench++/linux/mem.hpp>
+#include <Bench++/linux/exception/mem.hpp>
 
 #include <fstream>
 #include <string_view>
@@ -38,13 +38,13 @@ parseStatusFile(const std::string_view key) {
       std::size_t num_start = line.find_first_of("0123456789", key.length()); // start after the length of the key
 
       if (num_start == std::string::npos) {
-        throw LineParseError();
+        throw LineParseErr();
       }
       
       std::size_t num_end = line.find(' ', num_start); // space for the stuff
 
       if (num_end == std::string::npos) {
-        throw LineParseError();
+        throw LineParseErr();
       }
     
       std::string num_str = line.substr(num_start, num_end);
@@ -53,14 +53,14 @@ parseStatusFile(const std::string_view key) {
         retval = std::stoull(num_str);
       }
       catch(std::exception& e) {
-        throw StrTo_ull_Error();
+        throw StrTo_ull_Err();
       }
         
       return retval;
     }
   }
   
-  throw KeyNotFoundError();
+  throw KeyNotFoundErr();
 }
 
 }
