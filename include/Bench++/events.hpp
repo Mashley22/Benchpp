@@ -11,6 +11,16 @@
 
 namespace benchpp {
 
+template<typename T>
+concept EventsCounter = requires(T counter) {
+  { counter.start() } -> std::same_as<void>;
+  { counter.stop() } -> std::same_as<void>;
+  { counter.read() } -> std::convertible_to<std::int64_t>;
+  { counter.isRunning() } -> std::convertible_to<bool>;
+    
+  BENCHPP_CONCEPT_OPTIONAL({ counter.reset() } -> std::same_as<void>);
+};
+
 /**@brief an efficient way to store values at different points in a single run
  * and over multiple runs,
  * for the T template value, make a struct of all things being measured at each point,
@@ -100,23 +110,6 @@ private:
     return m_runNum * pointCount() + m_pointNum;
   };
 
-};
-
-template<typename T>
-concept EventsCounter = requires(T counter) {
-  { counter.start() } -> std::same_as<void>;
-  { counter.stop() } -> std::same_as<void>;
-  { counter.read() } -> std::convertible_to<std::int64_t>;
-    
-  BENCHPP_CONCEPT_OPTIONAL({ counter.reset() } -> std::same_as<void>);
-  
-  BENCHPP_CONCEPT_OPTIONAL({ counter.isRunning() } -> std::convertible_to<bool>);
-};
-
-template<EventsCounter base_T, class readVal_T = std::int64_t>
-class EventsCounterRecorder : base_T {
-private:
-  std::vector<readVal_T> m_record;
 };
 
 }
