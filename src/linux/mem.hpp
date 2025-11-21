@@ -11,37 +11,37 @@ namespace mem {
 
 [[nodiscard]]
 std::size_t 
-get_peakVirtual(void) {
+get_peakVirtual(void) {  //NOLINT
   return lnx::priv::parseStatusFile("VmPeak");
 }
 
 [[nodiscard]]
 std::size_t
-get_currentVirtual(void) {  
+get_currentVirtual(void) {  //NOLINT
   return lnx::priv::parseStatusFile("VmSize");
 }
 
 [[nodiscard]]
 std::size_t
-get_peakPhysical(void) {
+get_peakPhysical(void) {  //NOLINT
   return lnx::priv::parseStatusFile("VmHWM");
 }
 
 [[nodiscard]]
 std::size_t
-get_currentPhysical(void) {
+get_currentPhysical(void) {  //NOLINT
   return lnx::priv::parseStatusFile("VmRSS");
 }
 
 [[nodiscard]]
 std::size_t
-get_currentSwapped(void) {
+get_currentSwapped(void) {  //NOLINT
   return lnx::priv::parseStatusFile("VmSwap");
 }
 
 [[nodiscard]]
 std::optional<std::size_t>
-try_get_peakVirtual(void) noexcept {
+try_get_peakVirtual(void) noexcept {  //NOLINT
   try {
     std::size_t res = lnx::priv::parseStatusFile("VmPeak");
     return res;
@@ -53,7 +53,7 @@ try_get_peakVirtual(void) noexcept {
 
 [[nodiscard]]
 std::optional<std::size_t>
-try_get_currentVirtual(void) noexcept {
+try_get_currentVirtual(void) noexcept {  //NOLINT
   try {
     std::size_t res = lnx::priv::parseStatusFile("VmSize");
     return res;
@@ -65,7 +65,7 @@ try_get_currentVirtual(void) noexcept {
 
 [[nodiscard]]
 std::optional<std::size_t>
-try_get_peakPhysical(void) noexcept {
+try_get_peakPhysical(void) noexcept {  //NOLINT
   try {
     std::size_t res = lnx::priv::parseStatusFile("VmHWM");
     return res;
@@ -77,7 +77,7 @@ try_get_peakPhysical(void) noexcept {
 
 [[nodiscard]]
 std::optional<std::size_t>
-try_get_currentPhysical(void) noexcept {
+try_get_currentPhysical(void) noexcept {  //NOLINT
   try {
     std::size_t res = lnx::priv::parseStatusFile("VmRSS");
     return res;
@@ -89,7 +89,7 @@ try_get_currentPhysical(void) noexcept {
 
 [[nodiscard]]
 std::optional<std::size_t>
-try_get_currentSwapped(void) noexcept {
+try_get_currentSwapped(void) noexcept {  //NOLINT
   try {
     std::size_t res = lnx::priv::parseStatusFile("VmSwap");
     return res;
@@ -101,7 +101,7 @@ try_get_currentSwapped(void) noexcept {
 
 [[nodiscard]]
 Snapshot
-get_snapshot(void) {
+get_snapshot(void) {  //NOLINT
   Snapshot snap = {
     .virt = get_currentVirtual(),
     .phy = get_currentPhysical(),
@@ -113,7 +113,7 @@ get_snapshot(void) {
 
 [[nodiscard]]
 std::optional<Snapshot>
-try_get_snapshot(void) noexcept {
+try_get_snapshot(void) noexcept {  //NOLINT
   try {
     Snapshot snap = get_snapshot();
     return snap;
