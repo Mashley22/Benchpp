@@ -19,7 +19,7 @@ using Clock_t = std::chrono::steady_clock;
 
 using TimePoint_t = std::chrono::time_point<Clock_t>;
 using Time_t = std::chrono::nanoseconds;
-using Count_t = Time_t::rep;
+using TimeCount_t = Time_t::rep;
 
 
 // DONT TRY TO USE THIS WITH THE STATS STUFF
@@ -56,18 +56,18 @@ public:
   recordAndReset(void) noexcept;
   
   [[nodiscard]]
-  std::span<const Count_t>
+  std::span<const TimeCount_t>
   times(void) const noexcept;
     
   /**@brief empties the internal timer
    * @retval the currently stored times
    */
   [[nodiscard]]
-  std::vector<Count_t>
+  std::vector<TimeCount_t>
   emptyTimes(void);
 
 private:
-  std::vector<Count_t> m_times;
+  std::vector<TimeCount_t> m_times;
   BasicTimer m_stopwatch;
 };
 
@@ -77,7 +77,7 @@ private:
 template<std::size_t T_pointCount, std::size_t T_runCount>
 class MultiPointTimer {
 private:
-  EventRecord<Count_t, T_pointCount, T_runCount> m_times;
+  EventRecord<TimeCount_t, T_pointCount, T_runCount> m_times;
   BasicTimer m_stopwatch;
 
 public:

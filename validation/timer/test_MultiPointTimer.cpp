@@ -27,7 +27,7 @@ TEST_CASE( "Testing MultiPointTimer", "[Timer]") {
       for (std::size_t j = 0; j < POINT_COUNT; j++) {
         REQUIRE(timer.get_run(i).size() == POINT_COUNT);
         REQUIRE(timer.get_run(i)[j] > 0);
-        REQUIRE(timer.get_run(i)[j] != Count_t{});
+        REQUIRE(timer.get_run(i)[j] != TimeCount_t{}); // not sure about these
       }
     }
   }
@@ -38,7 +38,7 @@ TEST_CASE( "Testing MultiPointTimer", "[Timer]") {
         auto val = timer.get_point(i);
         REQUIRE(val.size() == TIMER_RUN_COUNT);
         REQUIRE(val[j] > 0);
-        REQUIRE(val[j] != Count_t{});
+        REQUIRE(val[j] != TimeCount_t{});
       }
     }
   }

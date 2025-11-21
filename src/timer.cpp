@@ -48,14 +48,14 @@ Timer::recordAndReset(void) noexcept {
   BasicTimer::reset();
 }
 
-std::span<const Count_t>
+std::span<const TimeCount_t>
 Timer::times(void) const noexcept {
   return m_times;
 }
 
-std::vector<Count_t>
+std::vector<TimeCount_t>
 Timer::emptyTimes(void) {
-  std::vector<Count_t> retval;
+  std::vector<TimeCount_t> retval;
   std::swap(m_times, retval);
   return retval;
 }
