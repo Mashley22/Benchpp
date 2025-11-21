@@ -9,31 +9,37 @@ namespace benchpp {
 
 TEST_CASE( "Testing MultiPointTimer", "[Timer]") {
   
-  MultiPointTimer<POINT_COUNT> timer;
+  MultiPointTimer<POINT_COUNT, TIMER_RUN_COUNT> timer;
 
-  SECTION("MultiPointerTimer is empty") {
-    REQUIRE(timer.times().size() == POINT_COUNT);
-    for (const auto& point : timer.times()) {
-      REQUIRE(point.empty());
+  for (std::size_t i = 0; i < TIMER_RUN_COUNT; i++) {
+    timer.start();
+
+    for (std::size_t j = 0; j < POINT_COUNT; j++) {
+      timer.lap();
+
+    }
+
+    timer.run_complete();
+  }
+
+  SECTION("MultiPointTimer::get_run()") {
+    for (std::size_t i = 0; i < TIMER_RUN_COUNT; i++) {
+      for (std::size_t j = 0; j < POINT_COUNT; j++) {
+        REQUIRE(timer.get_run(i).size() == POINT_COUNT);
+        REQUIRE(timer.get_run(i)[j] > 0);
+        REQUIRE(timer.get_run(i)[j] != Count_t{});
+      }
     }
   }
-  
-  SECTION("MultiPointTimer many runs") {
-    for (std::size_t i = 0; i < TIMER_RUN_COUNT; i++) {
-      timer.start();
 
-      for (std::size_t j = 0; j < POINT_COUNT; j++) {
-        timer.lap();
-
-        REQUIRE(timer.times()[j].size() == i + 1);
-        REQUIRE(timer.times()[j][i] > Time_t{0}.count());
+  SECTION("MultiPointTimer::get_point()") {
+    for (std::size_t i = 0; i < POINT_COUNT; i++) {
+      for (std::size_t j = 0; j < TIMER_RUN_COUNT; j++) {
+        auto val = timer.get_point(i);
+        REQUIRE(val.size() == TIMER_RUN_COUNT);
+        REQUIRE(val[j] > 0);
+        REQUIRE(val[j] != Count_t{});
       }
-
-      for (const auto& point : timer.times()) {
-        REQUIRE(point.size() == i + 1);
-      }
-
-      timer.endRun();
     }
   }
 

@@ -69,7 +69,7 @@ public:
   };
 
   [[nodiscard]]
-  std::vector<const T>
+  std::vector<T>
   get_point(std::size_t pointNum) const {
     std::vector<T> points;
     points.reserve(runCount());

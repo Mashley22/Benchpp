@@ -1,6 +1,8 @@
 #ifndef BENCHPP_TIMER_HPP
 #define BENCHPP_TIMER_HPP
 
+#include <Bench++/events.hpp>
+
 #include <chrono>
 #include <vector>
 #include <array>
@@ -71,13 +73,11 @@ private:
 
 
 /**@brief a class for being able to collect many times in one run and do several runs
- * the times are store in **Count_t form, accessed via [i][j], i refers to the lap number, j the run
  */
-template<std::size_t T_pointCount>
+template<std::size_t T_pointCount, std::size_t T_runCount>
 class MultiPointTimer {
 private:
-  std::size_t m_curPointCount = 0;
-  std::array<std::vector<Count_t>, T_pointCount> m_times{};
+  EventRecord<Count_t, T_pointCount, T_runCount> m_times;
   BasicTimer m_stopwatch;
 
 public:
@@ -86,7 +86,6 @@ public:
    */
   void
   start(void) noexcept {
-    assert(m_curPointCount == 0);
     m_stopwatch.start();
   }
   
@@ -99,29 +98,41 @@ public:
 
   void 
   lap(void) noexcept {
-    assert(m_curPointCount < T_pointCount);
-    m_times[m_curPointCount++].push_back(m_stopwatch.duration().count());
+    m_stopwatch.stop();
+    m_times.push_back(m_stopwatch.duration().count());
     m_stopwatch.reset();
     m_stopwatch.start();
   }
   
   void
-  endRun(void) noexcept {
-    m_curPointCount = 0;
+  run_complete(void) noexcept {
     m_stopwatch.reset();
+    m_times.run_complete();
   }
-
-  constexpr std::size_t
+  
+  [[nodiscard]] constexpr
+  std::size_t
   pointCount(void) const noexcept {
     return T_pointCount;
   }
+
+  [[nodiscard]] constexpr
+  std::size_t
+  runCount(void) const noexcept {
+    return T_runCount;
+  }
   
   [[nodiscard]]
-  const std::array<std::vector<Count_t>, T_pointCount> // This gets really buggy with spans for some reason __
-  times(void) const noexcept {
-    return m_times;
+  auto
+  get_point(std::size_t pointNum) const noexcept {
+    return m_times.get_point(pointNum);
   }
 
+  [[nodiscard]]
+  auto
+  get_run(std::size_t runNum) const noexcept {
+    return m_times.get_run(runNum);
+  }
 };
 
 }
