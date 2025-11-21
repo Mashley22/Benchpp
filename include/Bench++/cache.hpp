@@ -1,6 +1,5 @@
-#ifndef BENCHPP_PERF_HPP
-#define BENCHPP_PERF_HPP
-
+#ifndef BENCHPP_CACHE_HPP
+#define BENCHPP_CACHE_HPP
 
 namespace benchpp {
 
@@ -29,4 +28,12 @@ enum class Result {
 
 }
 
-#endif /* BENCHPP_PERF_HPP */
+#ifdef __linux__
+#ifndef BENCHPP_DETAIL_LINUX_HEADER // for the lsp
+  #include "detail/linux/core.hpp" 
+#endif
+#else
+#error "Only linux supported!"
+#endif
+
+#endif /* BENCHPP_CACHE_HPP */
