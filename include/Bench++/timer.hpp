@@ -77,7 +77,7 @@ private:
 template<std::size_t T_pointCount, std::size_t T_runCount>
 class MultiPointTimer {
 private:
-  EventRecord<TimeCount_t, T_pointCount, T_runCount> m_times;
+  EventsRecord<TimeCount_t, T_pointCount, T_runCount> m_times;
   BasicTimer m_stopwatch;
 
 public:

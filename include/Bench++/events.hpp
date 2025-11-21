@@ -18,7 +18,7 @@ namespace benchpp {
  * it puts everything together such that push_back is as fast as possible, but can be reorganised
  */
 template<typename T, std::size_t T_pointCount, std::size_t T_runCount>
-class EventRecord {
+class EventsRecord {
 private:
   T * m_dataPtr;
   std::size_t m_pointNum{0};
@@ -43,9 +43,9 @@ public:
     return pointCount() * runCount();
   }
 
-  EventRecord(void) : m_dataPtr(new T[totalEvents()]) {}
+  EventsRecord(void) : m_dataPtr(new T[totalEvents()]) {}
 
-  ~EventRecord(void) {
+  ~EventsRecord(void) {
     delete[] m_dataPtr;
   }
 
@@ -103,7 +103,7 @@ private:
 };
 
 template<typename T>
-concept EventCounter = requires(T counter) {
+concept EventsCounter = requires(T counter) {
   { counter.start() } -> std::same_as<void>;
   { counter.stop() } -> std::same_as<void>;
   { counter.read() } -> std::convertible_to<std::int64_t>;
@@ -113,8 +113,8 @@ concept EventCounter = requires(T counter) {
   BENCHPP_CONCEPT_OPTIONAL({ counter.isRunning() } -> std::convertible_to<bool>);
 };
 
-template<EventCounter base_T, class readVal_T = std::int64_t>
-class EventCounterRecorder : base_T {
+template<EventsCounter base_T, class readVal_T = std::int64_t>
+class EventsCounterRecorder : base_T {
 private:
   std::vector<readVal_T> m_record;
 };
