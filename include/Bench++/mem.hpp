@@ -23,7 +23,7 @@ struct Snapshot {
 
 /**@brief can be thrown by any of the getters if for some reasong they fail to get the memory
  */
-class Error {};
+class Error : std::exception {};
 
 [[nodiscard]]
 std::size_t
