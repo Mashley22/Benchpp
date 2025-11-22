@@ -1,6 +1,8 @@
 #ifndef BENCHPP_CACHE_HPP
 #define BENCHPP_CACHE_HPP
 
+#include <exception>
+
 namespace benchpp {
 
 namespace cache {
@@ -24,13 +26,19 @@ enum class Result {
     MISS       // Misses only
 };
 
+struct Event {
+  Type type;
+  Operation op;
+  Result res;
+};
+
 }
 
 }
 
 #ifdef __linux__
 #ifndef BENCHPP_DETAIL_LINUX_HEADER // for the lsp
-  #include "detail/linux/core.hpp" 
+  #include "linux/cache.hpp" 
 #endif
 #else
 #error "Only linux supported!"
