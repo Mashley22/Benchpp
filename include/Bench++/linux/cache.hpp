@@ -21,11 +21,12 @@ namespace detail {
 namespace lnx {
 
 [[nodiscard]] inline
-long
-open_cache_event(Event evt, pid_t pid = 0, int cpu = -1, int group_fd = -1, unsigned long flags = 0) {
+int
+open_cache_event(const Event& evt, pid_t pid = 0, int cpu = -1, int group_fd = -1, long unsigned flags = 0) {
 
   struct perf_event_attr hw_event = default_perf_event_attr();
-  
+    
+  hw_event.type = PERF_TYPE_HW_CACHE; // SUPER IMPORTANT
   hw_event.config = create_cache_config(evt);
   
   return open_perf_event(hw_event, pid, cpu, group_fd, flags);

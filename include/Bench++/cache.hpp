@@ -7,7 +7,7 @@ namespace benchpp {
 
 namespace cache {
 
-enum class Type {
+enum class Type : char { 
     L1D,    // L1 Data cache
     L1I,    // L1 Instruction cache  
     LL,     // Last Level Cache (L2/L3)
@@ -15,13 +15,13 @@ enum class Type {
     ITLB,   // Instruction TLB
 };
 
-enum class Operation {
+enum class Operation : char {
     READ,      // Read operations
     WRITE,     // Write operations  
     PREFETCH   // Prefetch operations
 };
 
-enum class Result {
+enum class Result : char {
     ACCESS,    // Total accesses
     MISS       // Misses only
 };

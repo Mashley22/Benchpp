@@ -15,6 +15,7 @@
 
 #include <cstdint>
 #include <stdexcept>
+#include <cstring>
 
 namespace benchpp {
 
@@ -26,8 +27,7 @@ namespace lnx {
 
 [[nodiscard]] constexpr
 uint64_t 
-create_cache_config(const Event& evt) noexcept {
-    uint64_t cache_val, op_val, result_val;
+create_cache_config(const Event& evt) noexcept { uint64_t cache_val, op_val, result_val;
     
     switch (evt.type) {
         case Type::L1D:  cache_val = PERF_COUNT_HW_CACHE_L1D; break;
@@ -54,13 +54,13 @@ create_cache_config(const Event& evt) noexcept {
     return cache_val | (op_val << 8) | (result_val << 16);
 }
 
-[[nodiscard]] constexpr
+[[nodiscard]] inline
 perf_event_attr
 default_perf_event_attr(void) {
   struct perf_event_attr hw_event{}; // should be all 0 initialized??! check this!
+  std::memset(&hw_event, 0, sizeof(hw_event));
   
-  hw_event.type = PERF_TYPE_HW_CACHE;
-  hw_event.size = sizeof(hw_event);
+  hw_event.type = PERF_TYPE_HARDWARE;
 
   hw_event.disabled = 1;
   hw_event.exclude_kernel = 1;
@@ -70,15 +70,15 @@ default_perf_event_attr(void) {
 }
 
 [[nodiscard]] inline
-long
-open_perf_event(perf_event_attr& hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags) {
+int
+open_perf_event(const perf_event_attr& hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags) {
   long retval = syscall(__NR_perf_event_open, &hw_event, pid, cpu, group_fd, flags);
 
   if (retval == -1) {
-    throw std::runtime_error("Failed to open perf event");
+    throw std::runtime_error("Failed to open perf event err: " + std::to_string(retval));
   }
 
-  return retval;
+  return static_cast<int>(retval);
 }
 
 inline
@@ -115,7 +115,7 @@ stop_counter(int fd) {
 long long
 read_counter(int fd) {
   long long value;
-  int res = ::read(fd, &value, sizeof(value));
+  ssize_t res = ::read(fd, &value, sizeof(value));
   
   if (res == -1) {
     throw std::runtime_error("Failed to read counter fd: " + std::to_string(fd));
