@@ -54,14 +54,11 @@ create_cache_config(const Event& evt) noexcept { uint64_t cache_val, op_val, res
     return cache_val | (op_val << 8) | (result_val << 16);
 }
 
-[[nodiscard]] inline
+[[nodiscard]] constexpr
 perf_event_attr
 default_perf_event_attr(void) {
   struct perf_event_attr hw_event{}; // should be all 0 initialized??! check this!
-  std::memset(&hw_event, 0, sizeof(hw_event));
   
-  hw_event.type = PERF_TYPE_HARDWARE;
-
   hw_event.disabled = 1;
   hw_event.exclude_kernel = 1;
   hw_event.exclude_hv = 1;

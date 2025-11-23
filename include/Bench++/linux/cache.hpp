@@ -11,6 +11,7 @@
 #include <syscall.h>
 
 #include <cstdint>
+#include <cassert>
 
 namespace benchpp {
 
@@ -53,6 +54,7 @@ public:
   [[nodiscard]]
   std::int64_t
   read(void) {
+    assert(m_fd != -1 && m_isRunning == true);
     std::int64_t count = detail::lnx::read_counter(m_fd);
     std::int64_t delta{count - m_prev_val};
     m_prev_val = count;
@@ -61,36 +63,47 @@ public:
 
   void
   start(void) {
+    assert(m_fd != -1 && m_isRunning == false);
     detail::lnx::reset_counter(m_fd);
     detail::lnx::start_counter(m_fd);
+    m_isRunning = true;
   }
   
   void
   stop(void) {
+    assert(m_isRunning == true);
     detail::lnx::stop_counter(m_fd);
+    m_isRunning = false;
   }
 
-  [[nodiscard]]
+  [[nodiscard]] constexpr
   Type
   type(void) const noexcept {
     return T_evt.type;
   }
 
-  [[nodiscard]]
+  [[nodiscard]] constexpr
   Operation
   operation(void) const noexcept {
     return T_evt.op;
   }
 
-  [[nodiscard]]
+  [[nodiscard]] constexpr
   Result
   result(void) const noexcept {
     return T_evt.res;
   }
 
+  [[nodiscard]] constexpr
+  const Event&
+  event(void) const noexcept {
+    return T_evt;
+  }
+
 private:
   std::int64_t m_prev_val{0};
   int m_fd{-1};
+  bool m_isRunning{false};
 };
 
 }

@@ -10,14 +10,20 @@
    benchpp::cache::Type::DTLB, \
    benchpp::cache::Type::ITLB}
 
+#define BENCHPP_CACHE_TYPES_NUM 5
+
 #define BENCHPP_CACHE_OPERATIONS_ALL \
   {benchpp::cache::Operation::READ, \
    benchpp::cache::Operation::WRITE, \
    benchpp::cache::Operation::PREFETCH}
 
+#define BENCHPP_CACHE_OPERATIONS_NUM 3
+
 #define BENCHPP_CACHE_RESULTS_ALL \
   {benchpp::cache::Result::ACCESS, \
-   benchpp::cache::Result::ACCESS}
+   benchpp::cache::Result::MISS}
+
+#define BENCHPP_CACHE_RESULTS_NUM 2
 
 namespace benchpp {
 

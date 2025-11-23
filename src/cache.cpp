@@ -18,6 +18,7 @@ type_toStr(const Type& val) {
     case Type::ITLB:
       return "Instruction TLB";
     };
+  return "Invalid cache type";
 }
 
 std::string
@@ -30,6 +31,7 @@ operation_toStr(const Operation& val) {
     case Operation::WRITE:
       return "Write";
   };
+  return "Invalid cache operation";
 }
 
 std::string
@@ -40,6 +42,7 @@ result_toStr(const Result& val) {
     case Result::MISS:
       return "Miss";
   };
+  return "Invalid cache result";
 }
 
 std::string
