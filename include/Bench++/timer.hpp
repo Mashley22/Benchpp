@@ -30,7 +30,8 @@ public:
 
   void
   stop(void) noexcept;
-  
+ 
+  [[nodiscard]]
   Time_t
   duration(void) const noexcept;
   
