@@ -3,31 +3,12 @@
 
 #include <string>
 
-#define BENCHPP_CACHE_TYPES_ALL \
-  {benchpp::cache::Type::L1D, \
-   benchpp::cache::Type::L1I, \
-   benchpp::cache::Type::LL, \
-   benchpp::cache::Type::DTLB, \
-   benchpp::cache::Type::ITLB}
-
-#define BENCHPP_CACHE_TYPES_NUM 5
-
-#define BENCHPP_CACHE_OPERATIONS_ALL \
-  {benchpp::cache::Operation::READ, \
-   benchpp::cache::Operation::WRITE, \
-   benchpp::cache::Operation::PREFETCH}
-
-#define BENCHPP_CACHE_OPERATIONS_NUM 3
-
-#define BENCHPP_CACHE_RESULTS_ALL \
-  {benchpp::cache::Result::ACCESS, \
-   benchpp::cache::Result::MISS}
-
-#define BENCHPP_CACHE_RESULTS_NUM 2
-
 namespace benchpp {
 
 namespace cache {
+
+// NOT ALL OF THESE ARE ALWAYS AVAILABLE DEPENDING ON HARDWARE, AND KERNEL, WILL PROVIDE A TOOL FOR THIS I THINK,
+// or just run the cache tests
 
 enum class Type { 
     L1D,    // L1 Data cache
