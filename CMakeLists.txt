@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BENCHPP_SOURCES
   src/timer.cpp
   src/mem.cpp
+  src/cache.cpp
 )
 
 add_library(benchpp

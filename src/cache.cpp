@@ -1,0 +1,52 @@
+#include <Bench++/cache.hpp>
+
+namespace benchpp {
+
+namespace cache {
+
+std::string
+type_toStr(const Type& val) {
+  switch(val) {
+    case Type::L1D:
+      return "L1 data";
+    case Type::L1I:
+      return "L1 instruction";
+    case Type::LL:
+      return "Lowest level cache";
+    case Type::DTLB:
+      return "Data TLB";
+    case Type::ITLB:
+      return "Instruction TLB";
+    };
+}
+
+std::string
+operation_toStr(const Operation& val) {
+  switch(val) {
+    case Operation::PREFETCH:
+      return "Prefetch";
+    case Operation::READ:
+      return "Read";
+    case Operation::WRITE:
+      return "Write";
+  };
+}
+
+std::string
+result_toStr(const Result& val) {
+  switch(val) {
+    case Result::ACCESS:
+      return "Access";
+    case Result::MISS:
+      return "Miss";
+  };
+}
+
+std::string
+Event::toStr(void) const {
+  return type_toStr(type) + " " + operation_toStr(op) + " " + result_toStr(res);
+}
+
+}
+
+}

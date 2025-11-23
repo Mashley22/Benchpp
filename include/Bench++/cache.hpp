@@ -1,6 +1,8 @@
 #ifndef BENCHPP_CACHE_HPP
 #define BENCHPP_CACHE_HPP
 
+#include <string>
+
 #define BENCHPP_CACHE_TYPES_ALL \
   {benchpp::cache::Type::L1D, \
    benchpp::cache::Type::L1I, \
@@ -44,7 +46,23 @@ struct Event {
   Type type;
   Operation op;
   Result res;
+  
+  [[nodiscard]]
+  std::string 
+  toStr(void) const;
 };
+
+[[nodiscard]]
+std::string
+type_toStr(const Type& type);
+
+[[nodiscard]]
+std::string
+operation_toStr(const Operation& type);
+
+[[nodiscard]]
+std::string
+result_toStr(const Result& type);
 
 }
 
