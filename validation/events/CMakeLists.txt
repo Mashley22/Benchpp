@@ -3,5 +3,3 @@ add_executable(test_events
 )
 
 add_unit_test(test_events)
-
-add_subdirectory(cache)

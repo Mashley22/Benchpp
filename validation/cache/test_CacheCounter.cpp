@@ -5,14 +5,15 @@
 namespace benchpp {
 
 namespace cache {
-TEST_CASE( "", "[Cache::Counter]" ) {
-  constexpr Event evt {
-    .type = Type::LL,
-    .op = Operation::READ,
-    .res = Result::MISS
-  };
 
-  Counter<evt> counter;
+TEST_CASE( "", "[Cache::Counter]" ) {
+
+  Counter<{Type::LL, Operation::READ, Result::MISS}> counter;
+
+  SECTION( "" ) {
+    counter.start();
+    REQUIRE(counter.read() == 0);
+  }
 
 }
 

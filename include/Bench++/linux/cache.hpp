@@ -51,10 +51,10 @@ public:
   }
   
   [[nodiscard]]
-  std::uint64_t
+  std::int64_t
   read(void) {
-    std::uint64_t count = detail::lnx::read_counter(m_fd);
-    std::uint64_t delta{count - m_prev_val};
+    std::int64_t count = detail::lnx::read_counter(m_fd);
+    std::int64_t delta{count - m_prev_val};
     m_prev_val = count;
     return delta;
   }
@@ -89,7 +89,7 @@ public:
   }
 
 private:
-  std::uint64_t m_prev_val{0};
+  std::int64_t m_prev_val{0};
   int m_fd{-1};
 };
 

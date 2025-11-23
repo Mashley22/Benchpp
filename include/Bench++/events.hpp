@@ -15,7 +15,7 @@ template<typename T>
 concept EventsCounter = requires(T counter) {
   { counter.start() } -> std::same_as<void>;
   { counter.stop() } -> std::same_as<void>;
-  { counter.read() } -> std::convertible_to<std::uint64_t>;
+  { counter.read() } -> std::convertible_to<std::int64_t>;
   { counter.isRunning() } -> std::convertible_to<bool>;
     
   BENCHPP_CONCEPT_OPTIONAL({ counter.reset() } -> std::same_as<void>);
