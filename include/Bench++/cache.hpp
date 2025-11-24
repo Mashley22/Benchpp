@@ -59,8 +59,6 @@ result_toStr(const Result& type);
 #ifndef BENCHPP_DETAIL_LINUX_HEADER // for the lsp
   #include "linux/cache.hpp" 
 #endif
-#else
-#error "Only linux supported!"
 #endif
 
 #endif /* BENCHPP_CACHE_HPP */
