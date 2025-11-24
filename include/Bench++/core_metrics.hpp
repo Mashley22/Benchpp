@@ -1,0 +1,28 @@
+#ifndef BENCHPP_CORE_METRICS_HPP
+#define BENCHPP_CORE_METRICS_HPP
+
+namespace benchpp {
+
+enum class Metrics {
+  HW_CPU_CYCLES,
+  SW_CPU_CYCLES,
+  CACHE_REFERENCES,
+  CACHE_MISSES,
+  BRANCH_INSTRUCTIONS,
+  BRANCH_MISSES,
+  STALLED_CYCLES_FRONTEND,
+  STALLED_CYCLES_BACKEND,
+  PAGE_FAULTS,
+  CONTEXT_SWITCHES,
+  CPU_MIGRATIONS
+};
+
+#ifdef __linux__
+#ifndef BENCHPP_DETAIL_LINUX_HEADER // for the lsp
+  #include "linux/core_metrics.hpp" 
+#endif
+#endif
+
+}
+
+#endif /* BENCHPP_CORE_METRICS_HPP */

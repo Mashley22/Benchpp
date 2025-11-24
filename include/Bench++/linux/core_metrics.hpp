@@ -1,0 +1,14 @@
+#ifndef BENCHPP_DETAIL_LINUX_CORE_METRICS_HPP
+#define BENCHPP_DETAIL_LINUX_CORE_METRICS_HPP
+
+#ifndef BENCHPP_DETAIL_LINUX_HEADER
+#define BENCHPP_DETAIL_LINUX_HEADER
+#endif
+
+#include <Bench++/core_metrics.hpp>
+
+namespace benchpp {
+
+}
+
+#endif /* BENCHPP_DETAIL_LINUX_CORE_METRICS_HPP */
