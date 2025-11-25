@@ -3,6 +3,18 @@
 
 #include <string>
 
+#define BENCHPP_METRIC_ALL_GENERATOR(macro) \
+    macro(Metric::HW_CPU_CYCLES); \
+    macro(Metric::CACHE_REFERENCES); \
+    macro(Metric::CACHE_MISSES); \
+    macro(Metric::BRANCH_INSTRUCTIONS); \
+    macro(Metric::BRANCH_MISSES); \
+    macro(Metric::STALLED_CYCLES_FRONTEND); \
+    macro(Metric::STALLED_CYCLES_BACKEND); \
+    macro(Metric::PAGE_FAULTS); \
+    macro(Metric::CONTEXT_SWITCHES); \
+    macro(Metric::CPU_MIGRATIONS);
+
 namespace benchpp {
 
 enum class Metric {
