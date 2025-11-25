@@ -1,4 +1,4 @@
-EXTRA_ARGS="-DCMAKE_EXPORT_COMPILE_COMMANDS=y -DBENCHPP_TEST=y"
+EXTRA_ARGS="-DBENCHPP_TEST=ON"
 
 
 if command -v ninja &> /dev/null; then
