@@ -1,9 +1,11 @@
 #ifndef BENCHPP_CORE_METRICS_HPP
 #define BENCHPP_CORE_METRICS_HPP
 
+#include <string>
+
 namespace benchpp {
 
-enum class Metrics {
+enum class Metric {
   HW_CPU_CYCLES,
   SW_CPU_CYCLES,
   CACHE_REFERENCES,
@@ -17,12 +19,16 @@ enum class Metrics {
   CPU_MIGRATIONS
 };
 
+[[nodiscard]]
+std::string
+metric_toStr(const Metric&);
+
+}
+
 #ifdef __linux__
 #ifndef BENCHPP_DETAIL_LINUX_HEADER // for the lsp
   #include "linux/core_metrics.hpp" 
 #endif
 #endif
-
-}
 
 #endif /* BENCHPP_CORE_METRICS_HPP */
