@@ -15,21 +15,7 @@
     }\
   }
 
-#define ALL_RES_TESTS(type, operation) \
-  GENERATE_TEST_TEMPLATE(Event({type, operation, Result::ACCESS})); \
-  GENERATE_TEST_TEMPLATE(Event({type, operation, Result::MISS}));
-
-#define ALL_OPS_TESTS(type) \
-  ALL_RES_TESTS(type, Operation::READ); \
-  ALL_RES_TESTS(type, Operation::WRITE); \
-  ALL_RES_TESTS(type, Operation::PREFETCH);
-
-#define ALL_TESTS \
-  ALL_OPS_TESTS(Type::L1D);\
-  ALL_OPS_TESTS(Type::L1I);\
-  ALL_OPS_TESTS(Type::LL);\
-  ALL_OPS_TESTS(Type::DTLB);\
-  ALL_OPS_TESTS(Type::ITLB);\
+#define ALL_TESTS BENCHPP_CACHE_EVENT_ALL_GENERATOR(GENERATE_TEST_TEMPLATE)
 
 namespace benchpp {
 
