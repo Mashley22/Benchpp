@@ -19,6 +19,7 @@ set(BENCHPP_SOURCES
 
 set(BENCHPP_LINUX_SOURCES
   src/linux/detail/core.cpp
+  src/linux/statusFile.cpp
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
