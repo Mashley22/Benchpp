@@ -25,10 +25,4 @@ metric_toStr(const Metric&);
 
 }
 
-#ifdef __linux__
-#ifndef BENCHPP_DETAIL_LINUX_HEADER // for the lsp
-  #include "linux/core_metrics.hpp" 
-#endif
-#endif
-
 #endif /* BENCHPP_CORE_METRICS_HPP */
