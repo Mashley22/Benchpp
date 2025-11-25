@@ -7,7 +7,6 @@ namespace benchpp {
 
 enum class Metric {
   HW_CPU_CYCLES,
-  SW_CPU_CYCLES,
   CACHE_REFERENCES,
   CACHE_MISSES,
   BRANCH_INSTRUCTIONS,

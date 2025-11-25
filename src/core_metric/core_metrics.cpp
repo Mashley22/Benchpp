@@ -7,8 +7,6 @@ std::string metric_toStr(const Metric& metric) {
   switch (metric) {
     case Metric::HW_CPU_CYCLES:
       return "HW_CPU_CYCLES";
-    case Metric::SW_CPU_CYCLES:
-      return "SW_CPU_CYCLES";
     case Metric::CACHE_REFERENCES:
       return "CACHE_REFERENCES";
     case Metric::CACHE_MISSES:
