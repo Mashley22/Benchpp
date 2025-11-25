@@ -25,7 +25,7 @@
   BENCHPP_CACHE_EVENT_RESULT_OPERATION_ALL_GENERATOR(expr, benchpp::cache::Type::DTLB); \
   BENCHPP_CACHE_EVENT_RESULT_OPERATION_ALL_GENERATOR(expr, benchpp::cache::Type::ITLB); \
 
-#define BENCHPP_TEMPLATE_EXTERN_DECL(evt) extern template class Counter<evt>;
+#define BENCHPP_CACHE_COUNTER_TEMPLATE_EXTERN_DECL(evt) extern template class Counter<evt>;
 
 namespace benchpp {
 
@@ -135,7 +135,7 @@ private:
   using m_ = detail::Counter_impl;
 };
 
-BENCHPP_CACHE_EVENT_ALL_GENERATOR(BENCHPP_TEMPLATE_EXTERN_DECL)
+BENCHPP_CACHE_EVENT_ALL_GENERATOR(BENCHPP_CACHE_COUNTER_TEMPLATE_EXTERN_DECL)
 
 }
 

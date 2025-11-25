@@ -16,6 +16,8 @@
     macro(Metric::CONTEXT_SWITCHES); \
     macro(Metric::CPU_MIGRATIONS);
 
+#define BENCHPP_METRIC_COUNTER_TEMPLATE_EXTENRN_DECL(met) extern template class MetricCounter<met>;
+
 namespace benchpp {
 
 enum class Metric {
@@ -74,6 +76,8 @@ public:
 private:
   using m_ = detail::Counter_impl;
 };
+
+BENCHPP_METRIC_ALL_GENERATOR(BENCHPP_METRIC_COUNTER_TEMPLATE_EXTENRN_DECL);
 
 }
 
