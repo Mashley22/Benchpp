@@ -1,4 +1,4 @@
-#include "statusFile.hpp"
+#include <Bench++/private/linux/statusFile.hpp>
 
 #include <Bench++/linux/exception/mem.hpp>
 

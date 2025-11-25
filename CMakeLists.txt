@@ -13,18 +13,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BENCHPP_SOURCES
   src/timer.cpp
-  src/mem.cpp
-  src/cache.cpp
+  src/mem/mem.cpp
+  src/cache/cache.cpp
 )
-
-set(BENCHPP_LINUX_SOURCES
-  src/linux/detail/core.cpp
-  src/linux/statusFile.cpp
-)
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  list(APPEND BENCHPP_SOURCES ${BENCHPP_LINUX_SOURCES})
-endif()
 
 add_library(benchpp
   STATIC
@@ -35,6 +26,23 @@ target_include_directories(benchpp
   PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
+
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  set(BENCHPP_LINUX_SOURCES
+    src/linux/core.cpp
+    src/linux/statusFile.cpp
+  )
+
+  target_sources(benchpp
+    PRIVATE
+      ${BENCHPP_LINUX_SOURCES}
+  )
+  target_include_directories(benchpp
+    PRIVATE
+      ${CMAKE_CURRENT_LIST_DIR}/private
+  )
+endif()
 
 #build options
 option(BENCHPP_DEBUG 

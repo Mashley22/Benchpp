@@ -1,8 +1,7 @@
 #include <Bench++/mem.hpp>
 #include <Bench++/linux/exception/mem.hpp>
 
-#include "statusFile.hpp"
-
+#include <Bench++/private/linux/statusFile.hpp>
 //TODO: self-adjust the readings?
 
 namespace benchpp {

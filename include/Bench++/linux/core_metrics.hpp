@@ -24,7 +24,6 @@ int
 open_core_metric_event(const Metric& metric,
                            pid_t pid = 0, int cpu = -1, int group_fd = -1, long unsigned flags = 0);
 
-
 }
 
 }

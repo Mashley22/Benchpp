@@ -42,22 +42,6 @@ read_counter(int fd);
 
 }
 
-namespace cache {
-
-namespace detail {
-
-namespace lnx {
-
-[[nodiscard]]
-uint64_t 
-create_cache_config(const Event& evt) noexcept;
-
-}
-
-}
-
-}
-
 }
 
 
