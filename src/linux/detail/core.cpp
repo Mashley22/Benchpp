@@ -1,6 +1,10 @@
 #include <Bench++/detail/linux/core.hpp>
 
 #include <stdexcept>
+#include <asm/unistd.h>
+#include <unistd.h>
+#include <sys/syscall.h>
+#include <sys/ioctl.h>
 
 #ifndef __linux__
 #error "Only build this file if on linux"

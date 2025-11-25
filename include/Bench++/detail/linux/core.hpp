@@ -8,10 +8,6 @@
 #include <Bench++/cache.hpp>
 
 #include <linux/perf_event.h>
-#include <asm/unistd.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <sys/syscall.h>
 
 #include <cstdint>
 
@@ -27,7 +23,7 @@ default_perf_event_attr(void);
 
 [[nodiscard]]
 int
-open_perf_event(const perf_event_attr& hw_event, pid_t pid, int cpu, int group_fd, unsigned long flags);
+open_perf_event(const perf_event_attr& hw_event, pid_t pid = 0, int cpu = -1, int group_fd = -1, unsigned long flags = 0);
 
 void
 reset_counter(int fd);

@@ -9,6 +9,8 @@
 #include <Bench++/detail/linux/core.hpp>
 
 #include <syscall.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 
 #include <cstdint>
 #include <cassert>
