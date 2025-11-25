@@ -21,17 +21,9 @@ namespace detail {
 
 namespace lnx {
 
-[[nodiscard]] inline
+[[nodiscard]]
 int
-open_cache_event(const Event& evt, pid_t pid = 0, int cpu = -1, int group_fd = -1, long unsigned flags = 0) {
-
-  struct perf_event_attr hw_event = default_perf_event_attr();
-    
-  hw_event.type = PERF_TYPE_HW_CACHE; // SUPER IMPORTANT
-  hw_event.config = create_cache_config(evt);
-  
-  return open_perf_event(hw_event, pid, cpu, group_fd, flags);
-}
+open_cache_event(const Event& evt, pid_t pid = 0, int cpu = -1, int group_fd = -1, long unsigned flags = 0);
 
 }
 
@@ -55,7 +47,7 @@ public:
   std::int64_t
   read(void) {
     assert(m_fd != -1 && m_isRunning == true);
-    std::int64_t count = detail::lnx::read_counter(m_fd);
+    std::int64_t count = benchpp::detail::lnx::read_counter(m_fd);
     std::int64_t delta{count - m_prev_val};
     m_prev_val = count;
     return delta;
@@ -64,15 +56,15 @@ public:
   void
   start(void) {
     assert(m_fd != -1 && m_isRunning == false);
-    detail::lnx::reset_counter(m_fd);
-    detail::lnx::start_counter(m_fd);
+    benchpp::detail::lnx::reset_counter(m_fd);
+    benchpp::detail::lnx::start_counter(m_fd);
     m_isRunning = true;
   }
   
   void
   stop(void) {
     assert(m_isRunning == true);
-    detail::lnx::stop_counter(m_fd);
+    benchpp::detail::lnx::stop_counter(m_fd);
     m_isRunning = false;
   }
 

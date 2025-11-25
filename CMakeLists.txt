@@ -17,6 +17,14 @@ set(BENCHPP_SOURCES
   src/cache.cpp
 )
 
+set(BENCHPP_LINUX_SOURCES
+  src/linux/detail/core.cpp
+)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  list(APPEND BENCHPP_SOURCES ${BENCHPP_LINUX_SOURCES})
+endif()
+
 add_library(benchpp
   STATIC
     ${BENCHPP_SOURCES}

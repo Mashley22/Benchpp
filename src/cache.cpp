@@ -53,3 +53,7 @@ Event::toStr(void) const {
 }
 
 }
+
+#ifdef __linux__
+  #include "linux/cache.hpp"
+#endif
