@@ -48,6 +48,7 @@ M_create_cache_config(const Event& evt) noexcept { // NOLINT
   return cache_val | (op_val << 8) | (result_val << 16);
 }
 
+[[nodiscard]]
 int
 M_open_cache_event(const Event& evt, pid_t pid = 0, int cpu = -1, int group_fd = -1, long unsigned flags = 0) { // NOLINT
 
