@@ -1,19 +1,12 @@
-#ifndef BENCHPP_DETAIL_LINUX_CORE_HPP
-#define BENCHPP_DETAIL_LINUX_CORE_HPP
-
-#ifndef BENCHPP_DETAIL_LINUX_HEADER
-#define BENCHPP_DETAIL_LINUX_HEADER
-#endif
-
-#include <Bench++/cache.hpp>
+#ifndef BENCHPP_PRIVATE_LINUX_PERF_EVENT_HPP
+#define BENCHPP_PRIVATE_LINUX_PERF_EVENT_HPP
 
 #include <linux/perf_event.h>
-
-#include <cstdint>
+#include <sys/types.h>
 
 namespace benchpp {
 
-namespace detail {
+namespace priv {
 
 namespace lnx {
 
@@ -45,4 +38,4 @@ read_counter(int fd);
 }
 
 
-#endif /* BENCHPP_DETAIL_LINUX_CORE_HPP */
+#endif /* BENCHPP_PRIVATE_LINUX_PERF_EVENT_HPP */

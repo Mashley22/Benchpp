@@ -11,38 +11,38 @@ namespace mem {
 [[nodiscard]]
 std::size_t 
 get_peakVirtual(void) {  //NOLINT
-  return lnx::priv::parseStatusFile("VmPeak");
+  return priv::lnx::parseStatusFile("VmPeak");
 }
 
 [[nodiscard]]
 std::size_t
 get_currentVirtual(void) {  //NOLINT
-  return lnx::priv::parseStatusFile("VmSize");
+  return priv::lnx::parseStatusFile("VmSize");
 }
 
 [[nodiscard]]
 std::size_t
 get_peakPhysical(void) {  //NOLINT
-  return lnx::priv::parseStatusFile("VmHWM");
+  return priv::lnx::parseStatusFile("VmHWM");
 }
 
 [[nodiscard]]
 std::size_t
 get_currentPhysical(void) {  //NOLINT
-  return lnx::priv::parseStatusFile("VmRSS");
+  return priv::lnx::parseStatusFile("VmRSS");
 }
 
 [[nodiscard]]
 std::size_t
 get_currentSwapped(void) {  //NOLINT
-  return lnx::priv::parseStatusFile("VmSwap");
+  return priv::lnx::parseStatusFile("VmSwap");
 }
 
 [[nodiscard]]
 std::optional<std::size_t>
 try_get_peakVirtual(void) noexcept {  //NOLINT
   try {
-    std::size_t res = lnx::priv::parseStatusFile("VmPeak");
+    std::size_t res = priv::lnx::parseStatusFile("VmPeak");
     return res;
   }
   catch(Error& e) {
@@ -54,7 +54,7 @@ try_get_peakVirtual(void) noexcept {  //NOLINT
 std::optional<std::size_t>
 try_get_currentVirtual(void) noexcept {  //NOLINT
   try {
-    std::size_t res = lnx::priv::parseStatusFile("VmSize");
+    std::size_t res = priv::lnx::parseStatusFile("VmSize");
     return res;
   }
   catch(Error& e) {
@@ -66,7 +66,7 @@ try_get_currentVirtual(void) noexcept {  //NOLINT
 std::optional<std::size_t>
 try_get_peakPhysical(void) noexcept {  //NOLINT
   try {
-    std::size_t res = lnx::priv::parseStatusFile("VmHWM");
+    std::size_t res = priv::lnx::parseStatusFile("VmHWM");
     return res;
   }
   catch(Error& e) {
@@ -78,7 +78,7 @@ try_get_peakPhysical(void) noexcept {  //NOLINT
 std::optional<std::size_t>
 try_get_currentPhysical(void) noexcept {  //NOLINT
   try {
-    std::size_t res = lnx::priv::parseStatusFile("VmRSS");
+    std::size_t res = priv::lnx::parseStatusFile("VmRSS");
     return res;
   }
   catch(Error& e) {
@@ -90,7 +90,7 @@ try_get_currentPhysical(void) noexcept {  //NOLINT
 std::optional<std::size_t>
 try_get_currentSwapped(void) noexcept {  //NOLINT
   try {
-    std::size_t res = lnx::priv::parseStatusFile("VmSwap");
+    std::size_t res = priv::lnx::parseStatusFile("VmSwap");
     return res;
   }
   catch(Error& e) {

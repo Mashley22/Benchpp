@@ -1,4 +1,4 @@
-#include <Bench++/detail/linux/core.hpp>
+#include <Bench++/private/linux/perf_event.hpp>
 
 #include <stdexcept>
 #include <asm/unistd.h>
@@ -6,13 +6,9 @@
 #include <sys/syscall.h>
 #include <sys/ioctl.h>
 
-#ifndef __linux__
-#error "Only build this file if on linux"
-#endif 
-
 namespace benchpp {
 
-namespace detail {
+namespace priv {
 
 namespace lnx {
 

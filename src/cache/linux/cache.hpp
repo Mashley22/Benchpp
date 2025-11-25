@@ -1,14 +1,21 @@
-#include <Bench++/linux/cache.hpp>
+#include <Bench++/cache.hpp>
 
+#include <Bench++/private/linux/perf_event.hpp>
+
+#include <linux/perf_event.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+
+#include <cassert>
+
+#define TEMPLATE_GENERATOR(evt) template class Counter<evt>;
 
 namespace benchpp {
 
 namespace cache {
 
-namespace detail {
-
 namespace lnx {
-
+ 
 namespace {
 
 [[nodiscard]]
@@ -41,23 +48,65 @@ M_create_cache_config(const Event& evt) noexcept { // NOLINT
   return cache_val | (op_val << 8) | (result_val << 16);
 }
 
-}
-
 int
-open_cache_event(const Event& evt, pid_t pid, int cpu, int group_fd, long unsigned flags) { // NOLINT
+M_open_cache_event(const Event& evt, pid_t pid = 0, int cpu = -1, int group_fd = -1, long unsigned flags = 0) { // NOLINT
 
-  struct perf_event_attr hw_event = benchpp::detail::lnx::default_perf_event_attr();
+  struct perf_event_attr hw_event = priv::lnx::default_perf_event_attr();
     
   hw_event.type = PERF_TYPE_HW_CACHE; // SUPER IMPORTANT
-  hw_event.config = detail::lnx::M_create_cache_config(evt);
+  hw_event.config = M_create_cache_config(evt);
   
-  return benchpp::detail::lnx::open_perf_event(hw_event, pid, cpu, group_fd, flags);
+  return priv::lnx::open_perf_event(hw_event, pid, cpu, group_fd, flags);
 }
 
 }
 
 }
 
+template<Event T_evt>
+Counter<T_evt>::Counter(void) {
+  m_::fd = lnx::M_open_cache_event(T_evt);
+}
+
+template<Event T_evt>
+Counter<T_evt>::~Counter(void) {
+  if (m_::fd != -1) {
+    ioctl(m_::fd, PERF_EVENT_IOC_DISABLE, 0); // double disable is safe i think?
+    close(m_::fd);
+  }
+}
+  
+template<Event T_evt>
+[[nodiscard]]
+std::int64_t
+Counter<T_evt>::read(void) {
+  assert(m_::fd != -1 && m_::isRunning == true);
+  std::int64_t count = priv::lnx::read_counter(m_::fd);
+  std::int64_t delta{count - m_::prev_val};
+  m_::prev_val = count;
+  return delta;
+}
+
+template<Event T_evt>
+void
+Counter<T_evt>::start(void) {
+  assert(m_::fd != -1 && m_::isRunning == false);
+  priv::lnx::reset_counter(m_::fd);
+  priv::lnx::start_counter(m_::fd);
+  m_::isRunning = true;
+}
+  
+template<Event T_evt>
+void
+Counter<T_evt>::stop(void) {
+  assert(m_::isRunning == true);
+  priv::lnx::stop_counter(m_::fd);
+  m_::isRunning = false;
+}
+
+BENCHPP_CACHE_EVENT_ALL_GENERATOR(TEMPLATE_GENERATOR);
+
 }
 
 }
+

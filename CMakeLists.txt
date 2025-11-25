@@ -30,7 +30,7 @@ target_include_directories(benchpp
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   set(BENCHPP_LINUX_SOURCES
-    src/linux/core.cpp
+    src/linux/perf_event.cpp
     src/linux/statusFile.cpp
   )
 

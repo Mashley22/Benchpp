@@ -1,13 +1,14 @@
+#ifndef BENCHPP_PRIVATE_STATUSFILE_HPP
+#define BENCHPP_PRIVATE_STATUSFILE_HPP
+
 #include <fstream>
 #include <string_view>
 
 namespace benchpp {
 
-namespace mem {
+namespace priv { 
 
 namespace lnx {
-
-namespace priv {
 
 [[nodiscard]]
 std::ifstream
@@ -23,4 +24,4 @@ parseStatusFile(const std::string_view key);
 
 }
 
-}
+#endif /* BENCHPP_PRIVATE_STATUSFILE_HPP */
