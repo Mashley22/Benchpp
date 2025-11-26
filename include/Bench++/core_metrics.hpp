@@ -77,7 +77,6 @@ private:
   using m_ = detail::Counter_impl;
 };
 
-BENCHPP_METRIC_ALL_GENERATOR(BENCHPP_METRIC_COUNTER_TEMPLATE_EXTENRN_DECL);
 
 }
 
