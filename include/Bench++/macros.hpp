@@ -6,8 +6,8 @@
 
 // ONE BENCHMARK PER EXEC
 #define BENCHMARK_MAIN( benchFunc, runNum ) \
-  int main(int argc, char** argv) { \
-    for (std::size_t i = 0; i++; i < runNum) { \
+  int main(void) { \
+    for (std::size_t i = 0; i < runNum; i++) { \
       benchFunc;\
     }\
   }

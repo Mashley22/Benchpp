@@ -54,7 +54,12 @@ option(BENCHPP_DEBUG
 )
 
 option(BENCHPP_TEST
-  "Build the unitests, use the build.sh in validation for this" 
+  "Build the unitests, use the build.sh in build/validation for this" 
+  OFF
+)
+
+option(BENCHPP_SAMPLES
+  "Build the samples, use the build.sh in build/samples for this"
   OFF
 )
 
@@ -71,7 +76,7 @@ option(BENCHPP_USE_HIGH_RESOLUTION_CLOCK
   OFF
 )
 
-if(DEFINED BENCHPP_TEST)
+if(BENCHPP_TEST)
   enable_testing()
   include(CTest)
   add_subdirectory(extern/catch2)
@@ -80,4 +85,8 @@ if(DEFINED BENCHPP_TEST)
   include(Catch)
 
   add_subdirectory(validation)
+endif()
+
+if(BENCHPP_BUILD_SAMPLES)
+  add_subdirectory(samples)
 endif()
