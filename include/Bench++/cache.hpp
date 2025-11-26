@@ -107,6 +107,12 @@ public:
   void
   stop(void);
 
+  [[nodiscard]]
+  bool
+  isRunning(void) const noexcept {
+    return detail::Counter_impl::isRunning;
+  }
+
   [[nodiscard]] constexpr
   Type
   type(void) const noexcept {

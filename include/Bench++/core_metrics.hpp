@@ -69,10 +69,17 @@ public:
   stop(void);
 
   [[nodiscard]]
+  bool
+  isRunning(void) const noexcept {
+    return detail::Counter_impl::isRunning;
+  }
+
+  [[nodiscard]]
   Metric
   metric(void) const noexcept {
     return T_metric;
   }
+
 private:
   using m_ = detail::Counter_impl;
 };
