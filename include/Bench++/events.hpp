@@ -26,7 +26,7 @@ concept EventsCounter = requires(T counter) {
  * for the T template value, make a struct of all things being measured at each point,
  * if measuring all the same things at that point
  * it puts everything together such that push_back is as fast as possible, but can be reorganised
- * can also make T such that it autmatically constructs and reads the values
+ * can also make T such that it automatically constructs and reads the values
  */
 template<typename T, std::size_t T_pointCount, std::size_t T_runCount>
 class EventsRecord {
