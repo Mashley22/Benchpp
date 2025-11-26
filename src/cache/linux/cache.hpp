@@ -2,13 +2,10 @@
 
 #include <Bench++/private/linux/perf_event.hpp>
 
-#include <linux/perf_event.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 
 #include <cassert>
-
-#define TEMPLATE_GENERATOR(evt) template class Counter<evt>;
 
 namespace benchpp {
 
@@ -104,8 +101,6 @@ Counter<T_evt>::stop(void) {
   priv::lnx::stop_counter(m_::fd);
   m_::isRunning = false;
 }
-
-BENCHPP_CACHE_EVENT_ALL_GENERATOR(TEMPLATE_GENERATOR);
 
 }
 

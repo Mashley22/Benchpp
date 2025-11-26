@@ -1,5 +1,8 @@
 #include <Bench++/core_metrics.hpp>
 
+
+#define TEMPLATE_GENERATOR(met) template class benchpp::MetricCounter<met>
+
 namespace benchpp {
 
 [[nodiscard]]
@@ -30,3 +33,9 @@ std::string metric_toStr(const Metric& metric) {
 }
 
 }
+
+#ifdef __linux__
+#include "linux/core_metrics.hpp"
+#endif 
+
+BENCHPP_METRIC_ALL_GENERATOR(TEMPLATE_GENERATOR);

@@ -5,16 +5,16 @@
 #include <cstdint>
 
 #define BENCHPP_METRIC_ALL_GENERATOR(macro) \
-    macro(Metric::HW_CPU_CYCLES); \
-    macro(Metric::CACHE_REFERENCES); \
-    macro(Metric::CACHE_MISSES); \
-    macro(Metric::BRANCH_INSTRUCTIONS); \
-    macro(Metric::BRANCH_MISSES); \
-    macro(Metric::STALLED_CYCLES_FRONTEND); \
-    macro(Metric::STALLED_CYCLES_BACKEND); \
-    macro(Metric::PAGE_FAULTS); \
-    macro(Metric::CONTEXT_SWITCHES); \
-    macro(Metric::CPU_MIGRATIONS);
+    macro(benchpp::Metric::HW_CPU_CYCLES); \
+    macro(benchpp::Metric::CACHE_REFERENCES); \
+    macro(benchpp::Metric::CACHE_MISSES); \
+    macro(benchpp::Metric::BRANCH_INSTRUCTIONS); \
+    macro(benchpp::Metric::BRANCH_MISSES); \
+    macro(benchpp::Metric::STALLED_CYCLES_FRONTEND); \
+    macro(benchpp::Metric::STALLED_CYCLES_BACKEND); \
+    macro(benchpp::Metric::PAGE_FAULTS); \
+    macro(benchpp::Metric::CONTEXT_SWITCHES); \
+    macro(benchpp::Metric::CPU_MIGRATIONS);
 
 #define BENCHPP_METRIC_COUNTER_TEMPLATE_EXTENRN_DECL(met) extern template class MetricCounter<met>;
 
