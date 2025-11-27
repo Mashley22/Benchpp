@@ -13,13 +13,7 @@ endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(BENCHPP_SOURCES
-  src/timer.cpp
-  src/mem/mem.cpp
-  src/cache/cache.cpp
-  src/core_metrics/core_metrics.cpp
-  src/iteration_counter.cpp
-)
+add_subdirectory(src)
 
 add_library(benchpp
   STATIC
@@ -33,11 +27,6 @@ target_include_directories(benchpp
 
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  set(BENCHPP_LINUX_SOURCES
-    src/linux/perf_event.cpp
-    src/linux/statusFile.cpp
-  )
-
   target_sources(benchpp
     PRIVATE
       ${BENCHPP_LINUX_SOURCES}

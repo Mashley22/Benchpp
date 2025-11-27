@@ -10,7 +10,7 @@ std::size_t
 currentIteration(void) noexcept;
 
 void
-startIteration(const std::size_t num = 0); // dont call this twice ..
+startIteration(const std::size_t num = 1); // dont call this twice ..
 
 }
 
