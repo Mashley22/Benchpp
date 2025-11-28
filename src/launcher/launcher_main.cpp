@@ -1,8 +1,8 @@
 #include <cstdlib>
 #include <iostream>
 
-#ifndef BENCHMARK_EXE
-#define BENCHMARK_EXE "markbench"
+#ifndef BENCHMARK_NAME
+#define BENCHMARK_NAME "markbench"
 #endif
 
 #ifndef ITERATION_NUM
@@ -15,7 +15,7 @@ void
 M_doIterations(std::size_t iterationNum) {
   for (std::size_t i = 1; i <= iterationNum; i++) {
     std::cout << "Beginning iteration: " << i << '\n';
-    std::system(BENCHMARK_EXE);
+    std::system(BENCHMARK_NAME);
     std::cout << "Finished iteration: " << i << '\n';
   }
 }
