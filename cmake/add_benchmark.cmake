@@ -10,13 +10,13 @@ function(add_benchmark TARGET_BENCHMARK ITERATIONS)
     ${BENCHPP_ROOT_DIR}/src/launcher/launcher_main.cpp
   )
 
-  set_target_properties(${LAUNCHER} {PROPERTIES
+  set_target_properties(${LAUNCHER} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${TARGET_BENCHMARK}
   )
 
   target_compile_definitions(${LAUNCHER} PRIVATE 
-    BENCHMARK_NAME = "./${TARGET_BENCHMARK}"
-    ITERATION_NUM = ${ITERATIONS}
+    BENCHMARK_NAME="./${TARGET_BENCHMARK}"
+    "ITERATION_NUM=$<1:${ITERATIONS}>"
   )
 
   target_link_libraries(${TARGET_BENCHMARK}
