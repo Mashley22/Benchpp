@@ -13,6 +13,10 @@ endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(BENCHPP_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE INTERNAL)
+
+include(cmake/add_benchmark.cmake)
+
 add_subdirectory(src)
 
 add_library(benchpp
