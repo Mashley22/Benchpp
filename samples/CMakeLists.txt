@@ -1,4 +1,4 @@
-function(add_sample TARGET_NAME)
+function(add_sample TARGET_NAME ITERATIONS)
 
   target_link_libraries(${TARGET_NAME}
     PRIVATE
@@ -20,6 +20,8 @@ function(add_sample TARGET_NAME)
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
+
+  add_benchmark(TARGET_NAME ITERATIONS)
 
 endfunction()
 
