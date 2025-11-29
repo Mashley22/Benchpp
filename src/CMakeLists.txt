@@ -3,7 +3,6 @@ set(BENCHPP_SOURCES
   src/mem/mem.cpp
   src/cache/cache.cpp
   src/core_metrics/core_metrics.cpp
-  src/iteration_counter.cpp
   src/registry.cpp
   src/private/registry.cpp
   PARENT_SCOPE
