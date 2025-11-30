@@ -35,6 +35,7 @@ M_findBenchmark(const std::string_view name) {
 void
 M_run_benchmark_impl(const BenchmarkInfo& benchmark, const std::size_t runNum) {
   std::cout << "Starting benchmark: " << benchmark.name
+            << " group:" << benchmark.group
             <<  " for " << runNum << " runs" << '\n';
 
   for (std::size_t i = 0; i < runNum; i++) {
@@ -43,6 +44,7 @@ M_run_benchmark_impl(const BenchmarkInfo& benchmark, const std::size_t runNum) {
   }
 
   std::cout << "Finished benchmark: " << benchmark.name
+            << " group:" << benchmark.group
             <<  " did " << runNum << " runs" << '\n';
 }
 
@@ -107,6 +109,26 @@ run_benchmark(const std::string_view name, const std::size_t runNum) {
   std::vector<BenchmarkInfo>::const_iterator it = M_findBenchmark(name);
   
   M_run_benchmark_impl(*it, runNum);
+}
+
+void
+run_group(const std::string_view name) {
+  GroupRunner runner(name);
+  std::cout << "Starting group: " << name << '\n';
+
+  while(runner.nextBenchmark()) {
+    run_benchmark(runner.currentBenchmark());
+  }
+
+  std::cout << "Finished group: " << name << '\n';
+}
+
+void 
+run_all(void) {
+  std::cout << "Running all benchmarks" << '\n';
+  for (const auto& benchmark : M_registeredBenchmarks) {
+    run_benchmark(benchmark);
+  }
 }
 
 void

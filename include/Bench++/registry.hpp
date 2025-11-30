@@ -21,15 +21,6 @@ struct BenchmarkInfo {
 void
 add_benchmark(const BenchmarkInfo& info);
 
-void
-run_benchmark(const std::string_view name);
-
-void
-run_benchmark(const std::string_view name, const std::size_t runNum);
-
-void
-run_group(const std::string_view groupName);
-
 }
 
 #endif /* BENCHPP_REGISTRY_HPP */

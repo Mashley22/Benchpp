@@ -23,6 +23,12 @@ void
 run_benchmark(const std::string_view name, const std::size_t runNum);
 
 void
+run_group(const std::string_view name);
+
+void 
+run_all(void);
+
+void
 print_all_groups(void);
 
 void
