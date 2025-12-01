@@ -3,6 +3,12 @@
 
 #include <string_view>
 
+#define REGISTER_BENCHMARK(benchmark) \
+bool benchmark##_registered_var = []() { \
+  benchpp::add_benchmark(benchmark); \
+  return true; \
+} \
+
 namespace benchpp {
 
 struct BenchmarkNotRegisteredErr {
