@@ -4,10 +4,10 @@
 #include <string_view>
 
 #define REGISTER_BENCHMARK(benchmark) \
-bool benchmark##_registered_var = []() { \
+static bool benchmark##_registered_var = []() { \
   benchpp::register_benchmark(benchmark); \
   return true; \
-} \
+}()\
 
 namespace benchpp {
 

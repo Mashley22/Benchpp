@@ -11,7 +11,7 @@ BenchmarkNotRegisteredErr::BenchmarkNotRegisteredErr(const std::string_view val)
 }
 
 void
-reigster_benchmark(const BenchmarkInfo &info) {
+register_benchmark(const BenchmarkInfo &info) {
   priv::register_benchmark(info);
 }
 

@@ -58,7 +58,7 @@ public:
   
 private:
   std::string_view m_name;
-  std::size_t m_currentIdx{0};
+  std::size_t m_currentIdx;
 };
 
 }

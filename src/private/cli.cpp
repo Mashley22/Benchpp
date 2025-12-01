@@ -8,7 +8,7 @@
 
 #define ERROR std::cerr << "[Error]: "
 
-#define USAGE_ERROR ERROR << "Usage: (Benchmark cmd)"
+#define USAGE_ERROR ERROR << "Usage: (Benchmark cmd) "
 
 namespace benchpp {
 
@@ -90,18 +90,19 @@ class Parser {
 private:
   int m_argc;
   char ** m_argv;
-  int m_currentIdx;
+  int m_currentIdx{1};
   const std::unordered_map<std::string_view, void(*)(const Opt_args&)> m_optMap{
     {BENCHPP_CLI_OPT_PRINT_ALL_BENCHMARKS, &M_print_all_benchmarks},
     {BENCHPP_CLI_OPT_PRINT_GROUP_INFOS, &M_print_group_infos},
     {BENCHPP_CLI_OPT_RUN_GROUP, &M_run_groups},
-    {BENCHPP_CLI_OPT_RUN_BENCHMARK, &M_run_benchmark}
+    {BENCHPP_CLI_OPT_RUN_BENCHMARK, &M_run_benchmark},
+    {BENCHPP_CLI_HELP, &M_print_help},
   };
 
 public:
 Parser() = delete;
 Parser(const int argc, char ** argv) :
-  m_argc(argc), m_argv(argv), m_currentIdx(1) {}
+  m_argc(argc), m_argv(argv) {}
 
 private:
 
@@ -113,8 +114,18 @@ extract_next_args(void) {
     .argv = &m_argv[m_currentIdx],
   };
 
-  while (M_is_opt(m_argv[m_currentIdx + retval.argc]) || m_currentIdx + retval.argc < m_argc) {
-    retval.argc++;
+  while (true) {
+    std::size_t currentIdx = m_currentIdx + retval.argc;
+    if (!(currentIdx < m_argc)) {
+      break;
+    }
+
+    if (M_is_opt(m_argv[currentIdx])) {
+      break;
+    }
+    else {
+      retval.argc++;
+    }
   }
 
   m_currentIdx += retval.argc;
@@ -127,7 +138,7 @@ void
 parse(void) {
   while (m_currentIdx < m_argc) {
     Opt_args next_args = extract_next_args();
-    
+
     try {
       m_optMap.at(std::string_view(next_args.argv[0]))(next_args);
     }

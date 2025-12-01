@@ -7,6 +7,7 @@
 #include <iostream>
 
 #define GROUP_RUNNER_INVALID_IDX std::numeric_limits<std::size_t>::max()
+#define GROUP_RUNNER_START_IDX GROUP_RUNNER_INVALID_IDX - 1 // no ones using this surely
 
 namespace benchpp {
 
@@ -38,8 +39,8 @@ M_run_benchmark_impl(const BenchmarkInfo& benchmark, const std::size_t runNum) {
             << " group:" << benchmark.group
             <<  " for " << runNum << " runs" << '\n';
 
-  for (std::size_t i = 0; i < runNum; i++) {
-    std::cout << "Run: " << runNum << '\n';
+  for (std::size_t i = 1; i <= runNum; i++) {
+    std::cout << "Run: " << i << '\n';
     benchmark.function();
   }
 
@@ -151,7 +152,7 @@ print_all_groups(void) {
 
 void
 print_all_benchmarks_in_group(const std::string_view groupName) {
-  std::cout << M_num_benchmarks_in_group(groupName) << " benchmarks in group: " << groupName;
+  std::cout << M_num_benchmarks_in_group(groupName) << " benchmarks in group: " << groupName << '\n';
 
   GroupRunner runner(groupName);
 
@@ -161,18 +162,21 @@ print_all_benchmarks_in_group(const std::string_view groupName) {
 }
 
 GroupRunner::GroupRunner(const std::string_view groupName) noexcept :
-  m_name(groupName) {}
+  m_name(groupName), m_currentIdx(GROUP_RUNNER_START_IDX) {}
 
 bool
 GroupRunner::nextBenchmark(void) noexcept {
   assert(m_currentIdx != GROUP_RUNNER_INVALID_IDX);
   
-  if (m_currentIdx != 0) {
+  if (m_currentIdx != GROUP_RUNNER_START_IDX) {
     m_currentIdx++;
   }
-  
+  else {
+    m_currentIdx = 0;
+  }
+
   while (m_currentIdx < M_registeredBenchmarks.size()) {
-    if (M_registeredBenchmarks[m_currentIdx].name == m_name) {
+    if (M_registeredBenchmarks[m_currentIdx].group == m_name) {
       return true;
     }
     m_currentIdx++;
@@ -191,7 +195,7 @@ GroupRunner::currentBenchmark(void) const noexcept {
 
 void
 GroupRunner::reset(void) noexcept {
-  m_currentIdx = 0;
+  m_currentIdx = GROUP_RUNNER_START_IDX;
 }
 
 }
