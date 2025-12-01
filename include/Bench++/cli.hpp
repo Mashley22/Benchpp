@@ -9,7 +9,7 @@
  */
 #define BENCHPP_CLI_OPT_PRINT_GROUP_INFOS "-lg" 
 
-/**@brief follow this with the group name
+/**@brief follow this with the group name / names like group1 group2 etc.
  */
 #define BENCHPP_CLI_OPT_RUN_GROUP "-g"
 

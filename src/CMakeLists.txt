@@ -5,6 +5,7 @@ set(BENCHPP_SOURCES
   src/core_metrics/core_metrics.cpp
   src/registry.cpp
   src/private/registry.cpp
+  src/private/cli.cpp
   PARENT_SCOPE
 )
 
