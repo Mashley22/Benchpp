@@ -5,7 +5,7 @@
 
 #define REGISTER_BENCHMARK(benchmark) \
 bool benchmark##_registered_var = []() { \
-  benchpp::add_benchmark(benchmark); \
+  benchpp::register_benchmark(benchmark); \
   return true; \
 } \
 
@@ -25,7 +25,7 @@ struct BenchmarkInfo {
 };
 
 void
-add_benchmark(const BenchmarkInfo& info);
+register_benchmark(const BenchmarkInfo& info);
 
 }
 

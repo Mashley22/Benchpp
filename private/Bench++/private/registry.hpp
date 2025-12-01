@@ -8,7 +8,7 @@ namespace benchpp {
 namespace priv {
 
 void
-add_benchmark(const BenchmarkInfo &info);
+register_benchmark(const BenchmarkInfo &info);
 
 void 
 run_benchmark(const BenchmarkInfo& benchmark);

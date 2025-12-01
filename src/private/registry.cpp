@@ -83,7 +83,7 @@ M_num_benchmarks_in_group(const std::string_view groupName) noexcept {
 }
 
 void
-add_benchmark(const BenchmarkInfo &info) {
+register_benchmark(const BenchmarkInfo &info) {
   M_registeredBenchmarks.push_back(info);
 }
 
