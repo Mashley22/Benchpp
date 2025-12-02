@@ -1,1 +1,2 @@
 Make some cmake helper functions for the unittests
+The cli commands kinda suck tbh
