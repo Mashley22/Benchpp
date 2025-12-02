@@ -16,4 +16,12 @@ register_benchmark(const BenchmarkInfo &info) {
   priv::register_benchmark(info);
 }
 
+std::stringstream
+BenchmarkInfo::id_to_sstream(void) const {
+  std::stringstream ss;
+  ss << BENCHPP_BENCHMARK_GROUP_AND_NAME_STREAM(group, name);
+
+  return ss;
+}
+
 }

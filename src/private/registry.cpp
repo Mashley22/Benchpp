@@ -37,18 +37,17 @@ M_findBenchmark(const std::string_view groupName, const std::string_view name) {
 
 void
 M_run_benchmark_impl(const BenchmarkInfo& benchmark, const std::size_t runNum) {
-  std::cout << "Starting benchmark: " << benchmark.name
-            << " group:" << benchmark.group
-            <<  " for " << runNum << " runs" << '\n';
+  std::cout << "Starting benchmark: " << benchmark.id_to_sstream().rdbuf()
+            << " for: " << runNum << " runs" << '\n';
+
 
   for (std::size_t i = 1; i <= runNum; i++) {
     std::cout << "Run: " << i << '\n';
     benchmark.function();
   }
 
-  std::cout << "Finished benchmark: " << benchmark.name
-            << " group:" << benchmark.group
-            <<  " did " << runNum << " runs" << '\n';
+  std::cout << "Finished benchmark: " << benchmark.id_to_sstream().rdbuf()
+            << " for: " << runNum << " runs" << '\n';
 }
 
 void

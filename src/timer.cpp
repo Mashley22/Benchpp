@@ -1,7 +1,5 @@
 #include <Bench++/timer.hpp>
 
-#include <iostream>
-
 namespace benchpp {
 
 void
