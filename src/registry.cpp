@@ -5,9 +5,10 @@
 
 namespace benchpp {
 
-BenchmarkNotRegisteredErr::BenchmarkNotRegisteredErr(const std::string_view val) noexcept {
-  std::cerr << "No registered benchmark found with name: " << val << '\n';
-  invalid_name = val;
+BenchmarkNotRegisteredErr::BenchmarkNotRegisteredErr(const std::string_view groupName_val, const std::string_view name_val) noexcept {
+  std::cerr << "No registered benchmark found with name: " << BENCHPP_BENCHMARK_GROUP_AND_NAME_STREAM(groupName_val, name_val) << '\n';
+  groupName = groupName_val;
+  name = name_val;
 }
 
 void

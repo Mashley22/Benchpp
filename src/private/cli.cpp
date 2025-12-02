@@ -22,6 +22,31 @@ struct Opt_args {
   char ** argv;
 };
 
+
+struct BenchmarkFullName {
+  std::string_view group;
+  std::string_view name;
+  
+  void
+  fromCombined(const std::string_view str) {
+    std::size_t pos = str.find(":");
+
+    if (pos == std::string_view::npos) {
+      group = "";
+      name = str;
+    }
+    else {
+      group = str.substr(0, pos);
+      name = str.substr(pos + 1);
+    }
+  }
+
+  BenchmarkFullName(const std::string_view str) {
+    fromCombined(str);
+  }
+};
+
+
 [[nodiscard]]
 bool
 M_is_opt(char* arg) {
@@ -65,12 +90,13 @@ M_run_groups(const Opt_args& opt_args) {
 void
 M_run_benchmark(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
-    USAGE_ERROR << BENCHPP_CLI_OPT_RUN_BENCHMARK << " (benchmark1) (benchmark2) (benchmark3)" << '\n';
+    USAGE_ERROR << BENCHPP_CLI_OPT_RUN_BENCHMARK << " (group:benchmark1) (group:benchmark2) (group:benchmark3)" << '\n';
     std::terminate();
   }
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {
-    run_benchmark(opt_args.argv[i]);
+    BenchmarkFullName parsedNames(opt_args.argv[i]);
+    run_benchmark(parsedNames.group, parsedNames.name);
   }
 }
 

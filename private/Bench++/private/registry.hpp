@@ -17,10 +17,10 @@ void
 run_benchmark(const BenchmarkInfo& benchmark, const std::size_t runNum);
 
 void
-run_benchmark(const std::string_view name);
+run_benchmark(const std::string_view groupName, const std::string_view name);
 
 void
-run_benchmark(const std::string_view name, const std::size_t runNum);
+run_benchmark(const std::string_view groupName, const std::string_view name, const std::size_t runNum);
 
 void
 run_group(const std::string_view name);

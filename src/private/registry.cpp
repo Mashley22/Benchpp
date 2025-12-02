@@ -18,16 +18,18 @@ namespace {
 std::vector<BenchmarkInfo> M_registeredBenchmarks;
 
 std::vector<BenchmarkInfo>::const_iterator
-M_findBenchmark(const std::string_view name) {
+M_findBenchmark(const std::string_view groupName, const std::string_view name) {
+  std::cout << groupName << '\n'; 
+  std::cout << name << std::endl;
   std::vector<BenchmarkInfo>::const_iterator it = 
     std::find_if(M_registeredBenchmarks.begin(),
                  M_registeredBenchmarks.end(),
-                 [&name](const BenchmarkInfo& info) {
-                   return info.name == name;
+                 [&name, &groupName](const BenchmarkInfo& info) {
+                   return (info.name == name) && (info.group == groupName);
                  });
 
   if (it == M_registeredBenchmarks.end()) {
-    throw BenchmarkNotRegisteredErr(name);
+    throw BenchmarkNotRegisteredErr(groupName, name);
   }
 
   return it;
@@ -99,15 +101,15 @@ run_benchmark(const BenchmarkInfo& benchmark) {
 }
 
 void
-run_benchmark(const std::string_view name) {
-  std::vector<BenchmarkInfo>::const_iterator it = M_findBenchmark(name);
+run_benchmark(const std::string_view groupName, const std::string_view name) {
+  std::vector<BenchmarkInfo>::const_iterator it = M_findBenchmark(groupName, name);
   
   M_run_benchmark_impl(*it, it->runNum);
 }
 
 void
-run_benchmark(const std::string_view name, const std::size_t runNum) {
-  std::vector<BenchmarkInfo>::const_iterator it = M_findBenchmark(name);
+run_benchmark(const std::string_view groupName, const std::string_view name, const std::size_t runNum) {
+  std::vector<BenchmarkInfo>::const_iterator it = M_findBenchmark(groupName, name);
   
   M_run_benchmark_impl(*it, runNum);
 }

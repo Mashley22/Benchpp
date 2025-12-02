@@ -9,12 +9,15 @@ static bool benchmark##_registered_var = []() { \
   return true; \
 }()\
 
+#define BENCHPP_BENCHMARK_GROUP_AND_NAME_STREAM(group, name) group << ":" << name
+
 namespace benchpp {
 
 struct BenchmarkNotRegisteredErr {
   BenchmarkNotRegisteredErr() = delete;
-  BenchmarkNotRegisteredErr(const std::string_view) noexcept;
-  std::string_view invalid_name;
+  BenchmarkNotRegisteredErr(const std::string_view groupName_val, const std::string_view name_val) noexcept;
+  std::string_view name;
+  std::string_view groupName;
 };
 
 struct BenchmarkInfo {
