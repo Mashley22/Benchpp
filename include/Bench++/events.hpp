@@ -6,8 +6,15 @@
 #include <vector>
 #include <cassert>
 #include <span>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <fstream>
+
+#include <Bench++/iteration_counter.hpp>
 
 #define BENCHPP_CONCEPT_OPTIONAL(opt) requires requires { opt; } || true
+#define BENCHPP_SAVEDATA_FOLDER "savedata/"
 
 namespace benchpp {
 
@@ -20,6 +27,20 @@ concept EventsCounter = requires(T counter) {
     
   BENCHPP_CONCEPT_OPTIONAL({ counter.reset() } -> std::same_as<void>);
 };
+
+template<typename T>
+void
+saveData(T * p_data, std::size_t pointCount, std::size_t runCount) {
+  std::stringstream ss;
+  ss << BENCHPP_SAVEDATA_FOLDER << std::to_string(currentIteration())
+     << sizeof(T) << "_" << pointCount << "_" << runCount;
+
+  std::ofstream saveDataFile(ss.str());
+  
+  for (std::size_t i = 0; i < pointCount * runCount; i++) {
+    saveDataFile << p_data[i];
+  }
+}
 
 /**@brief an efficient way to store values at different points in a single run
  * and over multiple runs,
@@ -108,6 +129,14 @@ public:
   std::size_t
   currentRunNum(void) const noexcept {
     return m_runNum;
+  }
+  
+  /**@note Do not bind this what or in a destructor of a static variable because of the GSIOF
+   *       Make sure all calls in tis function run in main
+   */
+  void
+  saveData(void) const {
+    saveData(m_dataPtr, T_pointCount, T_runCount);
   }
 
 private:
