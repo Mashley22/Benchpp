@@ -6,7 +6,6 @@ set(BENCHPP_SOURCES
   src/registry.cpp
   src/private/registry.cpp
   src/private/cli.cpp
-  src/main.cpp
   PARENT_SCOPE
 )
 

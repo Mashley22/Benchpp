@@ -19,28 +19,6 @@ include(cmake/add_benchmark.cmake)
 
 add_subdirectory(src)
 
-add_library(benchpp
-  STATIC
-    ${BENCHPP_SOURCES}
-)
-
-target_include_directories(benchpp
-  PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}/include
-)
-
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  target_sources(benchpp
-    PRIVATE
-      ${BENCHPP_LINUX_SOURCES}
-  )
-  target_include_directories(benchpp
-    PRIVATE
-      ${CMAKE_CURRENT_LIST_DIR}/private
-  )
-endif()
-
 #build options
 option(BENCHPP_DEBUG 
   "Add some extra debugging and asserts etc." 
@@ -57,17 +35,52 @@ option(BENCHPP_SAMPLES
   OFF
 )
 
-if(DEFINED BENCHPP_DEBUG)
-  target_compile_definitions(benchpp
-    PRIVATE
-    NDEBUG
-  )
-endif()
-
 #config options
 option(BENCHPP_USE_HIGH_RESOLUTION_CLOCK
   "Use std::chrono::high_resolution as opposed to std::chronon::steady"
   OFF
+)
+
+function(benchpp_add_core_library TARGET_NAME)
+
+  add_library(${TARGET_NAME}
+    STATIC
+      ${BENCHPP_SOURCES}
+  )
+
+  target_include_directories(${TARGET_NAME}
+    PUBLIC
+      ${CMAKE_CURRENT_LIST_DIR}/include
+  )
+
+
+  if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    target_sources(${TARGET_NAME}
+      PRIVATE
+        ${BENCHPP_LINUX_SOURCES}
+    )
+  endif()
+
+  target_include_directories(${TARGET_NAME}
+    PRIVATE
+      ${CMAKE_CURRENT_LIST_DIR}/private
+  )
+
+  if(DEFINED BENCHPP_DEBUG)
+    target_compile_definitions(${TARGET_NAME}
+      PRIVATE
+        NDEBUG
+    )
+  endif()
+
+endfunction()
+
+benchpp_add_core_library(benchpp)
+benchpp_add_core_library(benchpp_with_main)
+
+target_sources(benchpp_with_main
+  PRIVATE
+    src/main.cpp
 )
 
 if(BENCHPP_TEST)

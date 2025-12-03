@@ -3,4 +3,4 @@ add_executable(post_vs_pre_increment
   vector.cpp
 )
 
-add_benchmark(post_vs_pre_increment 1)
+add_sample(post_vs_pre_increment)

@@ -1,9 +1,9 @@
-function(add_sample TARGET_NAME ITERATIONS)
+function(add_sample TARGET_NAME)
 
   target_link_libraries(${TARGET_NAME}
-    PRIVATE
-      benchpp
-    )
+    PUBLIC
+      benchpp_with_main
+  )
 
   target_compile_options(${TARGET_NAME}
     PRIVATE
@@ -21,7 +21,9 @@ function(add_sample TARGET_NAME ITERATIONS)
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 
-  add_benchmark(TARGET_NAME ITERATIONS)
+  set_target_properties(${TARGET_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${TARGET_NAME}
+  )
 
 endfunction()
 

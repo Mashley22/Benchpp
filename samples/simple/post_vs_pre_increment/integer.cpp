@@ -3,7 +3,7 @@
 #include <Bench++/registry.hpp>
 
 #define RUN_NUM 100
-#define LOOP_NUM 1e6
+#define LOOP_NUM std::size_t(1e6)
 
 namespace benchpp {
 
@@ -21,6 +21,7 @@ M_post_increment(void) {
     a = b++;
   }
   M_postTimer.recordAndReset();
+  (void)a;
 }
 
 void
