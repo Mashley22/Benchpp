@@ -85,7 +85,7 @@ struct Stats {
   [[nodiscard]]
   T
   stddev(void) const noexcept {
-    return std::sqrt(variance);
+    return static_cast<T>(std::sqrt(variance));
   }
   
   void
