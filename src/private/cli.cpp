@@ -122,7 +122,7 @@ private:
     {BENCHPP_CLI_OPT_PRINT_GROUP_INFOS, &M_print_group_infos},
     {BENCHPP_CLI_OPT_RUN_GROUP, &M_run_groups},
     {BENCHPP_CLI_OPT_RUN_BENCHMARK, &M_run_benchmark},
-    {BENCHPP_CLI_HELP, &M_print_help},
+    {BENCHPP_CLI_OPT_HELP, &M_print_help},
   };
 
 public:

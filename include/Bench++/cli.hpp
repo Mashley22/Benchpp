@@ -18,6 +18,6 @@
  */
 #define BENCHPP_CLI_OPT_RUN_BENCHMARK "-b"
 
-#define BENCHPP_CLI_HELP "-h"
+#define BENCHPP_CLI_OPT_HELP "-h"
 
 #endif /* BENCHPP_CLI_HPP */
