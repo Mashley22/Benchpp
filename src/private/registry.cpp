@@ -15,20 +15,26 @@ namespace priv {
 
 namespace {
 
-std::vector<BenchmarkInfo> M_registeredBenchmarks;
+[[nodiscard]]
+std::vector<BenchmarkInfo>& 
+M_registeredBenchmarks(void) noexcept {
+  static std::vector<BenchmarkInfo> s_registeredBenchmarks = {}; // this shouldn't be needed on deinitialization?
+
+  return s_registeredBenchmarks;
+}
 
 std::vector<BenchmarkInfo>::const_iterator
 M_findBenchmark(const std::string_view groupName, const std::string_view name) {
   std::cout << groupName << '\n'; 
   std::cout << name << std::endl;
   std::vector<BenchmarkInfo>::const_iterator it = 
-    std::find_if(M_registeredBenchmarks.begin(),
-                 M_registeredBenchmarks.end(),
+    std::find_if(M_registeredBenchmarks().begin(),
+                 M_registeredBenchmarks().end(),
                  [&name, &groupName](const BenchmarkInfo& info) {
                    return (info.name == name) && (info.group == groupName);
                  });
 
-  if (it == M_registeredBenchmarks.end()) {
+  if (it == M_registeredBenchmarks().end()) {
     throw BenchmarkNotRegisteredErr(groupName, name);
   }
 
@@ -60,7 +66,7 @@ std::vector<std::string_view>
 M_find_all_groups(void) {
   std::vector<std::string_view> groups;
 
-  for (const BenchmarkInfo& info : M_registeredBenchmarks) {
+  for (const BenchmarkInfo& info : M_registeredBenchmarks()) {
     if (std::find(groups.begin(), groups.end(), info.group) != groups.end()) {
       groups.push_back(info.group);
     }
@@ -86,7 +92,7 @@ M_num_benchmarks_in_group(const std::string_view groupName) noexcept {
 
 void
 register_benchmark(const BenchmarkInfo &info) {
-  M_registeredBenchmarks.push_back(info);
+  M_registeredBenchmarks().push_back(info);
 }
 
 void
@@ -128,14 +134,14 @@ run_group(const std::string_view name) {
 void 
 run_all(void) {
   std::cout << "Running all benchmarks" << '\n';
-  for (const auto& benchmark : M_registeredBenchmarks) {
+  for (const auto& benchmark : M_registeredBenchmarks()) {
     run_benchmark(benchmark);
   }
 }
 
 void
 print_all_benchmarks(void) {
-  for (const BenchmarkInfo& info : M_registeredBenchmarks) {
+  for (const BenchmarkInfo& info : M_registeredBenchmarks()) {
     M_print_benchmarkInfo(info);
   }
 }
@@ -176,8 +182,8 @@ GroupRunner::nextBenchmark(void) noexcept {
     m_currentIdx = 0;
   }
 
-  while (m_currentIdx < M_registeredBenchmarks.size()) {
-    if (M_registeredBenchmarks[m_currentIdx].group == m_name) {
+  while (m_currentIdx < M_registeredBenchmarks().size()) {
+    if (M_registeredBenchmarks()[m_currentIdx].group == m_name) {
       return true;
     }
     m_currentIdx++;
@@ -191,7 +197,7 @@ const BenchmarkInfo&
 GroupRunner::currentBenchmark(void) const noexcept {
   assert(m_currentIdx != GROUP_RUNNER_INVALID_IDX);
   
-  return M_registeredBenchmarks[m_currentIdx];
+  return M_registeredBenchmarks()[m_currentIdx];
 }
 
 void
