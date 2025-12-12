@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.28)
 project(MyProject)
 
 set(BENCHPP_MINIMUM_CXX_STANDARD 20)
@@ -12,6 +12,7 @@ elseif(CMAKE_CXX_STANDARD LESS ${BENCHPP_MINIMUM_CXX_STANDARD})
 endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 set(BENCHPP_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE STRING "the")
 
@@ -48,6 +49,13 @@ function(benchpp_add_core_library TARGET_NAME)
       ${BENCHPP_SOURCES}
   )
 
+  target_sources(${TARGET_NAME} 
+    PUBLIC
+      FILE_SET CXX_MODULES
+      FILES
+        ${BENCHPP_CORE_INTERFACE}
+  )
+
   target_include_directories(${TARGET_NAME}
     PUBLIC
       ${CMAKE_CURRENT_LIST_DIR}/include
@@ -66,7 +74,7 @@ function(benchpp_add_core_library TARGET_NAME)
       ${CMAKE_CURRENT_LIST_DIR}/private
   )
 
-  if(DEFINED BENCHPP_DEBUG)
+  if(BENCHPP_DEBUG)
     target_compile_definitions(${TARGET_NAME}
       PRIVATE
         NDEBUG

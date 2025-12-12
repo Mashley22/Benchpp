@@ -1,8 +1,10 @@
-#include <Bench++/iteration_counter.hpp>
+module; 
 
-#include <limits>
 #include <cstdlib>
+#include <limits>
 #include <iostream>
+
+module Benchpp;
 
 #define M_ITERATION_INIT_VAL std::numeric_limits<std::size_t>::max()
 

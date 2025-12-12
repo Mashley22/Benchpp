@@ -1,0 +1,16 @@
+module;
+
+#include <cstddef>
+
+export module benchpp;
+
+namespace benchpp {
+
+[[nodiscard]]
+std::size_t
+currentIteration(void) noexcept;
+
+void
+startIteration(const std::size_t num = 1); // dont call this twice ..
+
+}
