@@ -12,11 +12,8 @@ elseif(CMAKE_CXX_STANDARD LESS ${BENCHPP_MINIMUM_CXX_STANDARD})
 endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 set(BENCHPP_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE STRING "the")
-
-include(cmake/add_benchmark.cmake)
 
 add_subdirectory(src)
 
@@ -44,16 +41,14 @@ option(BENCHPP_USE_HIGH_RESOLUTION_CLOCK
 
 function(benchpp_add_core_library TARGET_NAME)
 
-  add_library(${TARGET_NAME}
-    STATIC
-      ${BENCHPP_SOURCES}
-  )
+  add_library(${TARGET_NAME})
 
   target_sources(${TARGET_NAME} 
     PUBLIC
-      FILE_SET CXX_MODULES
-      FILES
+      FILE_SET CXX_MODULES FILES
         ${BENCHPP_CORE_INTERFACE}
+    PRIVATE
+      ${BENCHPP_SOURCES}
   )
 
   target_include_directories(${TARGET_NAME}

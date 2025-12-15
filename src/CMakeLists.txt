@@ -12,11 +12,13 @@ set(BENCHPP_SOURCES
 
 set(BENCHPP_CORE_INTERFACE
   src/core.cppm
+  src/cache/cache.cppm
   PARENT_SCOPE
 )
 
 set(BENCHPP_LINUX_SOURCES
   src/linux/perf_event.cpp
   src/linux/statusFile.cpp
+  src/cache/linux/cache.cpp
   PARENT_SCOPE
 )

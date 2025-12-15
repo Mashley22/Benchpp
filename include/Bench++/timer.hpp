@@ -106,6 +106,7 @@ public:
   
   void
   run_complete(void) noexcept {
+    m_stopwatch.stop();
     m_stopwatch.reset();
     m_times.run_complete();
   }

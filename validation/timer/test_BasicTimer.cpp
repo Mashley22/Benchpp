@@ -68,6 +68,7 @@ TEST_CASE( "BasicTimer", "[Timer]") {
 
     timer.start();
     M_smallStall();
+    timer.stop();
     
     timer.reset();
     

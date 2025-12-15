@@ -1,4 +1,4 @@
-#include <Bench++/cache.hpp>
+module;
 
 #include <Bench++/private/linux/perf_event.hpp>
 
@@ -6,6 +6,13 @@
 #include <unistd.h>
 
 #include <cassert>
+#include <cstdint>
+
+#include <Bench++/macros.hpp>
+
+module benchpp_cache;
+
+#define TEMPLATE_EXPORTER(evt) template class benchpp::cache::Counter<evt>;
 
 namespace benchpp {
 
@@ -106,3 +113,4 @@ Counter<T_evt>::stop(void) {
 
 }
 
+BENCHPP_CACHE_EVENT_ALL_GENERATOR(TEMPLATE_EXPORTER);

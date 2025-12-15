@@ -4,7 +4,7 @@ module;
 #include <limits>
 #include <iostream>
 
-module Benchpp;
+module benchpp;
 
 #define M_ITERATION_INIT_VAL std::numeric_limits<std::size_t>::max()
 

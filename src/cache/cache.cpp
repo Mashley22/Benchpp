@@ -1,6 +1,8 @@
-#include <Bench++/cache.hpp>
+module;
 
-#define TEMPLATE_GENERATOR(evt) template class benchpp::cache::Counter<evt>;
+#include <string>
+
+module benchpp_cache;
 
 namespace benchpp {
 
@@ -55,9 +57,3 @@ Event::toStr(void) const {
 }
 
 }
-
-#ifdef __linux__
-  #include "linux/cache.hpp"
-#endif
-
-BENCHPP_CACHE_EVENT_ALL_GENERATOR(TEMPLATE_GENERATOR);

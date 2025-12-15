@@ -1,7 +1,0 @@
-function(add_benchmark TARGET_BENCHMARK ITERATIONS)
-
-  set_target_properties(${TARGET_BENCHMARK} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${TARGET_BENCHMARK}
-  )
-
-endfunction()

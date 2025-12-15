@@ -40,6 +40,7 @@ TEST_CASE( "Timer", "[Timer]" ) {
   SECTION( "Timer record and reset works properly (i.e like record reset)" ) {
     for (std::size_t i = 0; i < TIMER_START_STOP_COUNT; i++) {
       timer.start();
+      timer.stop();
       timer.recordAndReset();
 
       REQUIRE(timer.times().size() == i + 1);

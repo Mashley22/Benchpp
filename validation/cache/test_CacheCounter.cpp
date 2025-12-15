@@ -1,6 +1,8 @@
-#include <Bench++/cache.hpp>
-
 #include <catch2/catch_test_macros.hpp>
+
+#include <Bench++/macros.hpp>
+
+import benchpp_cache;
 
 #define GENERATE_TEST_TEMPLATE(event) \
   TEST_CASE( event.toStr() , "[cache][!mayfail]" ) { \
