@@ -10,9 +10,9 @@ module;
 
 #include <Bench++/macros.hpp>
 
-module benchpp_cache;
+module Benchpp;
 
-#define TEMPLATE_EXPORTER(evt) template class benchpp::cache::Counter<evt>;
+#define CACHE_COUNTER_TEMPLATE_GENERATOR(evt) template class benchpp::cache::Counter<evt>;
 
 namespace benchpp {
 
@@ -113,4 +113,4 @@ Counter<T_evt>::stop(void) {
 
 }
 
-BENCHPP_CACHE_EVENT_ALL_GENERATOR(TEMPLATE_EXPORTER);
+BENCHPP_CACHE_EVENT_ALL_GENERATOR(CACHE_COUNTER_TEMPLATE_GENERATOR);

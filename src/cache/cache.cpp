@@ -2,7 +2,7 @@ module;
 
 #include <string>
 
-module benchpp_cache;
+module Benchpp;
 
 namespace benchpp {
 

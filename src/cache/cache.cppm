@@ -3,11 +3,7 @@ module;
 #include <string>
 #include <cstdint>
 
-#include <Bench++/macros.hpp>
-
-export module benchpp_cache;
-
-#define TEMPLATE_EXPORTER(evt) export extern template class benchpp::cache::Counter<evt>;
+export module Benchpp:cache;
 
 namespace benchpp {
 
@@ -35,16 +31,6 @@ export enum class Result {
     MISS       // Misses only
 };
 
-export struct Event {
-  Type type;
-  Operation op;
-  Result res;
-    
-  [[nodiscard]]
-  std::string 
-  toStr(void) const;
-};
-
 export
 [[nodiscard]]
 std::string
@@ -59,6 +45,17 @@ export
 [[nodiscard]]
 std::string
 result_toStr(const Result& type);
+
+
+export struct Event {
+  Type type;
+  Operation op;
+  Result res;
+    
+  [[nodiscard]]
+  std::string 
+  toStr(void) const;
+};
 
 namespace detail {
 
@@ -130,5 +127,3 @@ private:
 }
 
 }
-
-BENCHPP_CACHE_EVENT_ALL_GENERATOR(TEMPLATE_EXPORTER);

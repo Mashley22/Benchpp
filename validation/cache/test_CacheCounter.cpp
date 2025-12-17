@@ -2,7 +2,7 @@
 
 #include <Bench++/macros.hpp>
 
-import benchpp_cache;
+import Benchpp;
 
 #define GENERATE_TEST_TEMPLATE(event) \
   TEST_CASE( event.toStr() , "[cache][!mayfail]" ) { \

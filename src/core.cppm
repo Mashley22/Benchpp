@@ -2,7 +2,8 @@ module;
 
 #include <cstddef>
 
-export module benchpp;
+export module Benchpp;
+export import :cache;
 
 namespace benchpp {
 
