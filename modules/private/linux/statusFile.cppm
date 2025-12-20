@@ -1,8 +1,9 @@
-#ifndef BENCHPP_PRIVATE_STATUSFILE_HPP
-#define BENCHPP_PRIVATE_STATUSFILE_HPP
+module;
 
 #include <fstream>
 #include <string_view>
+
+export module Benchpp:priv.lnx.statusFile;
 
 namespace benchpp {
 
@@ -23,5 +24,3 @@ parseStatusFile(const std::string_view key);
 }
 
 }
-
-#endif /* BENCHPP_PRIVATE_STATUSFILE_HPP */

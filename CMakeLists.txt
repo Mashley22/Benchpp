@@ -49,6 +49,7 @@ function(benchpp_add_core_library TARGET_NAME)
       FILE_SET CXX_MODULES FILES
         modules/benchpp.cppm
         ${BENCHPP_PUBLIC_PARTITIONS}
+        ${BENCHPP_PRIVATE_PARTITIONS}
     PRIVATE
       ${BENCHPP_SOURCES}
   )

@@ -1,8 +1,10 @@
-#include <Bench++/private/linux/statusFile.hpp>
-
-#include <Bench++/linux/exception/mem.hpp>
+module;
 
 #include <string>
+#include <fstream>
+
+module Benchpp;
+import :lnx.exception.mem;
 
 #define LINUX_STATUS_FILE "/proc/self/status"
 

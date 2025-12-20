@@ -1,9 +1,11 @@
-#ifndef BENCHPP_LINUX_EXCEPTION_MEM_HPP
-#define BENCHPP_LINUX_EXCEPTION_MEM_HPP
+module;
 
-#include <Bench++/mem.hpp>
+#include <exception>
 
-namespace benchpp {
+export module Benchpp:lnx.exception.mem;
+import :mem;
+
+export namespace benchpp {
 
 namespace mem {
 
@@ -22,5 +24,3 @@ class LineParseErr: Error {};
 }
 
 }
-
-#endif /* BENCHPP_LINUX_MEM_HPP */

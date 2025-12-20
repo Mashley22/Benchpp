@@ -7,6 +7,9 @@ export import :stats;
 export import :events;
 export import :timer;
 export import :cache;
+export import :mem;
+export import :lnx.exception.mem;
+import :priv.lnx.statusFile;
 
 namespace benchpp {
 

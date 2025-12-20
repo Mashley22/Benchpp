@@ -1,14 +1,20 @@
-#ifndef BENCHPP_MEM_HPP
-#define BENCHPP_MEM_HPP
+module;
 
 #include <cstddef>
 #include <optional>
 
-namespace benchpp {
+export module Benchpp:mem;
+
+export namespace benchpp {
 
 namespace mem {
 
-//KB!!!
+// Note these may be non negligble, so it is recommned not to mix these with speed benchmarks
+// May add more but keeping it simple for now
+
+/**@brief can be thrown by any of the getters if for some reasong they fail to get the memory
+ */
+class Error : std::exception {};
 
 /**@brief contains the memory usage statistics at a particular point in time
  */
@@ -17,13 +23,6 @@ struct Snapshot {
   std::size_t phy;
   std::size_t swap;
 };
-
-// Note these may be non negligble, so it is recommned not to mix these with speed benchmarks
-// May add more but keeping it simple for now
-
-/**@brief can be thrown by any of the getters if for some reasong they fail to get the memory
- */
-class Error : std::exception {};
 
 [[nodiscard]]
 std::size_t
@@ -76,5 +75,3 @@ try_get_snapshot(void) noexcept;
 }
 
 }
-
-#endif /* BENCHPP_MEM_HPP */
