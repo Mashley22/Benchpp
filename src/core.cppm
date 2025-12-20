@@ -5,6 +5,7 @@ module;
 export module Benchpp;
 export import :timer;
 export import :cache;
+export import :stats;
 
 namespace benchpp {
 

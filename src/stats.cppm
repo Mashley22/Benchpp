@@ -1,5 +1,4 @@
-#ifndef BENCHPP_STATS_HPP
-#define BENCHPP_STATS_HPP
+module;
 
 #include <span>
 #include <vector>
@@ -8,7 +7,9 @@
 #include <iostream>
 #include <cassert>
 
-namespace benchpp {
+export module Benchpp:stats;
+
+export namespace benchpp {
 
 template<class T, class D = double>
 struct Stats {
@@ -103,5 +104,3 @@ struct Stats {
 };
 
 }
-
-#endif /* BENCHPP_STATS_HPP */
