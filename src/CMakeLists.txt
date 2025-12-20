@@ -10,15 +10,6 @@ set(BENCHPP_SOURCES
   PARENT_SCOPE
 )
 
-set(BENCHPP_CORE_INTERFACE
-  src/core.cppm
-  src/stats.cppm
-  src/cache/cache.cppm
-  src/timer.cppm
-  src/events.cppm
-  PARENT_SCOPE
-)
-
 set(BENCHPP_LINUX_SOURCES
   src/linux/perf_event.cpp
   src/linux/statusFile.cpp

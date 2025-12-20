@@ -16,6 +16,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BENCHPP_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE STRING "the")
 
 add_subdirectory(src)
+include(modules/CMakeLists.txt)
 
 #build options
 option(BENCHPP_DEBUG 
@@ -46,7 +47,8 @@ function(benchpp_add_core_library TARGET_NAME)
   target_sources(${TARGET_NAME} 
     PUBLIC
       FILE_SET CXX_MODULES FILES
-        ${BENCHPP_CORE_INTERFACE}
+        modules/benchpp.cppm
+        ${BENCHPP_PUBLIC_PARTITIONS}
     PRIVATE
       ${BENCHPP_SOURCES}
   )
