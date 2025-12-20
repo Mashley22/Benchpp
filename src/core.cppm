@@ -3,6 +3,7 @@ module;
 #include <cstddef>
 
 export module Benchpp;
+export import :timer;
 export import :cache;
 
 namespace benchpp {

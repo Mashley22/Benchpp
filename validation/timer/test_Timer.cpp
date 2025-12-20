@@ -1,6 +1,6 @@
-#include <Bench++/timer.hpp>
-
 #include <catch2/catch_test_macros.hpp>
+
+import Benchpp;
 
 #define TIMER_START_STOP_COUNT 100
 

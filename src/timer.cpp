@@ -1,4 +1,11 @@
-#include <Bench++/timer.hpp>
+module;
+
+#include <cassert>
+#include <vector>
+#include <bits/chrono.h>
+#include <span>
+
+module Benchpp;
 
 namespace benchpp {
 

@@ -13,6 +13,7 @@ set(BENCHPP_SOURCES
 set(BENCHPP_CORE_INTERFACE
   src/core.cppm
   src/cache/cache.cppm
+  src/timer.cppm
   PARENT_SCOPE
 )
 

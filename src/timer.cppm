@@ -1,5 +1,4 @@
-#ifndef BENCHPP_TIMER_HPP
-#define BENCHPP_TIMER_HPP
+module;
 
 #include <Bench++/events.hpp>
 
@@ -8,7 +7,9 @@
 
 #include <cassert>
 
-namespace benchpp {
+export module Benchpp:timer;
+
+export namespace benchpp {
 
 #ifdef BENCHPP_USE_HIGH_RESOLUTION_CLOCK
 using Clock_t = std::chrono::high_resolution_clock;
@@ -137,5 +138,3 @@ public:
 };
 
 }
-
-#endif /* BENCHPP_TIMER_HPP */

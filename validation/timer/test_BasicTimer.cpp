@@ -1,6 +1,6 @@
-#include <Bench++/timer.hpp>
-
 #include <catch2/catch_test_macros.hpp>
+
+import Benchpp;
 
 #define START_STOP_CYCLE_COUNT 100
 
