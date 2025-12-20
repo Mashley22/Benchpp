@@ -1,8 +1,7 @@
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo $SCRIPT_DIR
+source $SCRIPT_DIR/../build_core.sh
+
 EXTRA_ARGS="-DBENCHPP_BUILD_SAMPLES=ON"
 
-
-if command -v ninja &> /dev/null; then
-    cmake ../.. -G Ninja "$EXTRA_ARGS"
-else
-    cmake ../.. "$EXTRA_ARGS"
-fi
+eval $BASE_CMAKE_BUILD_COMMAND $EXTRA_ARGS $@
