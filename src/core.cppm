@@ -3,9 +3,10 @@ module;
 #include <cstddef>
 
 export module Benchpp;
+export import :stats;
+export import :events;
 export import :timer;
 export import :cache;
-export import :stats;
 
 namespace benchpp {
 

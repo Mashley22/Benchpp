@@ -1,5 +1,4 @@
-#ifndef BENCHPP_EVENTS_HPP
-#define BENCHPP_EVENTS_HPP
+module;
 
 #include <concepts>
 #include <cstdint>
@@ -13,10 +12,12 @@
 
 #include <Bench++/iteration_counter.hpp>
 
+export module Benchpp:events;
+
 #define BENCHPP_CONCEPT_OPTIONAL(opt) requires requires { opt; } || true
 #define BENCHPP_SAVEDATA_FOLDER "savedata/"
 
-namespace benchpp {
+export namespace benchpp {
 
 template<typename T>
 concept EventsCounter = requires(T counter) {
@@ -149,5 +150,3 @@ private:
 };
 
 }
-
-#endif /* BENCHPP_EVENTS_HPP */

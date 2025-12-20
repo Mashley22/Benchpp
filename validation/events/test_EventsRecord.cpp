@@ -1,6 +1,6 @@
-#include <Bench++/events.hpp>
-
 #include <catch2/catch_test_macros.hpp>
+
+import Benchpp;
 
 #define POINT_COUNT 100
 #define RUN_COUNT 1000

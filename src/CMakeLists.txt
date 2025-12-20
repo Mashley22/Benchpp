@@ -15,6 +15,7 @@ set(BENCHPP_CORE_INTERFACE
   src/stats.cppm
   src/cache/cache.cppm
   src/timer.cppm
+  src/events.cppm
   PARENT_SCOPE
 )
 

@@ -1,13 +1,12 @@
 module;
 
-#include <Bench++/events.hpp>
-
 #include <chrono>
 #include <vector>
 
 #include <cassert>
 
 export module Benchpp:timer;
+import :events;
 
 export namespace benchpp {
 
