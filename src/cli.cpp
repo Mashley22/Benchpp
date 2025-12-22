@@ -4,9 +4,8 @@ module;
 #include <cstdlib>
 #include <unordered_map>
 
-#include <Bench++/cli.hpp>
-
 module Benchpp;
+import :cli;
 import :priv.registry;
 
 #define ERROR std::cerr << "[Error]: "
