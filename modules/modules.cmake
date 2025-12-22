@@ -4,6 +4,7 @@ set(BENCHPP_PUBLIC_PARTITIONS
   timer.cppm
   events.cppm
   mem/mem.cppm
+  core_metrics.cppm
 )
 
 set(BENCHPP_PRIVATE_PARTITIONS)

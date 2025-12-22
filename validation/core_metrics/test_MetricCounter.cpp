@@ -1,6 +1,8 @@
-#include <Bench++/core_metrics.hpp>
-
 #include <catch2/catch_test_macros.hpp>
+
+#include <Bench++/macros.hpp>
+
+import Benchpp;
 
 #define GENERATE_TEST_TEMPLATE(met) \
   TEST_CASE( metric_toStr(met) , "[core_metrics][!mayfail]" ) { \

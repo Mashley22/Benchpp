@@ -1,25 +1,13 @@
-#ifndef BENCHPP_CORE_METRICS_HPP
-#define BENCHPP_CORE_METRICS_HPP
+module;
 
 #include <string>
 #include <cstdint>
 
-#define BENCHPP_METRIC_ALL_GENERATOR(macro) \
-    macro(benchpp::Metric::HW_CPU_CYCLES); \
-    macro(benchpp::Metric::CACHE_REFERENCES); \
-    macro(benchpp::Metric::CACHE_MISSES); \
-    macro(benchpp::Metric::BRANCH_INSTRUCTIONS); \
-    macro(benchpp::Metric::BRANCH_MISSES); \
-    macro(benchpp::Metric::STALLED_CYCLES_FRONTEND); \
-    macro(benchpp::Metric::STALLED_CYCLES_BACKEND); \
-    macro(benchpp::Metric::PAGE_FAULTS); \
-    macro(benchpp::Metric::CONTEXT_SWITCHES); \
-    macro(benchpp::Metric::CPU_MIGRATIONS);
-
-#define BENCHPP_METRIC_COUNTER_TEMPLATE_EXTENRN_DECL(met) extern template class MetricCounter<met>;
+export module Benchpp:core_metrics;
 
 namespace benchpp {
 
+export
 enum class Metric {
   HW_CPU_CYCLES,
   CACHE_REFERENCES,
@@ -33,6 +21,7 @@ enum class Metric {
   CPU_MIGRATIONS
 };
 
+export
 [[nodiscard]]
 std::string
 metric_toStr(const Metric&);
@@ -50,6 +39,7 @@ using Counter_impl = LinuxCounter_impl;
 
 }
 
+export
 template<Metric T_metric>
 class MetricCounter : detail::Counter_impl {
 public:
@@ -86,5 +76,3 @@ private:
 
 
 }
-
-#endif /* BENCHPP_CORE_METRICS_HPP */

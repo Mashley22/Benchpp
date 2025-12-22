@@ -14,6 +14,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     linux/statusFile.cpp
     cache/linux/cache.cpp
     mem/linux/mem.cpp
+    core_metrics/linux/core_metrics.cpp
   )
 endif()
 

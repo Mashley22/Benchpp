@@ -1,11 +1,18 @@
-#include <Bench++/core_metrics.hpp>
+module;
 
-#include <Bench++/private/linux/perf_event.hpp>
+#include <cassert>
+#include <cstdint>
 
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-#include <cassert>
+#include <Bench++/macros.hpp>
+
+#include <Bench++/private/linux/perf_event.hpp>
+
+module Benchpp;
+
+#define TEMPLATE_GENERATOR(met) template class benchpp::MetricCounter<met>
 
 namespace benchpp {
 
@@ -127,3 +134,5 @@ MetricCounter<T_metric>::stop(void) {
 }
 
 }
+
+BENCHPP_METRIC_ALL_GENERATOR(TEMPLATE_GENERATOR);
