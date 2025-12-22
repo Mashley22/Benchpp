@@ -10,9 +10,8 @@ module;
 #include <sstream>
 #include <fstream>
 
-#include <Bench++/iteration_counter.hpp>
-
 export module Benchpp:events;
+import :iteration_counter;
 
 #define BENCHPP_CONCEPT_OPTIONAL(opt) requires requires { opt; } || true
 #define BENCHPP_SAVEDATA_FOLDER "savedata/"
