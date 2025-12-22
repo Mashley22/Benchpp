@@ -7,7 +7,7 @@
 import Benchpp;
 
 #define RUN_NUM 100
-#define LOOP_NUM 1e6
+#define LOOP_NUM 1e7
 
 namespace benchpp {
 
@@ -18,19 +18,25 @@ Timer M_preTimer;
 
 std::vector<float> M_vec(LOOP_NUM);
 
+__attribute__((aligned(64)))
 void
 M_post_increment(void) {
   M_postTimer.start();
   for (auto it = M_vec.begin(); it != M_vec.end(); it++) {
+    volatile int i = 0;
+    (void)i;
   }
   M_postTimer.stop();
   M_postTimer.recordAndReset();
 }
 
+__attribute__((aligned(64)))
 void
 M_pre_increment(void) {
   M_preTimer.start();
   for (auto it = M_vec.begin(); it != M_vec.end(); ++it) {
+    volatile int i = 0;
+    (void)i;
   }
   M_preTimer.stop();
   M_preTimer.recordAndReset();

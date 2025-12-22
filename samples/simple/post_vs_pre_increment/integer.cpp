@@ -15,6 +15,7 @@ namespace {
 Timer M_postTimer;
 Timer M_preTimer;
 
+__attribute__((aligned(64)))
 void
 M_post_increment(void) {
   int a = 0;
@@ -28,6 +29,7 @@ M_post_increment(void) {
   (void)a;
 }
 
+__attribute__((aligned(64)))
 void
 M_pre_increment(void) {
   int a = 0;
