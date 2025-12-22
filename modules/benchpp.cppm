@@ -6,10 +6,13 @@ export import :events;
 export import :timer;
 export import :cache;
 export import :mem;
-export import :lnx.exception.mem;
 export import :core_metrics;
 export import :registry;
 export import :cli;
+
+#ifdef __linux__
+export import :lnx.exception.mem;
+#endif
 
 // import :priv.lnx.statusFile;
 // g++ is having issues with this line, compiles fine on clang++ and g++ without this line
