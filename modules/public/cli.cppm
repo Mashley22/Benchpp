@@ -1,12 +1,9 @@
-export module Benchpp:priv.cli;
+export module Benchpp:cli;
 
 namespace benchpp {
 
-namespace priv {
-
+export
 void
 parse_cli_input(int argc, char** argv);
-
-}
 
 }

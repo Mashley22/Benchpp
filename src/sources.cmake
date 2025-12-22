@@ -4,8 +4,8 @@ set(BENCHPP_SOURCES
   core_metrics/core_metrics.cpp
   iteration_counter.cpp
   registry.cpp
+  cli.cpp
   private/registry.cpp
-  private/cli.cpp
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

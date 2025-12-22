@@ -1,6 +1,5 @@
-module Benchpp;
-import :priv.cli;
+import Benchpp;
 
 int main(int argc, char** argv) {
-  benchpp::priv::parse_cli_input(argc, argv);
+  benchpp::parse_cli_input(argc, argv);
 }

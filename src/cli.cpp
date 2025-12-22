@@ -15,8 +15,6 @@ import :priv.registry;
 
 namespace benchpp {
 
-namespace priv {
-
 namespace {
 
 // i.e. -b group1 gives argc = 2, argv = {"-b", "group1"}
@@ -63,7 +61,7 @@ M_print_all_benchmarks(const Opt_args& opt_args) {
     std::terminate();
   }
   
-  print_all_benchmarks();
+  priv::print_all_benchmarks();
 }
 
 void
@@ -74,7 +72,7 @@ M_print_group_infos(const Opt_args& opt_args) {
   }
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {
-    print_all_benchmarks_in_group(opt_args.argv[i]);
+    priv::print_all_benchmarks_in_group(opt_args.argv[i]);
   }
 }
 
@@ -86,7 +84,7 @@ M_run_groups(const Opt_args& opt_args) {
   }
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {
-    run_group(opt_args.argv[i]);
+    priv::run_group(opt_args.argv[i]);
   }
 }
 
@@ -99,7 +97,7 @@ M_run_benchmark(const Opt_args& opt_args) {
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {
     BenchmarkFullName parsedNames(opt_args.argv[i]);
-    run_benchmark(parsedNames.group, parsedNames.name);
+    priv::run_benchmark(parsedNames.group, parsedNames.name);
   }
 }
 
@@ -186,8 +184,6 @@ void
 parse_cli_input(int argc, char ** argv) {
   Parser parser(argc, argv);
   parser.parse();
-}
-
 }
 
 }

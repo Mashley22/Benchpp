@@ -7,6 +7,7 @@ export module Benchpp:registry;
 
 namespace benchpp {
 
+export
 struct BenchmarkNotRegisteredErr {
   BenchmarkNotRegisteredErr() = delete;
   BenchmarkNotRegisteredErr(const std::string_view groupName_val, const std::string_view name_val) noexcept;
@@ -14,6 +15,7 @@ struct BenchmarkNotRegisteredErr {
   std::string_view groupName;
 };
 
+export
 struct BenchmarkInfo {
   std::string_view name;
   std::string_view group;
@@ -25,6 +27,7 @@ struct BenchmarkInfo {
   id_to_sstream(void) const;
 };
 
+export
 void
 register_benchmark(const BenchmarkInfo& info);
 

@@ -7,10 +7,10 @@ set(BENCHPP_PUBLIC_PARTITIONS
   core_metrics.cppm
   iteration_counter.cppm
   registry.cppm
+  cli.cppm
 )
 
 set(BENCHPP_PRIVATE_PARTITIONS
-  cli.cppm
   registry.cppm
 )
 
