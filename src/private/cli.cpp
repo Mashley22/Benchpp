@@ -1,10 +1,14 @@
-#include <Bench++/private/cli.hpp>
-
-#include <Bench++/private/registry.hpp>
+module;
 
 #include <iostream>
 #include <cstdlib>
 #include <unordered_map>
+
+#include <Bench++/cli.hpp>
+
+#include <Bench++/private/registry.hpp>
+
+module Benchpp;
 
 #define ERROR std::cerr << "[Error]: "
 
