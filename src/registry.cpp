@@ -1,7 +1,11 @@
-#include <Bench++/registry.hpp>
-#include <Bench++/private/registry.hpp>
+module;
 
 #include <iostream>
+
+#include <Bench++/macros.hpp>
+
+module Benchpp;
+import :priv.registry;
 
 namespace benchpp {
 

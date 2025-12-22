@@ -1,17 +1,9 @@
-#ifndef BENCHPP_REGISTRY_HPP
-#define BENCHPP_REGISTRY_HPP
+module;
 
 #include <string_view>
 #include <sstream>
 
-#define REGISTER_BENCHMARK(benchmark) \
-static bool benchmark##_registered_var = []() { \
-  benchpp::register_benchmark(benchmark); \
-  return true; \
-}()\
-
-#define BENCHPP_BENCHMARK_GROUP_AND_NAME_STREAM(group_macro_val, name_macro_val)\
-  group_macro_val << ":" << name_macro_val
+export module Benchpp:registry;
 
 namespace benchpp {
 
@@ -37,5 +29,3 @@ void
 register_benchmark(const BenchmarkInfo& info);
 
 }
-
-#endif /* BENCHPP_REGISTRY_HPP */

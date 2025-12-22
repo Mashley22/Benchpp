@@ -1,7 +1,10 @@
-#ifndef BENCHPP_PRIVATE_REGISTRY_HPP
-#define BENCHPP_PRIVATE_REGISTRY_HPP
+module;
 
-#include <Bench++/registry.hpp>
+#include <string_view>
+#include <cstddef>
+
+export module Benchpp:priv.registry;
+import :registry;
 
 namespace benchpp {
 
@@ -64,4 +67,3 @@ private:
 }
 
 }
-#endif /* BENCHPP_PRIVATE_REGISTRY_HPP */

@@ -40,5 +40,13 @@
 
 #define BENCHPP_METRIC_COUNTER_TEMPLATE_EXTENRN_DECL(met) extern template class MetricCounter<met>;
 
+#define REGISTER_BENCHMARK(benchmark) \
+static bool benchmark##_registered_var = []() { \
+  benchpp::register_benchmark(benchmark); \
+  return true; \
+}()\
+
+#define BENCHPP_BENCHMARK_GROUP_AND_NAME_STREAM(group_macro_val, name_macro_val)\
+  group_macro_val << ":" << name_macro_val
 
 #endif /* BENCHPP_MACROS_HPP */

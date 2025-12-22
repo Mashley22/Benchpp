@@ -1,10 +1,13 @@
-#include <Bench++/private/registry.hpp>
+module;
 
 #include <vector>
 #include <algorithm>
 #include <limits>
 #include <cassert>
 #include <iostream>
+
+module Benchpp;
+import :priv.registry;
 
 #define GROUP_RUNNER_INVALID_IDX std::numeric_limits<std::size_t>::max()
 #define GROUP_RUNNER_START_IDX GROUP_RUNNER_INVALID_IDX - 1 // no ones using this surely

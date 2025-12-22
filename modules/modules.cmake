@@ -6,10 +6,12 @@ set(BENCHPP_PUBLIC_PARTITIONS
   mem/mem.cppm
   core_metrics.cppm
   iteration_counter.cppm
+  registry.cppm
 )
 
 set(BENCHPP_PRIVATE_PARTITIONS
   cli.cppm
+  registry.cppm
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

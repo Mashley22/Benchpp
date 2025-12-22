@@ -6,9 +6,8 @@ module;
 
 #include <Bench++/cli.hpp>
 
-#include <Bench++/private/registry.hpp>
-
 module Benchpp;
+import :priv.registry;
 
 #define ERROR std::cerr << "[Error]: "
 
