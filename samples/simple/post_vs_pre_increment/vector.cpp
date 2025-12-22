@@ -23,6 +23,7 @@ M_post_increment(void) {
   M_postTimer.start();
   for (auto it = M_vec.begin(); it != M_vec.end(); it++) {
   }
+  M_postTimer.stop();
   M_postTimer.recordAndReset();
 }
 
@@ -31,6 +32,7 @@ M_pre_increment(void) {
   M_preTimer.start();
   for (auto it = M_vec.begin(); it != M_vec.end(); ++it) {
   }
+  M_preTimer.stop();
   M_preTimer.recordAndReset();
 }
 

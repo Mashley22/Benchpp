@@ -23,6 +23,7 @@ M_post_increment(void) {
   for (std::size_t i = 0; i < LOOP_NUM; i++) {
     a = b++;
   }
+  M_postTimer.stop();
   M_postTimer.recordAndReset();
   (void)a;
 }
@@ -35,6 +36,7 @@ M_pre_increment(void) {
   for (std::size_t i = 0; i < LOOP_NUM; i++) {
     a = ++b;
   }
+  M_preTimer.stop();
   M_preTimer.recordAndReset();
   (void)a;
 }
