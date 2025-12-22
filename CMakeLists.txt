@@ -15,8 +15,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BENCHPP_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE STRING "the")
 
-add_subdirectory(src)
-include(modules/CMakeLists.txt)
+include(src/sources.cmake)
+include(modules/modules.cmake)
 
 #build options
 option(BENCHPP_DEBUG 
@@ -59,13 +59,6 @@ function(benchpp_add_core_library TARGET_NAME)
       ${CMAKE_CURRENT_LIST_DIR}/include
   )
 
-
-  if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    target_sources(${TARGET_NAME}
-      PRIVATE
-        ${BENCHPP_LINUX_SOURCES}
-    )
-  endif()
 
   target_include_directories(${TARGET_NAME}
     PRIVATE
