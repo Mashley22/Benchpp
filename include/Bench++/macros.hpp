@@ -24,8 +24,6 @@
   BENCHPP_CACHE_EVENT_RESULT_OPERATION_ALL_GENERATOR(expr, benchpp::cache::Type::DTLB); \
   BENCHPP_CACHE_EVENT_RESULT_OPERATION_ALL_GENERATOR(expr, benchpp::cache::Type::ITLB); \
 
-#define BENCHPP_CACHE_COUNTER_TEMPLATE_EXTERN_DECL(evt) extern template class Counter<evt>;
-
 #define BENCHPP_METRIC_ALL_GENERATOR(macro) \
     macro(benchpp::Metric::HW_CPU_CYCLES); \
     macro(benchpp::Metric::CACHE_REFERENCES); \
@@ -37,8 +35,6 @@
     macro(benchpp::Metric::PAGE_FAULTS); \
     macro(benchpp::Metric::CONTEXT_SWITCHES); \
     macro(benchpp::Metric::CPU_MIGRATIONS);
-
-#define BENCHPP_METRIC_COUNTER_TEMPLATE_EXTENRN_DECL(met) extern template class MetricCounter<met>;
 
 #define REGISTER_BENCHMARK(benchmark) \
 static bool benchmark##_registered_var = []() { \
