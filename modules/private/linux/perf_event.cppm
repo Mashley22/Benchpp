@@ -1,8 +1,9 @@
-#ifndef BENCHPP_PRIVATE_LINUX_PERF_EVENT_HPP
-#define BENCHPP_PRIVATE_LINUX_PERF_EVENT_HPP
+module;
 
 #include <linux/perf_event.h>
 #include <sys/types.h>
+
+export module Benchpp:priv.lnx.perf_event;
 
 namespace benchpp {
 
@@ -36,6 +37,3 @@ read_counter(int fd);
 }
 
 }
-
-
-#endif /* BENCHPP_PRIVATE_LINUX_PERF_EVENT_HPP */

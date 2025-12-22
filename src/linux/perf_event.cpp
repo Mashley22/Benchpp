@@ -1,10 +1,14 @@
-#include <Bench++/private/linux/perf_event.hpp>
+module;
 
 #include <stdexcept>
+
+#include <linux/perf_event.h>
 #include <asm/unistd.h>
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <sys/ioctl.h>
+
+module Benchpp;
 
 namespace benchpp {
 

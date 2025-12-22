@@ -5,12 +5,12 @@ module;
 
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <linux/perf_event.h>
 
 #include <Bench++/macros.hpp>
 
-#include <Bench++/private/linux/perf_event.hpp>
-
 module Benchpp;
+import :priv.lnx.perf_event;
 
 #define TEMPLATE_GENERATOR(met) template class benchpp::MetricCounter<met>
 

@@ -1,16 +1,17 @@
 module;
 
-#include <Bench++/private/linux/perf_event.hpp>
-
-#include <sys/ioctl.h>
-#include <unistd.h>
 
 #include <cassert>
 #include <cstdint>
 
+#include <sys/ioctl.h>
+#include <unistd.h>
+#include <linux/perf_event.h>
+
 #include <Bench++/macros.hpp>
 
 module Benchpp;
+import :priv.lnx.perf_event;
 
 #define CACHE_COUNTER_TEMPLATE_GENERATOR(evt) template class benchpp::cache::Counter<evt>;
 

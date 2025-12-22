@@ -16,6 +16,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   )
   set(BENCHPP_PRIVATE_SYSTEM_PARTITIONS
     linux/statusFile.cppm
+    linux/perf_event.cppm
   )
 endif()
 
