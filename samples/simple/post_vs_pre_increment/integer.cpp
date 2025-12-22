@@ -1,6 +1,9 @@
-#include <Bench++/timer.hpp>
-#include <Bench++/stats.hpp>
-#include <Bench++/registry.hpp>
+#include <cstddef>
+#include <iostream>
+
+#include <Bench++/macros.hpp>
+
+import Benchpp;
 
 #define RUN_NUM 100
 #define LOOP_NUM std::size_t(1e6)
