@@ -55,16 +55,12 @@ TEST_CASE( "Test cli output", "[cli]" ) {
 
   oldBuffer = std::cout.rdbuf(stdoutBuffer.rdbuf());
 
-  SECTION( "Basic" ) {
-    std::cout << "Testing";
-    REQUIRE(stdoutBuffer.str() == "Testing");
+  SECTION( "help" ) {
+    const char* emptyInput[] = {"", "-h"};
+    const char** p_emptyInput = emptyInput;
+    benchpp::parse_cli_input(2, p_emptyInput);
+    REQUIRE(benchpp::priv::has_terminated() == false);
   }
 
-  SECTION( "Basic2" ) {
-    std::cout << "Testing2";
-    REQUIRE(stdoutBuffer.str() == "Testing2");
-  }
-
-  
   std::cout.rdbuf(oldBuffer);
 }

@@ -10,6 +10,10 @@ export import :core_metrics;
 export import :registry;
 export import :cli;
 
+#ifdef BENCHPP_TEST
+export import :priv.utils;
+#endif
+
 #ifdef __linux__
 export import :lnx.exception.mem;
 #endif
