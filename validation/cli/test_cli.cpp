@@ -7,6 +7,7 @@
 import Benchpp;
 
 #include <Bench++/macros.hpp>
+#include <testing.hpp>
 
 #define GROUP_NUM 5
 #define BENCHMARK_NUM 5
@@ -32,7 +33,7 @@ CREATE_GROUP(1) \
 CREATE_GROUP(2) \
 CREATE_GROUP(3) \
 CREATE_GROUP(4) \
-CREATE_GROUP(5) \
+CREATE_GROUP(5) 
 
 namespace {
 
@@ -48,7 +49,7 @@ CREATE_ALL;
 
 }
 
-TEST_CASE( "Test cli output", "[cli]" ) {
+TEST_CASE( "Test correct outprinting", "[cli]" ) {
 
   std::ostringstream stdoutBuffer;
   std::streambuf* oldBuffer;
@@ -59,8 +60,31 @@ TEST_CASE( "Test cli output", "[cli]" ) {
     const char* emptyInput[] = {"", "-h"};
     const char** p_emptyInput = emptyInput;
     benchpp::parse_cli_input(2, p_emptyInput);
-    REQUIRE(benchpp::priv::has_terminated() == false);
+    REQUIRE(stdoutBuffer.str() == "Need to implement this\n");
+  }
+
+  SECTION( "-l" ) {
+    const char* input[] = {"", "-l"};
+    const char** p_input = input;
+    benchpp::parse_cli_input(2, p_input);
   }
 
   std::cout.rdbuf(oldBuffer);
+}
+
+TEST_CASE( "Test incorreclt cli inputs", "[cli]" ) {
+
+  std::ostringstream stderrBuffer;
+  std::streambuf* oldBuffer;
+
+  oldBuffer = std::cerr.rdbuf(stderrBuffer.rdbuf());
+
+  SECTION( "-l incorrectly" ) {
+    const char* input[] = {"", "-l", "aaah"};
+    const char** p_input = input;
+    TERMINATE_CATCHER(benchpp::parse_cli_input(3, p_input));
+    REQUIRE(stderrBuffer.str() == "[Error]: Usage: (Benchmark cmd) -l\n");
+  }
+
+  std::cerr.rdbuf(oldBuffer);
 }
