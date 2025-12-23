@@ -104,13 +104,13 @@ M_run_benchmark(const Opt_args& opt_args) {
 void
 M_print_help(const Opt_args& opt_args) {
   (void)opt_args;
-  std::cout << "Need to implement this";
+  std::cout << "Need to implement this\n";
 }
 
 void
 M_invalid_option(const Opt_args& opt_args) {
   (void)opt_args;
-  std::cout << "Invalid option, use -h for help";
+  std::cout << "Invalid option, use -h for help\n";
 }
 
 class Parser {
