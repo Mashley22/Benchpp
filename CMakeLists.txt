@@ -21,7 +21,7 @@ include(modules/modules.cmake)
 #build options
 option(BENCHPP_DEBUG 
   "Add some extra debugging and asserts etc." 
-  OFF
+  ON
 )
 
 option(BENCHPP_TEST
@@ -59,7 +59,7 @@ function(benchpp_add_core_library TARGET_NAME)
       ${CMAKE_CURRENT_LIST_DIR}/include
   )
 
-  if(BENCHPP_DEBUG)
+  if(NOT BENCHPP_DEBUG)
     target_compile_definitions(${TARGET_NAME}
       PRIVATE
         NDEBUG
@@ -77,6 +77,7 @@ target_sources(benchpp_with_main
 )
 
 if(BENCHPP_TEST)
+  add_compile_definitions(BENCHPP_TEST)
   enable_testing()
   include(CTest)
   add_subdirectory(extern/catch2)
