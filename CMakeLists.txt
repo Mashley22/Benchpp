@@ -59,12 +59,6 @@ function(benchpp_add_core_library TARGET_NAME)
       ${CMAKE_CURRENT_LIST_DIR}/include
   )
 
-
-  target_include_directories(${TARGET_NAME}
-    PRIVATE
-      ${CMAKE_CURRENT_LIST_DIR}/private
-  )
-
   if(BENCHPP_DEBUG)
     target_compile_definitions(${TARGET_NAME}
       PRIVATE
