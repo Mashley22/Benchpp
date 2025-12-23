@@ -6,6 +6,8 @@
 
 import Benchpp;
 
+#include <Bench++/samples/utils.hpp>
+
 #define RUN_NUM 100
 #define LOOP_NUM 1e7
 
@@ -18,7 +20,7 @@ Timer M_preTimer;
 
 std::vector<float> M_vec(LOOP_NUM);
 
-__attribute__((aligned(64)))
+ATTRIB_CACHE_LINE_ALIGN
 void
 M_post_increment(void) {
   M_postTimer.start();
@@ -30,7 +32,7 @@ M_post_increment(void) {
   M_postTimer.recordAndReset();
 }
 
-__attribute__((aligned(64)))
+ATTRIB_CACHE_LINE_ALIGN
 void
 M_pre_increment(void) {
   M_preTimer.start();
