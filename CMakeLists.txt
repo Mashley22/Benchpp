@@ -46,13 +46,29 @@ function(benchpp_add_core_library TARGET_NAME)
 
   target_sources(${TARGET_NAME} 
     PUBLIC
-      FILE_SET CXX_MODULES FILES
+      FILE_SET public_cxx_modules TYPE CXX_MODULES
+      FILES
         modules/benchpp.cppm
         ${BENCHPP_PUBLIC_PARTITIONS}
-        ${BENCHPP_PRIVATE_PARTITIONS} # uh dont try to put a private scope of this as well it wont work
     PRIVATE
       ${BENCHPP_SOURCES}
   )
+
+  if(BENCHPP_TEST) # let the private modules be visible to the test sources
+    target_sources(${TARGET_NAME}
+      PUBLIC
+        FILE_SET private_cxx_modules TYPE CXX_MODULES
+        FILES
+          ${BENCHPP_PRIVATE_PARTITIONS} 
+    )
+  else()
+    target_sources(${TARGET_NAME}
+      PRIVATE
+        FILE_SET private_modules TYPE CXX_MODULES
+        FILES
+          ${BENCHPP_PRIVATE_PARTITIONS} 
+    )
+  endif()
 
   target_include_directories(${TARGET_NAME}
     PUBLIC
