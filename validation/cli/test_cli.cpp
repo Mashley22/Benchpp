@@ -86,7 +86,19 @@ TEST_CASE( "Test incorreclt cli inputs", "[cli]" ) {
     REQUIRE(stderrBuffer.str() == "[Error]: Usage: (Benchmark cmd) -l\n");
   }
 
-  SECTION(
+  SECTION( "-g incorrectly" ) {
+    const char* input[] = {"", "-g"};
+    const char** p_input = input;
+    TERMINATE_CATCHER(benchpp::parse_cli_input(3, p_input));
+    REQUIRE(stderrBuffer.str() == "[Error]: Usage: (Benchmark cmd) -g (group1) (group2) (group3)\n");
+  }
+
+  SECTION( "-b incorrectly" ) {
+    const char* input[] = {"", "-b"};
+    const char** p_input = input;
+    TERMINATE_CATCHER(benchpp::parse_cli_input(3, p_input));
+    REQUIRE(stderrBuffer.str() == "[Error]: Usage: (Benchmark cmd) -b (group:benchmark1) (group:benchmark2) (group:benchmark3)\n");
+  }
 
   std::cerr.rdbuf(oldBuffer);
 }
