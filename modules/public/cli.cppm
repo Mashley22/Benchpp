@@ -32,6 +32,6 @@ constexpr std::string_view BENCHPP_CLI_OPT_HELP = "-h";
 
 export
 void
-parse_cli_input(int argc, char** argv);
+parse_cli_input(int argc, const char** argv);
 
 }

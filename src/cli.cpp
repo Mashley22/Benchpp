@@ -20,7 +20,7 @@ namespace {
 // i.e. -b group1 gives argc = 2, argv = {"-b", "group1"}
 struct Opt_args {
   int argc;
-  char ** argv;
+  const char ** argv;
 };
 
 
@@ -50,7 +50,7 @@ struct BenchmarkFullName {
 
 [[nodiscard]]
 bool
-M_is_opt(char* arg) {
+M_is_opt(const char* arg) {
   return (arg[0] == '-');
 }
 
@@ -116,7 +116,7 @@ M_invalid_option(const Opt_args& opt_args) {
 class Parser {
 private:
   int m_argc;
-  char ** m_argv;
+  const char ** m_argv;
   int m_currentIdx{1};
   const std::unordered_map<std::string_view, void(*)(const Opt_args&)> m_optMap{
     {BENCHPP_CLI_OPT_PRINT_ALL_BENCHMARKS, &M_print_all_benchmarks},
@@ -128,7 +128,7 @@ private:
 
 public:
 Parser() = delete;
-Parser(const int argc, char ** argv) :
+Parser(const int argc, const char ** argv) :
   m_argc(argc), m_argv(argv) {}
 
 private:
@@ -181,7 +181,7 @@ parse(void) {
 }
 
 void
-parse_cli_input(int argc, char ** argv) {
+parse_cli_input(int argc, const char ** argv) {
   Parser parser(argc, argv);
   parser.parse();
 }
