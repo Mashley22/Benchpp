@@ -7,6 +7,7 @@ module;
 module Benchpp;
 import :cli;
 import :priv.registry;
+import :priv.utils;
 
 #define ERROR std::cerr << "[Error]: "
 
@@ -57,7 +58,7 @@ void
 M_print_all_benchmarks(const Opt_args& opt_args) {
   if (opt_args.argc != 1) {
     USAGE_ERROR << BENCHPP_CLI_OPT_PRINT_ALL_BENCHMARKS << '\n';
-    std::terminate();
+    priv::terminate();
   }
   
   priv::print_all_benchmarks();
@@ -67,7 +68,7 @@ void
 M_print_group_infos(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
     USAGE_ERROR << BENCHPP_CLI_OPT_PRINT_GROUP_INFOS << " (group1) (group2) (group3)" << '\n';
-    std::terminate();
+    priv::terminate();
   }
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {
@@ -79,7 +80,7 @@ void
 M_run_groups(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
     USAGE_ERROR << BENCHPP_CLI_OPT_RUN_GROUP << " (group1) (group2) (group3)" << '\n';
-    std::terminate();
+    priv::terminate();
   }
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {
@@ -91,7 +92,7 @@ void
 M_run_benchmark(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
     USAGE_ERROR << BENCHPP_CLI_OPT_RUN_BENCHMARK << " (group:benchmark1) (group:benchmark2) (group:benchmark3)" << '\n';
-    std::terminate();
+    priv::terminate();
   }
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {
@@ -170,7 +171,7 @@ parse(void) {
     }
     catch (const std::out_of_range& e) {
       std::cerr << next_args.argv[0] << " is not a valid option, use -h for more help";
-      std::terminate();
+      priv::terminate();
     }
   }
 }

@@ -61,7 +61,7 @@ M_run_benchmark_impl(const BenchmarkInfo& benchmark, const std::size_t runNum) {
 
 void
 M_print_benchmarkInfo(const BenchmarkInfo& benchmark) {
-  std::cout << benchmark.name << "   group:" << benchmark.group << "   runs:" << benchmark.runNum << '\n';
+  std::cout << benchmark.group << ":" << benchmark.name << "   runs:" << benchmark.runNum << '\n';
 }
 
 [[nodiscard]]

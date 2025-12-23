@@ -6,6 +6,7 @@ set(BENCHPP_SOURCES
   registry.cpp
   cli.cpp
   private/registry.cpp
+  utils.cpp
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

@@ -12,6 +12,7 @@ set(BENCHPP_PUBLIC_PARTITIONS
 
 set(BENCHPP_PRIVATE_PARTITIONS
   registry.cppm
+  utils.cppm
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
