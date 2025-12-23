@@ -4,7 +4,7 @@ function(add_unit_test TARGET_NAME)
     PRIVATE
       benchpp
       Catch2::Catch2WithMain
-    )
+  )
 
   target_compile_options(${TARGET_NAME}
     PRIVATE
