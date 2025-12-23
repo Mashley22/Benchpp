@@ -57,7 +57,7 @@ M_is_opt(const char* arg) {
 void
 M_print_all_benchmarks(const Opt_args& opt_args) {
   if (opt_args.argc != 1) {
-    USAGE_ERROR << BENCHPP_CLI_OPT_PRINT_ALL_BENCHMARKS << '\n';
+    USAGE_ERROR << CLI_OPT_PRINT_ALL_BENCHMARKS << '\n';
     priv::terminate();
   }
   
@@ -79,7 +79,7 @@ M_print_group_infos(const Opt_args& opt_args) {
 void 
 M_run_groups(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
-    USAGE_ERROR << BENCHPP_CLI_OPT_RUN_GROUP << " (group1) (group2) (group3)" << '\n';
+    USAGE_ERROR << CLI_OPT_RUN_GROUP << " (group1) (group2) (group3)" << '\n';
     priv::terminate();
   }
 
@@ -91,7 +91,7 @@ M_run_groups(const Opt_args& opt_args) {
 void
 M_run_benchmark(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
-    USAGE_ERROR << BENCHPP_CLI_OPT_RUN_BENCHMARK << " (group:benchmark1) (group:benchmark2) (group:benchmark3)" << '\n';
+    USAGE_ERROR << CLI_OPT_RUN_BENCHMARK << " (group:benchmark1) (group:benchmark2) (group:benchmark3)" << '\n';
     priv::terminate();
   }
 
@@ -119,11 +119,11 @@ private:
   const char ** m_argv;
   int m_currentIdx{1};
   const std::unordered_map<std::string_view, void(*)(const Opt_args&)> m_optMap{
-    {BENCHPP_CLI_OPT_PRINT_ALL_BENCHMARKS, &M_print_all_benchmarks},
-    {BENCHPP_CLI_OPT_PRINT_GROUP_INFOS, &M_print_group_infos},
-    {BENCHPP_CLI_OPT_RUN_GROUP, &M_run_groups},
-    {BENCHPP_CLI_OPT_RUN_BENCHMARK, &M_run_benchmark},
-    {BENCHPP_CLI_OPT_HELP, &M_print_help},
+    {CLI_OPT_PRINT_ALL_BENCHMARKS, &M_print_all_benchmarks},
+    {CLI_OPT_PRINT_GROUP_INFOS, &M_print_group_infos},
+    {CLI_OPT_RUN_GROUP, &M_run_groups},
+    {CLI_OPT_RUN_BENCHMARK, &M_run_benchmark},
+    {CLI_OPT_HELP, &M_print_help},
   };
 
 public:
