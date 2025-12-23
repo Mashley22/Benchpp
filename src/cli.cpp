@@ -67,8 +67,8 @@ M_print_all_benchmarks(const Opt_args& opt_args) {
 void
 M_print_group_infos(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
-    USAGE_ERROR << BENCHPP_CLI_OPT_PRINT_GROUP_INFOS << " (group1) (group2) (group3)" << '\n';
-    priv::terminate();
+    priv::print_all_groups();
+    return;
   }
 
   for (std::size_t i = 1; i < opt_args.argc; i++) {

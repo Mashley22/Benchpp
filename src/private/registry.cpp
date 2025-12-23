@@ -68,9 +68,9 @@ M_print_benchmarkInfo(const BenchmarkInfo& benchmark) {
 std::vector<std::string_view>
 M_find_all_groups(void) {
   std::vector<std::string_view> groups;
-
+  
   for (const BenchmarkInfo& info : M_registeredBenchmarks()) {
-    if (std::find(groups.begin(), groups.end(), info.group) != groups.end()) {
+    if (std::find(groups.begin(), groups.end(), info.group) == groups.end()) {
       groups.push_back(info.group);
     }
   }

@@ -86,5 +86,7 @@ TEST_CASE( "Test incorreclt cli inputs", "[cli]" ) {
     REQUIRE(stderrBuffer.str() == "[Error]: Usage: (Benchmark cmd) -l\n");
   }
 
+  SECTION(
+
   std::cerr.rdbuf(oldBuffer);
 }
