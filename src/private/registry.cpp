@@ -28,8 +28,6 @@ M_registeredBenchmarks(void) noexcept {
 
 std::vector<BenchmarkInfo>::const_iterator
 M_findBenchmark(const std::string_view groupName, const std::string_view name) {
-  std::cout << groupName << '\n'; 
-  std::cout << name << std::endl;
   std::vector<BenchmarkInfo>::const_iterator it = 
     std::find_if(M_registeredBenchmarks().begin(),
                  M_registeredBenchmarks().end(),
