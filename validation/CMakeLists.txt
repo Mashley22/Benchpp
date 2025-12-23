@@ -6,6 +6,11 @@ function(add_unit_test TARGET_NAME)
       Catch2::Catch2WithMain
   )
 
+  target_include_directories(${TARGET_NAME}
+    PRIVATE
+      ${CMAKE_CURRENT_FUNCTION_LIST_DIR}/include
+  )
+
   target_compile_options(${TARGET_NAME}
     PRIVATE
       -Wall

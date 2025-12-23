@@ -8,14 +8,7 @@ void
 terminate(void);
 
 #ifdef BENCHPP_TEST
-export
-[[nodiscard]]
-bool
-has_terminated(void);
-
-export
-void
-undo_terminate(void);
+export class TerminateCalled {};
 #endif
 
 }
