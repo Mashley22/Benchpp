@@ -134,6 +134,11 @@ public:
   get_run(std::size_t runNum) const noexcept {
     return m_times.get_run(runNum);
   }
+
+  void
+  saveData(void) const noexcept {
+    m_times.saveData();
+  }
 };
 
 }
