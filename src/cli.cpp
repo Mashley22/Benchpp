@@ -8,6 +8,7 @@ module Benchpp;
 import :cli;
 import :priv.registry;
 import :priv.utils;
+import :iteration_counter;
 
 #define ERROR std::cerr << "[Error]: "
 
@@ -108,6 +109,29 @@ M_print_help(const Opt_args& opt_args) {
 }
 
 void
+M_setIterationCounter(const Opt_args& opt_args) {
+  if (opt_args.argc != 2) {
+    USAGE_ERROR << CLI_OPT_SET_ITERATION_COUNTER << " (iteration num)" << '\n';
+    priv::terminate();
+  }
+  
+  std::size_t num;
+  try {
+    num = std::stoll(opt_args.argv[1]);
+  }
+  catch(std::invalid_argument& e) {
+    ERROR << opt_args.argv[1] << " is an invalid arguement for the iteration counter\n";
+    priv::terminate();
+  }
+  catch(std::out_of_range& e) {
+    ERROR << opt_args.argv[1] << " is out of range for the iteration counter\n";
+    priv::terminate();
+  }
+  
+  startIteration(num);
+}
+
+void
 M_invalid_option(const Opt_args& opt_args) {
   (void)opt_args;
   std::cout << "Invalid option, use -h for help\n";
@@ -124,6 +148,7 @@ private:
     {CLI_OPT_RUN_GROUP, &M_run_groups},
     {CLI_OPT_RUN_BENCHMARK, &M_run_benchmark},
     {CLI_OPT_HELP, &M_print_help},
+    {CLI_OPT_SET_ITERATION_COUNTER, &M_setIterationCounter},
   };
 
 public:

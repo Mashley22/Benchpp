@@ -31,6 +31,9 @@ export
 constexpr std::string_view CLI_OPT_HELP = "-h";
 
 export
+constexpr std::string_view CLI_OPT_SET_ITERATION_COUNTER = "-i";
+
+export
 void
 parse_cli_input(int argc, const char** argv);
 
