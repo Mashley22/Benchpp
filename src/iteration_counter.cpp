@@ -12,23 +12,18 @@ namespace benchpp {
 
 namespace {
 
-[[nodiscard]]
-std::size_t& 
-M_iteration(void) noexcept {
-  static std::size_t s_iteration{M_ITERATION_INIT_VAL};
-  return s_iteration;
-}
+std::size_t M_iteration{M_ITERATION_INIT_VAL};
 
 [[nodiscard]]
 bool M_doubleStartIteration(void) noexcept {
-  return M_iteration() != M_ITERATION_INIT_VAL;
+  return M_iteration != M_ITERATION_INIT_VAL;
 }
 
 }
 
 std::size_t
 currentIteration(void) noexcept {
-  return M_iteration();
+  return M_iteration;
 }
 
 void 
@@ -38,7 +33,7 @@ startIteration(const std::size_t num) {
     std::abort();
   }
 
-  M_iteration() = num;
+  M_iteration = num;
 }
 
 }
