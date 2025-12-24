@@ -456,3 +456,44 @@ TEST_CASE( "Run group | -g", "[cli]" ) {
     checkBenchmarksRanCorrectly();
   }
 }
+
+TEST_CASE( "set iteration counter | -i", "[cli]") {
+  ConsoleOutBuffer outBuffer;
+
+  SECTION( "correct usage" ) {
+    constexpr std::size_t num = 300291;
+    const std::string numStr = std::to_string(num);
+    const char* input[] = {"", benchpp::CLI_OPT_SET_ITERATION_COUNTER.data(), numStr.c_str()};
+    const char** p_input = input;
+    benchpp::parse_cli_input(3, p_input);
+
+    outBuffer.reqStderrEmpty();
+    outBuffer.reqStdoutEmpty();
+    REQUIRE(benchpp::currentIteration() == num);
+  }
+
+  SECTION( "incorrect usage" ) {
+    const char* input[] = {"", benchpp::CLI_OPT_SET_ITERATION_COUNTER.data()};
+    const char** p_input = input;
+    TERMINATE_CATCHER(benchpp::parse_cli_input(2, p_input));
+
+    outBuffer.reqStdoutEmpty();
+    REQUIRE(outBuffer.stderrStr() == "[Error]: Usage: (Benchmark cmd) -i (iteration num)\n");
+  }
+
+  SECTION( "invalid input" ) {
+    constexpr std::string_view invalidArg = "ah";
+    const char* input[] = {"", benchpp::CLI_OPT_SET_ITERATION_COUNTER.data(), invalidArg.data()};
+    const char** p_input = input;
+    TERMINATE_CATCHER(benchpp::parse_cli_input(3, p_input));
+
+    auto correctOutput = [&]() {
+      std::stringstream ss;
+      ss << "[Error]: " << invalidArg << " is an invalid arguement for the iteration counter\n";
+      return ss.str();
+    };
+
+    outBuffer.reqStdoutEmpty();
+    REQUIRE(outBuffer.stderrStr() == correctOutput());
+  }
+}
