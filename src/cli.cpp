@@ -58,7 +58,7 @@ M_is_opt(const char* arg) {
 void
 M_print_all_benchmarks(const Opt_args& opt_args) {
   if (opt_args.argc != 1) {
-    USAGE_ERROR << CLI_OPT_PRINT_ALL_BENCHMARKS << '\n';
+    USAGE_ERROR << CLI_OPT_PRINT_ALL_BENCHMARKS << std::endl;
     priv::terminate();
   }
   
@@ -80,7 +80,7 @@ M_print_group_infos(const Opt_args& opt_args) {
 void 
 M_run_groups(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
-    USAGE_ERROR << CLI_OPT_RUN_GROUP << " (group1) (group2) (group3)" << '\n';
+    USAGE_ERROR << CLI_OPT_RUN_GROUP << " (group1) (group2) (group3)" << std::endl;
     priv::terminate();
   }
 
@@ -92,7 +92,7 @@ M_run_groups(const Opt_args& opt_args) {
 void
 M_run_benchmark(const Opt_args& opt_args) {
   if (opt_args.argc == 1) {
-    USAGE_ERROR << CLI_OPT_RUN_BENCHMARK << " (group:benchmark1) (group:benchmark2) (group:benchmark3)" << '\n';
+    USAGE_ERROR << CLI_OPT_RUN_BENCHMARK << " (group:benchmark1) (group:benchmark2) (group:benchmark3)" << std::endl;
     priv::terminate();
   }
 
@@ -111,7 +111,7 @@ M_print_help(const Opt_args& opt_args) {
 void
 M_setIterationCounter(const Opt_args& opt_args) {
   if (opt_args.argc != 2) {
-    USAGE_ERROR << CLI_OPT_SET_ITERATION_COUNTER << " (iteration num)" << '\n';
+    USAGE_ERROR << CLI_OPT_SET_ITERATION_COUNTER << " (iteration num)" << std::endl;
     priv::terminate();
   }
   
@@ -120,11 +120,11 @@ M_setIterationCounter(const Opt_args& opt_args) {
     num = std::stoll(opt_args.argv[1]);
   }
   catch(std::invalid_argument& e) {
-    ERROR << opt_args.argv[1] << " is an invalid arguement for the iteration counter\n";
+    ERROR << opt_args.argv[1] << " is an invalid arguement for the iteration counter" << std::endl;
     priv::terminate();
   }
   catch(std::out_of_range& e) {
-    ERROR << opt_args.argv[1] << " is out of range for the iteration counter\n";
+    ERROR << opt_args.argv[1] << " is out of range for the iteration counter" << std::endl;
     priv::terminate();
   }
   
