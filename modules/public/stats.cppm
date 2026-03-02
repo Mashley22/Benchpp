@@ -84,11 +84,23 @@ struct Stats {
   }
   
   [[nodiscard]]
-  T
-  stddev(void) const noexcept {
-    return static_cast<T>(std::sqrt(variance));
+  D
+  stddev(void) const {
+    return std::sqrt(variance);
   }
-  
+
+  [[nodiscard]]
+  D
+  varianceOfMean(void) const {
+    return variance / mean;
+  }
+
+  [[nodiscard]]
+  D
+  stddevOfMean(void) const {
+    return std::sqrt(varianceOfMean());
+  }
+
   void
   print(void) const {
     std::cout 
