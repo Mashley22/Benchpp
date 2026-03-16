@@ -3,6 +3,8 @@
 
 #include <new>
 
-#define ATTRIB_CACHE_LINE_ALIGN __attribute__((aligned(std::hardware_destructive_interference_size)))
+#define LOOP_FODDER \
+  volatile int fodder_var = 0; \
+  (void)fodder_var;
 
 #endif /* BENCHPP_SAMPLES_UTILS */

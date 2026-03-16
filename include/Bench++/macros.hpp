@@ -45,4 +45,8 @@ static bool benchmark##_registered_var = []() { \
 #define BENCHPP_BENCHMARK_GROUP_AND_NAME_STREAM(group_macro_val, name_macro_val)\
   group_macro_val << ":" << name_macro_val
 
+#define BENCHPP_ATTRIB_CACHE_LINE_ALIGN __attribute__((aligned(std::hardware_destructive_interference_size)))
+
+#define BENCHPP_BENCHMARK_FUNC __attribute__((noinline)) BENCHPP_ATTRIB_CACHE_LINE_ALIGN
+
 #endif /* BENCHPP_MACROS_HPP */

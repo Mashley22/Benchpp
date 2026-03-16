@@ -20,25 +20,23 @@ Timer M_preTimer;
 
 std::vector<float> M_vec(LOOP_NUM);
 
-ATTRIB_CACHE_LINE_ALIGN
+BENCHPP_BENCHMARK_FUNC
 void
 M_post_increment(void) {
   M_postTimer.start();
   for (auto it = M_vec.begin(); it != M_vec.end(); it++) {
-    volatile int i = 0;
-    (void)i;
+    LOOP_FODDER;
   }
   M_postTimer.stop();
   M_postTimer.recordAndReset();
 }
 
-ATTRIB_CACHE_LINE_ALIGN
+BENCHPP_BENCHMARK_FUNC
 void
 M_pre_increment(void) {
   M_preTimer.start();
   for (auto it = M_vec.begin(); it != M_vec.end(); ++it) {
-    volatile int i = 0;
-    (void)i;
+    LOOP_FODDER;
   }
   M_preTimer.stop();
   M_preTimer.recordAndReset();

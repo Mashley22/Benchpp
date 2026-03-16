@@ -7,7 +7,7 @@ import Benchpp;
 
 #include <Bench++/samples/utils.hpp>
 
-#define RUN_NUM 100
+#define RUN_NUM 1000
 #define LOOP_NUM std::size_t(1e6)
 
 namespace benchpp {
@@ -17,32 +17,26 @@ namespace {
 Timer M_postTimer;
 Timer M_preTimer;
 
-ATTRIB_CACHE_LINE_ALIGN
+BENCHPP_BENCHMARK_FUNC
 void
 M_post_increment(void) {
-  int a = 0;
-  int b = 0;
   M_postTimer.start();
   for (std::size_t i = 0; i < LOOP_NUM; i++) {
-    a = b++;
+    LOOP_FODDER;
   }
   M_postTimer.stop();
   M_postTimer.recordAndReset();
-  (void)a;
 }
 
-ATTRIB_CACHE_LINE_ALIGN
+BENCHPP_BENCHMARK_FUNC
 void
 M_pre_increment(void) {
-  int a = 0;
-  int b = 0;
   M_preTimer.start();
-  for (std::size_t i = 0; i < LOOP_NUM; i++) {
-    a = ++b;
+  for (std::size_t i = 0; i < LOOP_NUM; ++i) {
+    LOOP_FODDER;
   }
   M_preTimer.stop();
   M_preTimer.recordAndReset();
-  (void)a;
 }
 
 void
