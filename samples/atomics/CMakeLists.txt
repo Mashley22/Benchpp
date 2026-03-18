@@ -18,9 +18,9 @@ add_executable(atomic_optimised
   increment.cpp
 )
 
-target_compile_options(optimised
+target_compile_options(atomic_optimised
   PRIVATE
-    "-O2"
+    "-O3"
 )
 
 add_atomics_sample(atomic)

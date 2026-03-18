@@ -8,20 +8,20 @@ function(add_post_vs_pre_increment_sample TARGET_NAME)
 
 endfunction()
 
-add_executable(basic
+add_executable(post_vs_pre_increment_basic
   integer.cpp
   vector.cpp
 )
 
-add_executable(optimised
+add_executable(post_vs_pre_increment_optimised
   integer.cpp
   vector.cpp
 )
 
-target_compile_options(optimised
+target_compile_options(post_vs_pre_increment_optimised
   PRIVATE
-    "-O2"
+    "-O3"
 )
 
-add_post_vs_pre_increment_sample(basic)
-add_post_vs_pre_increment_sample(optimised)
+add_post_vs_pre_increment_sample(post_vs_pre_increment_basic)
+add_post_vs_pre_increment_sample(post_vs_pre_increment_optimised)
