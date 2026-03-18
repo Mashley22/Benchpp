@@ -33,3 +33,4 @@ function(add_sample TARGET_NAME)
 endfunction()
 
 add_subdirectory(post_vs_pre_increment)
+add_subdirectory(atomics)

@@ -61,6 +61,10 @@ function(benchpp_add_core_library TARGET_NAME)
         FILES
           ${BENCHPP_PRIVATE_PARTITIONS} 
     )
+    target_compile_definitions(${TARGET_NAME}
+      PUBLIC
+        "BENCHPP_TEST"
+    )
   else()
     target_sources(${TARGET_NAME}
       PRIVATE
@@ -93,7 +97,6 @@ target_sources(benchpp_with_main
 )
 
 if(BENCHPP_TEST)
-  add_compile_definitions(BENCHPP_TEST)
   enable_testing()
   include(CTest)
   add_subdirectory(extern/catch2)
