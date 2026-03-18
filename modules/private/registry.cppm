@@ -2,6 +2,7 @@ module;
 
 #include <string_view>
 #include <cstddef>
+#include <cassert>
 
 export module Benchpp:priv.registry;
 import :registry;
@@ -9,6 +10,20 @@ import :registry;
 namespace benchpp {
 
 namespace priv {
+
+struct BenchmarkInfo : public benchpp::BenchmarkInfo {
+  using Base = benchpp::BenchmarkInfo;
+  BenchmarkInfo() = default;
+  BenchmarkInfo(const benchpp::BenchmarkInfo& inf) : benchpp::BenchmarkInfo(inf) {}
+
+  ~BenchmarkInfo() {
+    if (Base::p_timer != nullptr) {
+      if (!Base::p_timer->times().empty()) {
+        benchpp::BenchmarkInfo::printCompletionInfo();
+      }
+    }
+  }
+};
 
 void
 register_benchmark(const BenchmarkInfo &info);

@@ -5,6 +5,8 @@ module;
 
 export module Benchpp:registry;
 
+import :timer;
+
 namespace benchpp {
 
 export
@@ -21,10 +23,18 @@ struct BenchmarkInfo {
   std::string_view group;
   void (*function)();
   std::size_t runNum{1};
+  Timer* p_timer = nullptr;
 
   [[nodiscard]]
   std::stringstream
   id_to_sstream(void) const;
+
+  [[nodiscard]]
+  std::string
+  formatCompletionInfo(void) const;
+
+  void
+  printCompletionInfo(void) const;
 };
 
 export

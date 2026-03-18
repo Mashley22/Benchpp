@@ -6,6 +6,7 @@ module;
 #include <cmath>
 #include <iostream>
 #include <cassert>
+#include <format>
 
 export module Benchpp:stats;
 
@@ -101,17 +102,24 @@ struct Stats {
     return std::sqrt(varianceOfMean());
   }
 
+  [[nodiscard]]
+  std::string
+  formatResults(void) const {
+    return std::format(
+      "Sample count: {}\n"
+      "Mean: {}\n"
+      "Variance: {}\n"
+      "Standard deviation: {}\n"
+      "Min: {}\n"
+      "Max: {}\n"
+      "Range: {}\n"
+      "Median: {}\n", 
+      count, mean, variance, stddev(), min, max, range(), median);
+  }
+
   void
   print(void) const {
-    std::cout 
-    << "Sample count: " << count << '\n'
-    << "Mean: " << mean << '\n'
-    << "Variance: " << variance << '\n'
-    << "Standard deviation: " << stddev() << '\n'
-    << "Min: " << min << '\n'
-    << "Max: " << max << '\n'
-    << "Range: " << range() << '\n'
-    << "Median: " << median << '\n';
+    std::cout << formatResults();
   }
 };
 

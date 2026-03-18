@@ -1,5 +1,4 @@
 #include <cstddef>
-#include <iostream>
 
 #include <Bench++/macros.hpp>
 
@@ -39,20 +38,6 @@ M_pre_increment(void) {
   M_preTimer.recordAndReset();
 }
 
-void
-M_printStats(void) {
-  if (!M_postTimer.times().empty()) {
-    std::cout << "For the post increment: " << '\n';
-    Stats<TimeCount_t>::generate(M_postTimer.times()).print();
-  }
-  if (!M_preTimer.times().empty()) {
-    std::cout << "For the pre increment: " << '\n';
-    Stats<TimeCount_t>::generate(M_preTimer.times()).print();
-  }
-}
-
-char M_dummy = (std::atexit(M_printStats), 0);
-
 }
 
 }
@@ -64,6 +49,7 @@ benchpp::BenchmarkInfo post = {
   .group = "integer",
   .function = benchpp::M_post_increment,
   .runNum = RUN_NUM,
+  .p_timer = &benchpp::M_postTimer
 };
 
 benchpp::BenchmarkInfo pre = {
@@ -71,6 +57,7 @@ benchpp::BenchmarkInfo pre = {
   .group = "integer",
   .function = benchpp::M_pre_increment,
   .runNum = RUN_NUM,
+  .p_timer = &benchpp::M_preTimer
 };
 
 }

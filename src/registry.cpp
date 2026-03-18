@@ -1,5 +1,7 @@
 module;
 
+#include <cassert>
+#include <format>
 #include <iostream>
 
 #include <Bench++/macros.hpp>
@@ -26,6 +28,21 @@ BenchmarkInfo::id_to_sstream(void) const {
   ss << BENCHPP_BENCHMARK_GROUP_AND_NAME_STREAM(group, name);
 
   return ss;
+}
+
+std::string
+BenchmarkInfo::formatCompletionInfo(void) const {
+  assert(p_timer != nullptr);
+  assert(!p_timer->times().empty());
+  return std::format("=====================\n"
+                     "{}:{}\n"
+                     "{}", group, name, Stats<TimeCount_t>::generate(p_timer->times()).formatResults());
+}
+
+
+void
+BenchmarkInfo::printCompletionInfo(void) const {
+  std::cout << formatCompletionInfo() << '\n';
 }
 
 }
