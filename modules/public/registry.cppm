@@ -17,6 +17,13 @@ struct BenchmarkNotRegisteredErr {
   std::string_view groupName;
 };
 
+export 
+struct GroupNotRegisteredErr {
+  GroupNotRegisteredErr() = delete;
+  GroupNotRegisteredErr(const std::string_view groupName_val) noexcept;
+  std::string_view groupName;
+};
+
 export
 struct BenchmarkInfo {
   std::string_view name;

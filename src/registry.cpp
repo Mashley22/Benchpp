@@ -17,6 +17,11 @@ BenchmarkNotRegisteredErr::BenchmarkNotRegisteredErr(const std::string_view grou
   name = name_val;
 }
 
+GroupNotRegisteredErr::GroupNotRegisteredErr(const std::string_view groupName_val) noexcept {
+  std::cerr << "No registered group found with name: " << groupName_val << '\n';
+  groupName = groupName_val;
+}
+
 void
 register_benchmark(const BenchmarkInfo &info) {
   priv::register_benchmark(info);

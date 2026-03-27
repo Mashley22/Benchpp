@@ -36,6 +36,22 @@ M_findBenchmark(const std::string_view groupName, const std::string_view name) {
   return it;
 }
 
+std::vector<BenchmarkInfo>::const_iterator
+M_findGroup(const std::string_view groupName) {
+  std::vector<BenchmarkInfo>::const_iterator it = 
+    std::find_if(M_registeredBenchmarks.begin(),
+                 M_registeredBenchmarks.end(),
+                 [&groupName](const BenchmarkInfo& info) {
+                   return info.group == groupName;
+                 });
+
+  if (it == M_registeredBenchmarks.end()) {
+    throw GroupNotRegisteredErr(groupName);
+  }
+
+  return it;
+}
+
 void
 M_run_benchmark_impl(const BenchmarkInfo& benchmark, const std::size_t runNum) {
   std::cout << "Starting benchmark: " << benchmark.id_to_sstream().rdbuf()
@@ -116,6 +132,7 @@ run_benchmark(const std::string_view groupName, const std::string_view name, con
 
 void
 run_group(const std::string_view name) {
+  M_findGroup(name);
   GroupRunner runner(name);
   std::cout << "Starting group: " << name << '\n';
 
