@@ -123,4 +123,22 @@ struct Stats {
   }
 };
 
+template<class T, class D = double>
+[[nodiscard]] bool
+isMeanEqual(const Stats<T, D>& a, const Stats<T, D>& b, D tolerance = 1) {
+  return std::abs(a.mean - b.mean) < tolerance * std::sqrt(a.varianceOfMean() + b.varianceOfMean());
+}
+
+template<class T, class D = double>
+[[nodiscard]] bool
+isMeanLessThanOrEqual(const Stats<T, D>& a, const Stats<T, D>& b, D tolerance = 1) {
+  return a.mean < b.mean + tolerance * std::sqrt(a.varianceOfMean() + b.varianceOfMean());
+}
+
+template<class T, class D = double>
+[[nodiscard]] bool
+isMeanLessThan(const Stats<T, D>& a, const Stats<T, D>& b, D tolerance = 1) {
+  return a.mean + tolerance * std::sqrt(a.varianceOfMean() + b.varianceOfMean()) < b.mean;
+}
+
 }
