@@ -86,14 +86,6 @@ benchpp::BenchmarkInfo vectorPushBack = {
 REGISTER_BENCHMARK(vectorPushBack);
 ```
 
-### 2. Run Your Benchmarks
-```bash
-./benchmark -b containers:vector_push    # Run specific benchmark
-./benchmark -g containers                # Run all benchmarks in "containers" group
-./benchmark -l                            # List all benchmarks
-./benchmark -i 500 -b group:benchmark    # Run with 500 iterations
-```
-
 ## Architecture
 
 ### Core Components
@@ -101,7 +93,6 @@ REGISTER_BENCHMARK(vectorPushBack);
 - **Registry** (`src/registry.cpp`, `modules/private/registry.cppm`)
   - Manages benchmark registration and execution
   - Handles grouping and iteration control
-  - Uses `GroupRunner` for efficient group traversal
 
 - **CLI** (`src/cli.cpp`, `modules/public/cli.cppm`)
   - Command-line argument parsing
@@ -134,4 +125,3 @@ See [LICENSE](LICENSE) file for details.
 ## Acknowledgments
 
 - Uses [Catch2](https://github.com/catchorg/Catch2) for testing
-- Built with modern C++ best practices
