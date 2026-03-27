@@ -132,6 +132,13 @@ M_setIterationCounter(const Opt_args& opt_args) {
 }
 
 void
+M_runAll(const Opt_args& opt_args) {
+  (void)opt_args;
+  std::cout << "running all benchmarks!\n";
+  priv::run_all();
+}
+
+void
 M_invalid_option(const Opt_args& opt_args) {
   (void)opt_args;
   std::cout << "Invalid option, use -h for help\n";
@@ -149,6 +156,7 @@ private:
     {CLI_OPT_RUN_BENCHMARK, &M_run_benchmark},
     {CLI_OPT_HELP, &M_print_help},
     {CLI_OPT_SET_ITERATION_COUNTER, &M_setIterationCounter},
+    {CLI_OPT_RUN_ALL, &M_runAll},
   };
 
 public:
