@@ -37,7 +37,7 @@
     macro(benchpp::Metric::CPU_MIGRATIONS);
 
 #define REGISTER_BENCHMARK(benchmark) \
-static bool benchmark##_registered_var = []() { \
+[[maybe_unused]] static bool benchmark##_registered_var = []() { \
   benchpp::register_benchmark(benchmark); \
   return true; \
 }()\
