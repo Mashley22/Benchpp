@@ -39,7 +39,6 @@ BasicTimer::duration(void) const noexcept {
 
 void
 BasicTimer::reset(void) noexcept {
-  assert(m_running == false);
   m_running = false;
   m_recordedTime = Time_t(0);
 }

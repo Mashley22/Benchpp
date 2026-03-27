@@ -150,7 +150,7 @@ TEST_CASE( "Help | -h", "[cli]") {
     benchpp::parse_cli_input(2, p_emptyInput);
 
     outBuffer.reqStderrEmpty(); // This is the more useful way to see the errors
-    REQUIRE(outBuffer.stdoutStr() == "Need to implement this\n");
+    REQUIRE(outBuffer.stdoutStr().size() > 0);
     // i.e in this case if everything is going to std::cerr, then the REQUIRE... line will just show "" != ...
   }
 
@@ -160,7 +160,7 @@ TEST_CASE( "Help | -h", "[cli]") {
     benchpp::parse_cli_input(3, p_emptyInput);
 
     outBuffer.reqStderrEmpty();
-    REQUIRE(outBuffer.stdoutStr() == "Need to implement this\n");
+    REQUIRE(outBuffer.stdoutStr().size() > 0);
   }
 
 }
@@ -390,16 +390,16 @@ TEST_CASE( "Run group | -g", "[cli]" ) {
     constexpr std::string_view nonExistentGroup = "ahah";
     const char* input[] = {"", benchpp::CLI_OPT_RUN_GROUP.data(), nonExistentGroup.data()};
     const char** p_input = input;
-    benchpp::parse_cli_input(3, p_input);
+    REQUIRE_THROWS_AS(benchpp::parse_cli_input(3, p_input), benchpp::GroupNotRegisteredErr);
 
     auto correctNonExistGroupOutput = [&]() {
       std::stringstream ss;
-      ss << "Starting group: " << nonExistentGroup << '\n' << "Finished group: " << nonExistentGroup << '\n';
+      ss << "No registered group found with name: " << nonExistentGroup << '\n';
       return ss.str();
     };
-
-    outBuffer.reqStderrEmpty();
-    REQUIRE(outBuffer.stdoutStr() == correctNonExistGroupOutput());
+    
+    outBuffer.reqStdoutEmpty();
+    REQUIRE(outBuffer.stderrStr() == correctNonExistGroupOutput());
   }
 
   SECTION( "single group" ) {

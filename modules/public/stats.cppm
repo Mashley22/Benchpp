@@ -38,13 +38,9 @@ struct Stats {
       sum_of_squares += results[i] * results[i];
       mean += results[i];
 
-      if (results[i] < min) {
-        min = results[i];
-      }
+      min = std::min(results[i], min);
 
-      if (results[i] > max) {
-        max = results[i];
-      }
+      max = std::max(results[i], max);
     }
     D mean_of_squares = static_cast<D>(sum_of_squares) / static_cast<D>(results.size());
     stats.mean = static_cast<D>(mean) / static_cast<D>(results.size());

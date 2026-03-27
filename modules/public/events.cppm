@@ -52,7 +52,7 @@ saveData(T * p_data, std::size_t pointCount, std::size_t runCount) {
 template<typename T, std::size_t T_pointCount, std::size_t T_runCount>
 class EventsRecord {
 private:
-  T * m_dataPtr;
+  T* m_dataPtr;
   std::size_t m_pointNum{0};
   std::size_t m_runNum{0};
 
