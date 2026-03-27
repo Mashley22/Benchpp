@@ -1,6 +1,7 @@
 module;
 
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 #include <unordered_map>
 
@@ -105,7 +106,28 @@ M_run_benchmark(const Opt_args& opt_args) {
 void
 M_print_help(const Opt_args& opt_args) {
   (void)opt_args;
-  std::cout << "Need to implement this\n";
+  std::cout << "Benchpp - C++ lightweight benchmarking and performance monitoring framework\n\n"
+            << "USAGE:\n"
+            << "  benchmark [OPTION] [ARGUMENTS]\n\n"
+            << "OPTIONS:\n"
+            << "  " << std::setw(3) << std::left << CLI_OPT_PRINT_ALL_BENCHMARKS 
+            << "          List all available benchmarks\n"
+            << "  " << std::setw(3) << std::left << CLI_OPT_PRINT_GROUP_INFOS 
+            << "          List all groups, or info about specific group(s)\n"
+            << "                  " << "Usage: " << CLI_OPT_PRINT_GROUP_INFOS << " [group1] [group2] ...\n"
+            << "  " << std::setw(3) << std::left << CLI_OPT_RUN_GROUP 
+            << "          Run benchmarks in specified group(s)\n"
+            << "                  " << "Usage: " << CLI_OPT_RUN_GROUP << " <group1> [group2] [group3] ...\n"
+            << "  " << std::setw(3) << std::left << CLI_OPT_RUN_BENCHMARK 
+            << "          Run specific benchmark(s)\n"
+            << "                  " << "Usage: " << CLI_OPT_RUN_BENCHMARK << " <group:benchmark1> [group:benchmark2] ...\n"
+            << "  " << std::setw(3) << std::left << CLI_OPT_SET_ITERATION_COUNTER 
+            << "          Set the number of iterations to run\n"
+            << "                  " << "Usage: " << CLI_OPT_SET_ITERATION_COUNTER << " <iteration_num>\n"
+            << "  " << std::setw(3) << std::left << CLI_OPT_RUN_ALL
+            << "          Run all benchmarks\n"
+            << "  " << std::setw(3) << std::left << CLI_OPT_HELP 
+            << "          Display this help message\n";
 }
 
 void
