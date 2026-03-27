@@ -40,6 +40,21 @@ option(BENCHPP_USE_HIGH_RESOLUTION_CLOCK
   OFF
 )
 
+if(BENCHPP_SAMPLES)
+  if(supported)
+    message(STATUS "IPO / LTO enabled")
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+  else()
+    message(STATUS "IPO / LTO not supported: <${error}>")
+  endif()
+
+  if(MSVC)
+    add_compile_options("/Ox")
+  else()
+    add_compile_options("-O3")
+  endif()
+endif()
+
 function(benchpp_add_core_library TARGET_NAME)
 
   add_library(${TARGET_NAME})

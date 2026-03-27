@@ -21,10 +21,6 @@ function(add_sample TARGET_NAME)
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
   )
 
-  set_target_properties(${TARGET_NAME} PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${TARGET_NAME}
-  )
-
   target_include_directories(${TARGET_NAME}
     PRIVATE
       ${CMAKE_CURRENT_FUNCTION_LIST_DIR}/utils/include
